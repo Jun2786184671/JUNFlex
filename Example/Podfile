@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'JUNFlex_Example' do
+  pod 'JUNFlex', :path => '../'
+
+  target 'JUNFlex_Tests' do
+    inherit! :search_paths
+
+    pod 'FBSnapshotTestCase'
+  end
+end
