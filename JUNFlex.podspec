@@ -36,7 +36,8 @@ TODO: Add long description of the pod here.
   #   'JUNFlex' => ['JUNFlex/Assets/*.png']
   # }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.public_header_files = 'JUNFlex/Classes/*.h', 'JUNFlex/Classes/core/builder/JUNStackBuilder.h'
+  s.frameworks = 'UIKit', 'Foundation'
+  s.dependency 'JUNTableView', '~> 0.1.0'
+  s.dependency 'JUNCollectionView', '~> 0.1.0'
 end

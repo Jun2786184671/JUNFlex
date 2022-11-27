@@ -1,0 +1,355 @@
+//
+//  JUNFlex.m
+//  JUNFlex
+//
+//  Created by Jun Ma on 2022/11/26.
+//
+
+#import "JUNLinearStack.h"
+
+#define JUNLayoutAttributeTop (self.isH ? NSLayoutAttributeTop : NSLayoutAttributeLeading)
+#define JUNLayoutAttributeBottom (self.isH ? NSLayoutAttributeBottom : NSLayoutAttributeTrailing)
+#define JUNLayoutAttributeLeading (self.isH ? NSLayoutAttributeLeading : NSLayoutAttributeTop)
+#define JUNLayoutAttributeTrailing (self.isH ? NSLayoutAttributeTrailing : NSLayoutAttributeBottom)
+#define JUNLayoutAttributeWidth (self.isH ? NSLayoutAttributeWidth : NSLayoutAttributeHeight)
+#define JUNLayoutAttributeHeight (self.isH ? NSLayoutAttributeHeight : NSLayoutAttributeWidth)
+#define JUNLayoutAttributeCenterY (self.isH ? NSLayoutAttributeCenterY : NSLayoutAttributeCenterX)
+#define JUNLayoutAttributeCenterX (self.isH ? NSLayoutAttributeCenterX : NSLayoutAttributeCenterY)
+
+#define jun_insetsTop (self.isH ? self.insets.top : self.insets.left)
+#define jun_insetsBottom (self.isH ? self.insets.bottom : self.insets.right)
+#define jun_insetsLeft (self.isH ? self.insets.left : self.insets.top)
+#define jun_insetsRight (self.isH ? self.insets.right : self.insets.bottom)
+
+#define jun_itemW(item) (self.isH ? item.frame.size.width : item.frame.size.height)
+#define jun_itemH(item) (self.isH ? item.frame.size.height : item.frame.size.width)
+
+@interface JUNLinearStack ()
+
+@property(nonatomic, assign) JUNFlexLinearArrangement arrangement;
+
+@property(nonatomic, assign, readonly) bool isH;
+
+@end
+
+@implementation JUNLinearStack
+
+- (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(JUNFlexAlignment)alignment arrangement:(JUNFlexLinearArrangement)arrangement insets:(UIEdgeInsets)insets {
+    if (self = [super initWithItems:items alignment:alignment insets:insets]) {
+        self.arrangement = arrangement;
+        [self _setUpItems];
+    }
+    return self;
+}
+
+- (void)_setUpItems {
+    UIView *prevItem = nil;
+    UIView *prevSizeBox = nil;
+    for (UIView *item in self.items) {
+        item.translatesAutoresizingMaskIntoConstraints = false;
+        [self _setUpItemFrame:item];
+        [self addSubview:item];
+        UIView *sizeBox = [self _createSizeBox];
+        [self addSubview:sizeBox];
+        [self _setUpConstraintsForItem:item andSizeBox:sizeBox prevItem:prevItem prevSizeBox:prevSizeBox];
+        prevItem = item;
+        prevSizeBox = sizeBox;
+    }
+    UIView *sizeBox = [self _createSizeBox];
+    [self addSubview:sizeBox];
+    [self _setUpConstraintsForItem:nil andSizeBox:sizeBox prevItem:prevItem prevSizeBox:prevSizeBox];
+}
+
+- (void)_setUpItemFrame:(UIView *)item {
+    CGRect itemFrame = item.frame;
+    CGFloat itemW = itemFrame.size.width;
+    CGFloat itemH = itemFrame.size.height;
+    if (!itemW || !itemH) {
+        [item sizeToFit];
+        itemW = itemW ? itemW : item.frame.size.width;
+        itemH = itemH ? itemH : item.frame.size.height;
+        itemFrame.size.width = itemW;
+        itemFrame.size.height = itemH;
+        item.frame = itemFrame;
+    }
+}
+
+- (UIView *)_createSizeBox {
+    UIView *sizeBox = [[UIView alloc] init];
+    sizeBox.translatesAutoresizingMaskIntoConstraints = false;
+    return sizeBox;
+}
+
+- (void)_setUpConstraintsForItem:(UIView *)item andSizeBox:(UIView *)sizeBox prevItem:(UIView *)prevItem prevSizeBox:(UIView *)prevSizeBox {
+    [self _setUpMainAxisConstraintsForItem:item andSizeBox:sizeBox prevItem:prevItem prevSizeBox:prevSizeBox];
+    [self _setUpCrossAxisConstraintsForItem:item andSizeBox:sizeBox];
+}
+
+- (bool)isH {
+    return self.direction == JUNFlexDirectionHorizontal;
+}
+
+- (void)_setUpMainAxisConstraintsForItem:(UIView *)item andSizeBox:(UIView *)sizeBox prevItem:(UIView *)prevItem prevSizeBox:(UIView *)prevSizeBox {
+    [self _setUpMainAxisConstraintsForSizeBox:sizeBox prevItem:prevItem prevSizeBox:prevSizeBox];
+    if (item != nil) {
+        [self _setUpMainAxisConstraintsForItem:item sizeBox:sizeBox prevItem:prevItem];
+    }
+}
+
+- (void)_setUpMainAxisConstraintsForSizeBox:(UIView *)sizeBox prevItem:(UIView *)prevItem prevSizeBox:(UIView *)prevSizeBox {
+    if (prevItem == nil) { // first sizebox
+        [self _setUpMainAxisConstraintsForFirstSizeBox:sizeBox];
+    } else {
+        [self addConstraint:
+            [NSLayoutConstraint
+             constraintWithItem:sizeBox
+             attribute:JUNLayoutAttributeLeading
+             relatedBy:NSLayoutRelationEqual
+             toItem:prevItem
+             attribute:JUNLayoutAttributeTrailing
+             multiplier:1.0f constant:0.0f]
+        ];
+        if (prevItem == [self.items firstObject] && [self.items count] > 1) { // second sizebox
+            [self _setUpRestMainAxisConstraintsForSecondSizeBox:sizeBox prevSizeBox:prevSizeBox];
+        } else if (prevItem == [self.items lastObject]) { // last additional sizebox
+            [self _setUpRestMainAxisConstraintsForLastSizeBox:sizeBox prevSizeBox:prevSizeBox];
+        } else {
+            [self _setUpRestMainAxisConstraintsForMedialSizeBox:sizeBox prevSizeBox:prevSizeBox];
+        }
+    }
+}
+
+- (void)_setUpMainAxisConstraintsForFirstSizeBox:(UIView *)sizeBox {
+    [self addConstraint:
+        [NSLayoutConstraint
+         constraintWithItem:sizeBox
+         attribute:JUNLayoutAttributeLeading
+         relatedBy:NSLayoutRelationEqual
+         toItem:self
+         attribute:JUNLayoutAttributeLeading
+         multiplier:1.0f
+         constant:jun_insetsLeft]
+    ];
+    if (self.arrangement == JUNFlexLinearArrangementSpaceEqual) {
+        [self addConstraint:
+            [NSLayoutConstraint
+             constraintWithItem:sizeBox
+             attribute:JUNLayoutAttributeWidth
+             relatedBy:NSLayoutRelationEqual
+             toItem:nil
+             attribute:NSLayoutAttributeNotAnAttribute
+             multiplier:1.0f constant:0.0f]
+        ];
+    }
+}
+
+- (void)_setUpRestMainAxisConstraintsForSecondSizeBox:(UIView *)sizeBox prevSizeBox:(UIView *)prevSizeBox {
+    if (self.arrangement == JUNFlexLinearArrangementSpaceEqual) return;
+    CGFloat multiplier = 1.0f;
+    if (self.arrangement == JUNFlexLinearArrangementSpaceSurround) {
+        multiplier = 2.0f;
+    }
+    [self addConstraint:
+         [NSLayoutConstraint
+          constraintWithItem:sizeBox
+          attribute:JUNLayoutAttributeWidth
+          relatedBy:NSLayoutRelationEqual
+          toItem:prevSizeBox
+          attribute:JUNLayoutAttributeWidth
+          multiplier:multiplier constant:0.0f]
+    ];
+}
+
+- (void)_setUpRestMainAxisConstraintsForLastSizeBox:(UIView *)sizeBox prevSizeBox:(UIView *)prevSizeBox {
+    [self addConstraint:
+        [NSLayoutConstraint
+         constraintWithItem:sizeBox
+         attribute:JUNLayoutAttributeTrailing
+         relatedBy:NSLayoutRelationEqual
+         toItem:self
+         attribute:JUNLayoutAttributeTrailing
+         multiplier:1.0f
+         constant:-jun_insetsRight]
+    ];
+    CGFloat multiplier = 1.0f;
+    if (self.arrangement == JUNFlexLinearArrangementSpaceEqual) {
+        multiplier = 0.0f;
+    } else if (self.arrangement == JUNFlexLinearArrangementSpaceSurround) {
+        multiplier = 0.5f;
+    }
+    [self addConstraint:
+         [NSLayoutConstraint
+          constraintWithItem:sizeBox
+          attribute:JUNLayoutAttributeWidth
+          relatedBy:NSLayoutRelationEqual
+          toItem:prevSizeBox
+          attribute:JUNLayoutAttributeWidth
+          multiplier:multiplier constant:0.0f]
+    ];
+}
+
+- (void)_setUpRestMainAxisConstraintsForMedialSizeBox:(UIView *)sizeBox prevSizeBox:(UIView *)prevSizeBox {
+    [self addConstraint:
+        [NSLayoutConstraint
+         constraintWithItem:sizeBox
+         attribute:JUNLayoutAttributeWidth
+         relatedBy:NSLayoutRelationEqual
+         toItem:prevSizeBox
+         attribute:JUNLayoutAttributeWidth
+         multiplier:1.0f constant:0.0f]
+    ];
+}
+
+- (void)_setUpMainAxisConstraintsForItem:(UIView *)item sizeBox:(UIView *)sizeBox prevItem:(UIView *)prevItem {
+    [self addConstraint:
+        [NSLayoutConstraint
+         constraintWithItem:item
+         attribute:JUNLayoutAttributeLeading
+         relatedBy:NSLayoutRelationEqual
+         toItem:sizeBox
+         attribute:JUNLayoutAttributeTrailing
+         multiplier:1.0f constant:0.0f]
+    ];
+    [self _setUpRatioConstraintsForItem:item toPrevItem:prevItem];
+    if ([item isKindOfClass:[JUNStack class]]) return;
+    NSAssert(jun_itemW(item), @"item added to flex must have a valid length on main axis");
+    [self addConstraint:
+         [NSLayoutConstraint
+          constraintWithItem:item
+          attribute:JUNLayoutAttributeWidth
+          relatedBy:NSLayoutRelationEqual
+          toItem:nil
+          attribute:NSLayoutAttributeNotAnAttribute
+          multiplier:1.0f constant:jun_itemW(item)]
+    ];
+}
+
+- (void)_setUpRatioConstraintsForItem:(UIView *)item toPrevItem:(UIView *)prevItem {
+    if (jun_itemW(item) == 0.0f || jun_itemW(prevItem) == 0.0f) return;
+    [self addConstraint:
+         [NSLayoutConstraint
+          constraintWithItem:item
+          attribute:JUNLayoutAttributeWidth
+          relatedBy:NSLayoutRelationEqual
+          toItem:prevItem
+          attribute:JUNLayoutAttributeWidth
+          multiplier:jun_itemW(item) / jun_itemW(prevItem)
+          constant:0.0f]
+    ];
+}
+
+- (void)_setUpCrossAxisConstraintsForItem:(UIView *)item andSizeBox:(UIView *)sizeBox {
+    [self _setUpCrossAxisConstraintsForSizeBox:sizeBox];
+    if (item == nil) return;
+    if (jun_itemH(item) > 0.0f) {
+        [self _setUpCrossAxisConstraintsForSpecifiedHeightItem:item];
+    } else {
+        [self _setUpCrossAxisConstraintsForNonSpecifiedHeightItem:item];
+    }
+    NSLayoutConstraint *axisMinConstraint = [NSLayoutConstraint
+                                         constraintWithItem:self
+                                         attribute:JUNLayoutAttributeTop
+                                         relatedBy:NSLayoutRelationLessThanOrEqual
+                                         toItem:item attribute:JUNLayoutAttributeTop
+                                         multiplier:1.0f
+                                         constant:-jun_insetsTop];
+    axisMinConstraint.priority = UILayoutPriorityFittingSizeLevel;
+    NSLayoutConstraint *axisMaxConstraint = [NSLayoutConstraint
+                                          constraintWithItem:self
+                                          attribute:JUNLayoutAttributeBottom
+                                          relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                          toItem:item attribute:JUNLayoutAttributeBottom
+                                          multiplier:1.0f
+                                          constant:jun_insetsBottom];
+    axisMaxConstraint.priority = UILayoutPriorityFittingSizeLevel;
+    [self addConstraint:axisMaxConstraint];
+    [self addConstraint:axisMinConstraint];
+}
+
+- (void)_setUpCrossAxisConstraintsForSizeBox:(UIView *)sizeBox {
+    [self addConstraints:@[
+        [NSLayoutConstraint
+         constraintWithItem:sizeBox
+         attribute:JUNLayoutAttributeTop
+         relatedBy:NSLayoutRelationEqual
+         toItem:self
+         attribute:JUNLayoutAttributeTop
+         multiplier:1.0f
+         constant:jun_insetsTop],
+        [NSLayoutConstraint
+         constraintWithItem:sizeBox
+         attribute:JUNLayoutAttributeBottom
+         relatedBy:NSLayoutRelationEqual
+         toItem:self
+         attribute:JUNLayoutAttributeBottom
+         multiplier:1.0f
+         constant:-jun_insetsBottom],
+    ]];
+}
+
+- (void)_setUpCrossAxisConstraintsForSpecifiedHeightItem:(UIView *)item {
+    [self addConstraint:
+         [NSLayoutConstraint
+          constraintWithItem:item
+          attribute:JUNLayoutAttributeHeight
+          relatedBy:NSLayoutRelationEqual
+          toItem:nil
+          attribute:NSLayoutAttributeNotAnAttribute
+          multiplier:1.0f
+          constant:jun_itemH(item)]
+    ];
+    if (self.alignment == JUNFlexAlignmentMin) {
+        [self addConstraint:
+             [NSLayoutConstraint
+              constraintWithItem:item
+              attribute:JUNLayoutAttributeTop
+              relatedBy:NSLayoutRelationEqual
+              toItem:self
+              attribute:JUNLayoutAttributeTop
+              multiplier:1.0f constant:jun_insetsTop]
+        ];
+    } else if (self.alignment == JUNFlexAlignmentCenter) {
+        [self addConstraint:
+             [NSLayoutConstraint
+              constraintWithItem:item
+              attribute:JUNLayoutAttributeCenterY
+              relatedBy:NSLayoutRelationEqual
+              toItem:self
+              attribute:JUNLayoutAttributeCenterY
+              multiplier:1.0f constant:0.0f]
+        ];
+    } else {
+        [self addConstraint:
+             [NSLayoutConstraint
+              constraintWithItem:item
+              attribute:JUNLayoutAttributeBottom
+              relatedBy:NSLayoutRelationEqual
+              toItem:self
+              attribute:JUNLayoutAttributeBottom
+              multiplier:1.0f constant:-jun_insetsBottom]
+        ];
+    }
+}
+
+- (void)_setUpCrossAxisConstraintsForNonSpecifiedHeightItem:(UIView *)item {
+    [self addConstraints:@[
+        [NSLayoutConstraint
+         constraintWithItem:item
+         attribute:JUNLayoutAttributeTop
+         relatedBy:NSLayoutRelationEqual
+         toItem:self
+         attribute:JUNLayoutAttributeTop
+         multiplier:1.0f
+         constant:jun_insetsTop],
+        [NSLayoutConstraint
+         constraintWithItem:item
+         attribute:JUNLayoutAttributeBottom
+         relatedBy:NSLayoutRelationEqual
+         toItem:self
+         attribute:JUNLayoutAttributeBottom
+         multiplier:1.0f
+         constant:-jun_insetsBottom],
+    ]];
+}
+
+@end

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A8BD75BD04833984B78129B /* Pods_JUNFlex_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D6FA0E5EC011FB465D8BD78 /* Pods_JUNFlex_Tests.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -21,8 +20,9 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		6A04137D62D089ECC304139D /* Pods_JUNFlex_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BCFA74AFC12B8ED76F1438E /* Pods_JUNFlex_Tests.framework */; };
+		6B224D09C6F87608B1D50500 /* Pods_JUNFlex_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71A9C56EF2342554DDFDA10C /* Pods_JUNFlex_Example.framework */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
-		7844714FAC07AC34572AF089 /* Pods_JUNFlex_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF04D2ABCFB331564263F3A /* Pods_JUNFlex_Example.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -37,9 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		05DDF45DB32AAFF0B4CA2152 /* Pods-JUNFlex_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JUNFlex_Example.debug.xcconfig"; path = "Target Support Files/Pods-JUNFlex_Example/Pods-JUNFlex_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		0AF04D2ABCFB331564263F3A /* Pods_JUNFlex_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JUNFlex_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		100FCC18FF3E124692D8DFAC /* Pods-JUNFlex_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JUNFlex_Tests.debug.xcconfig"; path = "Target Support Files/Pods-JUNFlex_Tests/Pods-JUNFlex_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		00605DAE6B74BBEFA96B656A /* Pods-JUNFlex_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JUNFlex_Tests.debug.xcconfig"; path = "Target Support Files/Pods-JUNFlex_Tests/Pods-JUNFlex_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		0BCFA74AFC12B8ED76F1438E /* Pods_JUNFlex_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JUNFlex_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		471477B24F45BB9D3A3667D7 /* Pods-JUNFlex_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JUNFlex_Tests.release.xcconfig"; path = "Target Support Files/Pods-JUNFlex_Tests/Pods-JUNFlex_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* JUNFlex_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JUNFlex_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -59,14 +59,14 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		68764DB7CEC01C39FC611EFA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		68764DB7CEC01C39FC611EFA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		71A9C56EF2342554DDFDA10C /* Pods_JUNFlex_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JUNFlex_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		9D6FA0E5EC011FB465D8BD78 /* Pods_JUNFlex_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JUNFlex_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A2E4B9052C3C0142C2C7B271 /* Pods-JUNFlex_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JUNFlex_Tests.release.xcconfig"; path = "Target Support Files/Pods-JUNFlex_Tests/Pods-JUNFlex_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		BA17049068273889F1CD1A55 /* Pods-JUNFlex_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JUNFlex_Example.release.xcconfig"; path = "Target Support Files/Pods-JUNFlex_Example/Pods-JUNFlex_Example.release.xcconfig"; sourceTree = "<group>"; };
-		E3FC218AFEC373E62161DEA4 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		E69FEDA17D69760127DFA7FA /* JUNFlex.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = JUNFlex.podspec; path = ../JUNFlex.podspec; sourceTree = "<group>"; };
+		B24F9091656343298BE028B1 /* Pods-JUNFlex_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JUNFlex_Example.release.xcconfig"; path = "Target Support Files/Pods-JUNFlex_Example/Pods-JUNFlex_Example.release.xcconfig"; sourceTree = "<group>"; };
+		C2D76CBDF49596439A90CFF2 /* Pods-JUNFlex_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JUNFlex_Example.debug.xcconfig"; path = "Target Support Files/Pods-JUNFlex_Example/Pods-JUNFlex_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		E3FC218AFEC373E62161DEA4 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		E69FEDA17D69760127DFA7FA /* JUNFlex.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = JUNFlex.podspec; path = ../JUNFlex.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +77,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				7844714FAC07AC34572AF089 /* Pods_JUNFlex_Example.framework in Frameworks */,
+				6B224D09C6F87608B1D50500 /* Pods_JUNFlex_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +88,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				1A8BD75BD04833984B78129B /* Pods_JUNFlex_Tests.framework in Frameworks */,
+				6A04137D62D089ECC304139D /* Pods_JUNFlex_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,8 +123,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				0AF04D2ABCFB331564263F3A /* Pods_JUNFlex_Example.framework */,
-				9D6FA0E5EC011FB465D8BD78 /* Pods_JUNFlex_Tests.framework */,
+				71A9C56EF2342554DDFDA10C /* Pods_JUNFlex_Example.framework */,
+				0BCFA74AFC12B8ED76F1438E /* Pods_JUNFlex_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -188,12 +188,11 @@
 		8CE44C42C3B9C687D636E77C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				05DDF45DB32AAFF0B4CA2152 /* Pods-JUNFlex_Example.debug.xcconfig */,
-				BA17049068273889F1CD1A55 /* Pods-JUNFlex_Example.release.xcconfig */,
-				100FCC18FF3E124692D8DFAC /* Pods-JUNFlex_Tests.debug.xcconfig */,
-				A2E4B9052C3C0142C2C7B271 /* Pods-JUNFlex_Tests.release.xcconfig */,
+				C2D76CBDF49596439A90CFF2 /* Pods-JUNFlex_Example.debug.xcconfig */,
+				B24F9091656343298BE028B1 /* Pods-JUNFlex_Example.release.xcconfig */,
+				00605DAE6B74BBEFA96B656A /* Pods-JUNFlex_Tests.debug.xcconfig */,
+				471477B24F45BB9D3A3667D7 /* Pods-JUNFlex_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -204,11 +203,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "JUNFlex_Example" */;
 			buildPhases = (
-				087D3ACD0FACB2DBF05DB547 /* [CP] Check Pods Manifest.lock */,
+				850A8192B94A795BEE270B14 /* [CP] Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				7E34CFBE179347B29F2B5120 /* [CP] Embed Pods Frameworks */,
+				41571022132D2F5BFF140231 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -223,11 +222,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "JUNFlex_Tests" */;
 			buildPhases = (
-				6520B1D548BEFCC752FA3B62 /* [CP] Check Pods Manifest.lock */,
+				63B4544A455B13A86B4722DA /* [CP] Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				2CD685DD7D98D333D3CB30F9 /* [CP] Embed Pods Frameworks */,
+				785B97205F33D154354C915C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -259,6 +258,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -296,47 +296,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		087D3ACD0FACB2DBF05DB547 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-JUNFlex_Example-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2CD685DD7D98D333D3CB30F9 /* [CP] Embed Pods Frameworks */ = {
+		41571022132D2F5BFF140231 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-JUNFlex_Tests/Pods-JUNFlex_Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/FBSnapshotTestCase/FBSnapshotTestCase.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-JUNFlex_Example/Pods-JUNFlex_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/JUNCollectionView/JUNCollectionView.framework",
+				"${BUILT_PRODUCTS_DIR}/JUNFlex/JUNFlex.framework",
+				"${BUILT_PRODUCTS_DIR}/JUNTableView/JUNTableView.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSnapshotTestCase.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JUNCollectionView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JUNFlex.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JUNTableView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JUNFlex_Tests/Pods-JUNFlex_Tests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JUNFlex_Example/Pods-JUNFlex_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6520B1D548BEFCC752FA3B62 /* [CP] Check Pods Manifest.lock */ = {
+		63B4544A455B13A86B4722DA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -358,22 +340,44 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7E34CFBE179347B29F2B5120 /* [CP] Embed Pods Frameworks */ = {
+		785B97205F33D154354C915C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-JUNFlex_Example/Pods-JUNFlex_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/JUNFlex/JUNFlex.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-JUNFlex_Tests/Pods-JUNFlex_Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FBSnapshotTestCase/FBSnapshotTestCase.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JUNFlex.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSnapshotTestCase.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JUNFlex_Example/Pods-JUNFlex_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JUNFlex_Tests/Pods-JUNFlex_Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		850A8192B94A795BEE270B14 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JUNFlex_Example-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -510,7 +514,7 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 05DDF45DB32AAFF0B4CA2152 /* Pods-JUNFlex_Example.debug.xcconfig */;
+			baseConfigurationReference = C2D76CBDF49596439A90CFF2 /* Pods-JUNFlex_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -526,7 +530,7 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA17049068273889F1CD1A55 /* Pods-JUNFlex_Example.release.xcconfig */;
+			baseConfigurationReference = B24F9091656343298BE028B1 /* Pods-JUNFlex_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -542,7 +546,7 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 100FCC18FF3E124692D8DFAC /* Pods-JUNFlex_Tests.debug.xcconfig */;
+			baseConfigurationReference = 00605DAE6B74BBEFA96B656A /* Pods-JUNFlex_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -567,7 +571,7 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2E4B9052C3C0142C2C7B271 /* Pods-JUNFlex_Tests.release.xcconfig */;
+			baseConfigurationReference = 471477B24F45BB9D3A3667D7 /* Pods-JUNFlex_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
