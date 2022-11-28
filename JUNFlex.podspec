@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'JUNFlex'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of JUNFlex.'
+  s.summary          = 'A ui framework that makes ios development easier.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/Jun Ma/JUNFlex'
+  s.homepage         = 'https://github.com/Jun2786184671/JUNFlex'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Jun Ma' => 'maxinchun5@gmail.com' }
-  s.source           = { :git => 'https://github.com/Jun Ma/JUNFlex.git', :tag => s.version.to_s }
+  s.source           = { :git => 'git@github.com:Jun2786184671/JUNFlex.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '10.0'
@@ -36,8 +36,9 @@ TODO: Add long description of the pod here.
   #   'JUNFlex' => ['JUNFlex/Assets/*.png']
   # }
 
-  s.public_header_files = 'JUNFlex/Classes/*.h', 'JUNFlex/Classes/core/builder/JUNStackBuilder.h', 'JUNFlex/Classes/core/common/*.h'
+  s.public_header_files = 'JUNFlex/Classes/*.h', 'JUNFlex/Classes/core/builder/*.h'
   s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'JUNTableView', '~> 0.1.0'
   s.dependency 'JUNCollectionView', '~> 0.1.0'
+  s.dependency 'SDWebImage', '~> 5.0'
 end

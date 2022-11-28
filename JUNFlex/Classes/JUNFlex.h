@@ -7,64 +7,45 @@
 
 #import <Foundation/Foundation.h>
 #import <JUNFlex/JUNStackBuilder.h>
-#import <JUNFlex/JUNStackMeta.h>
+#import <JUNFlex/JUNListBuilder.h>
+#import <JUNFlex/JUNPaddingBuilder.h>
+#import <JUNFlex/JUNItemBuilder.h>
+#import <JUNFlex/JUNModel.h>
 
-#ifndef Horizontal
-#define Horizontal JUNFlex.HStack
+#ifndef $Hstack
+#define $Hstack JUNFlex.hstack
 #endif
 
-#ifndef Vertical
-#define Vertical JUNFlex.VStack
+#ifndef $Vstack
+#define $Vstack JUNFlex.vstack
 #endif
 
-#ifndef Stack
-#define Stack JUNFlex.ZStack
+#ifndef $Zstack
+#define $Zstack JUNFlex.zstack
 #endif
 
-#ifndef jun_alignment
-#define jun_alignment(var) kJUNStackAlignment : @(var)
+#ifndef $Padding
+#define $Padding JUNFlex.padding
 #endif
 
-#ifndef jun_insets
-#define jun_insets(t, l, b, r) kJUNStackInsets : [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(t, l, b, r)]
+#ifndef $Item
+#define $Item JUNFlex.item
 #endif
 
-#ifndef jun_insetAll
-#define jun_insetAll(a) jun_insets(a, a, a, a)
+#ifndef $List
+#define $List JUNFlex.list
 #endif
-
-#ifndef jun_insetTop
-#define jun_insetTop(t) jun_insets(t, 0, 0, 0)
-#endif
-
-#ifndef jun_insetLeft
-#define jun_insetLeft(l) jun_insets(0, l, 0, 0)
-#endif
-
-#ifndef jun_insetBottom
-#define jun_insetBottom(b) jun_insets(0, 0, b, 0)
-#endif
-
-#ifndef jun_insetRight
-#define jun_insetRight(r) jun_insets(0, 0, 0, r)
-#endif
-
-//#define JUNHStack(var, ...) jun_stack(JUNFlex.hStack, var, ##__VA_ARGS__, nil);
-//#define JUNVStack(var, ...) jun_stack(JUNFlex.vStack, var, ##__VA_ARGS__, nil);
-//#define JUNZStack(var, ...) jun_stack(JUNFlex.zStack, var, ##__VA_ARGS__, nil);
 
 NS_ASSUME_NONNULL_BEGIN
 
-//extern UIView *jun_stack(JUNStackBuilder *builder, id buildContext, ...);
-//extern UIView *JUNHStack(NSArray<id> *buildContext);
-//extern UIView *JUNVStack(NSArray<id> *buildContext);
-//extern UIView *JUNZStack(NSArray<id> *buildContext);
-
 @interface JUNFlex : NSObject
 
-@property(class, nonatomic, readonly) JUNStackBuilder *HStack;
-@property(class, nonatomic, readonly) JUNStackBuilder *VStack;
-@property(class, nonatomic, readonly) JUNStackBuilder *ZStack;
+@property(class, nonatomic, readonly) JUNStackBuilder *hstack;
+@property(class, nonatomic, readonly) JUNStackBuilder *vstack;
+@property(class, nonatomic, readonly) JUNStackBuilder *zstack;
+@property(class, nonatomic, readonly) JUNPaddingBuilder *padding;
+@property(class, nonatomic, readonly) JUNListBuilder *list;
+@property(class, nonatomic, readonly) JUNItemBuilder *item;
 
 @end
 

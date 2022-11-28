@@ -6,6 +6,7 @@
 //
 
 #import "JUNStack.h"
+#import "UIView+JUNex4Flex.h"
 
 @interface JUNStack ()
 
@@ -18,25 +19,7 @@
 @implementation JUNStack
 
 - (void)didMoveToWindow {
-    if (self.superview == nil) return;
-    if ([self _isConstraintedInSuperview]) return;
-    [self _addDefaultConstraintsToSuperview];
-}
-
-- (bool)_isConstraintedInSuperview {
-    for (NSLayoutConstraint *constraint in self.superview.constraints) {
-        if (constraint.firstItem == self || constraint.secondItem == self) return true;
-    }
-    return false;
-}
-
-- (void)_addDefaultConstraintsToSuperview {
-    [self.superview addConstraints:@[
-        [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0f],
-        [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f],
-        [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f],
-        [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0.0f],
-    ]];
+    [self jun_addDefaultConstraintsIfNeeded];
 }
 
 - (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(JUNStackAlignment)alignment insets:(UIEdgeInsets)insets {
@@ -45,8 +28,18 @@
         self.items = items;
         self.alignment = alignment;
         self.insets = insets;
+        [self _addHugConstraints];
+        
     }
     return self;
+}
+
+- (void)_addHugConstraints {
+    NSLayoutConstraint *hConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:0.0f];
+    hConstraint.priority = UILayoutPriorityDefaultLow;
+    NSLayoutConstraint *vConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:0.0f];
+    vConstraint.priority = UILayoutPriorityDefaultLow;
+    [self addConstraints:@[hConstraint, vConstraint]];
 }
 
 @end

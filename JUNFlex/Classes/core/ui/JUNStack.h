@@ -6,7 +6,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JUNStackMeta.h"
+
+typedef enum {
+    JUNStackAlignmentCrossAxisMax = 1 << 0,
+    JUNStackAlignmentCrossAxisCenter = 1 << 1,
+    JUNStackAlignmentCrossAxisMin = 1 << 2,
+    JUNStackAlignmentMainAxisMax = 1 << 3,
+    JUNStackAlignmentMainAxisCenter = 1 << 4,
+    JUNStackAlignmentMainAxisMin = 1 << 5,
+} JUNStackAlignment;
 
 NS_ASSUME_NONNULL_BEGIN
 

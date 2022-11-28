@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIView (JUNex4Flex)
 
 - (CGRect)jun_validateFrame;
+- (void)jun_addDefaultConstraintsIfNeeded;
+- (UIView *)jun_wrapWithInset:(UIEdgeInsets)insets;
 
 @end
 
