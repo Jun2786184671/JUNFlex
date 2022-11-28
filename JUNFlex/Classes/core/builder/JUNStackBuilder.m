@@ -7,6 +7,7 @@
 
 #import "JUNStackBuilder.h"
 #import "JUNStackBuilder+JUNex.h"
+#import "JUNStack.h"
 
 @interface JUNStackBuilder ()
 
@@ -16,17 +17,8 @@
 
 @implementation JUNStackBuilder
 
-NSString * const kJUNFlexAlignment = @"kJUNFlexAlignment";
-NSString * const kJUNFlexInsetsAll = @"kJUNFlexInsetsAll";
-NSString * const kJUNFlexInsets = @"kJUNFlexInsets";
-NSString * const kJUNFlexInsetsTop = @"kJUNFlexInsetsTop";
-NSString * const kJUNFlexInsetsBottom = @"kJUNFlexInsetsBottom";
-NSString * const kJUNFlexInsetsLeft = @"kJUNFlexInsetsLeft";
-NSString * const kJUNFlexInsetsRight = @"kJUNFlexInsetsRight";
-
-+ (instancetype)sharedInstance {
-    return nil;
-}
+NSString * const kJUNStackAlignment = @"kJUNStackAlignment";
+NSString * const kJUNStackInsets = @"kJUNStackInsets";
 
 - (JUNStackBuilder * _Nonnull (^)(NSDictionary * _Nullable))properties {
     return ^(NSDictionary *configurations) {
@@ -35,7 +27,7 @@ NSString * const kJUNFlexInsetsRight = @"kJUNFlexInsetsRight";
     };
 }
 
-- (JUNStack *)_getStackWithItems:(NSArray<UIView *> *)items alignment:(JUNFlexAlignment)alignment insets:(UIEdgeInsets)insets {
+- (JUNStack *)_getStackWithItems:(NSArray<UIView *> *)items alignment:(JUNStackAlignment)alignment insets:(UIEdgeInsets)insets {
     return nil;
 }
 
@@ -44,37 +36,16 @@ NSString * const kJUNFlexInsetsRight = @"kJUNFlexInsetsRight";
     return ^(NSArray<UIView *> *items) {
         id value = nil;
 
-        JUNFlexAlignment alignment = JUNFlexAlignmentCenter;
-        value = self.configurations[kJUNFlexAlignment];
+        JUNStackAlignment alignment = JUNStackAlignmentMainAxisCenter | JUNStackAlignmentCrossAxisCenter;
+        value = self.configurations[kJUNStackAlignment];
         if (value && [value isKindOfClass:[NSNumber class]]) {
-            alignment = (JUNFlexAlignment)[value integerValue];
+            alignment = (JUNStackAlignment)[value integerValue];
         }
 
         UIEdgeInsets insets = UIEdgeInsetsZero;
-        value = self.configurations[kJUNFlexInsetsAll];
-        if (value && [value isKindOfClass:[NSNumber class]]) {
-            CGFloat inset = [value floatValue];
-            insets = UIEdgeInsetsMake(inset, inset, inset, inset);
-        }
-        value = self.configurations[kJUNFlexInsets];
+        value = self.configurations[kJUNStackInsets];
         if (value && [value isKindOfClass:[NSValue class]]) {
             insets = [value UIEdgeInsetsValue];
-        }
-        value = self.configurations[kJUNFlexInsetsTop];
-        if (value && [value isKindOfClass:[NSNumber class]]) {
-            insets.top = [value floatValue];
-        }
-        value = self.configurations[kJUNFlexInsetsBottom];
-        if (value && [value isKindOfClass:[NSNumber class]]) {
-            insets.bottom = [value floatValue];
-        }
-        value = self.configurations[kJUNFlexInsetsLeft];
-        if (value && [value isKindOfClass:[NSNumber class]]) {
-            insets.left = [value floatValue];
-        }
-        value = self.configurations[kJUNFlexInsetsRight];
-        if (value && [value isKindOfClass:[NSNumber class]]) {
-            insets.right = [value floatValue];
         }
         return [self _getStackWithItems:items alignment:alignment insets:insets];
     };

@@ -6,13 +6,15 @@
 //
 
 #import "JUNStackBuilder.h"
-#import "JUNStack.h"
+#import "JUNStackMeta.h"
+
+@class JUNStack;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JUNStackBuilder ()
 
-- (JUNStack *)_getStackWithItems:(NSArray<UIView *> *)items alignment:(JUNFlexAlignment)alignment insets:(UIEdgeInsets)insets;
+- (JUNStack *)_getStackWithItems:(NSArray<UIView *> *)items alignment:(JUNStackAlignment)alignment insets:(UIEdgeInsets)insets;
 - (NSDictionary *)configurations;
 
 @end

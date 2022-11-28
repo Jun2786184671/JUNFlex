@@ -6,18 +6,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JUNFlex.h"
+#import "JUNStackMeta.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JUNStack : UIView
 
-- (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(JUNFlexAlignment)alignment insets:(UIEdgeInsets)insets;
-@property(nonatomic, strong, readonly) NSArray<UIView *> *items;
-@property(nonatomic, assign, readonly) JUNFlexAlignment alignment;
-@property(nonatomic, assign, readonly) UIEdgeInsets insets;
+- (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(JUNStackAlignment)alignment insets:(UIEdgeInsets)insets;
 
-@property(nonatomic, assign, readonly) JUNFlexDirection direction;
+@property(nonatomic, strong, readonly) NSArray<UIView *> *items;
+@property(nonatomic, assign, readonly) JUNStackAlignment alignment;
+@property(nonatomic, assign, readonly) UIEdgeInsets insets;
 
 @end
 

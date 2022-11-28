@@ -10,7 +10,7 @@
 @interface JUNStack ()
 
 @property(nonatomic, strong) NSArray<UIView *> *items;
-@property(nonatomic, assign) JUNFlexAlignment alignment;
+@property(nonatomic, assign) JUNStackAlignment alignment;
 @property(nonatomic, assign) UIEdgeInsets insets;
 
 @end
@@ -31,7 +31,6 @@
 }
 
 - (void)_addDefaultConstraintsToSuperview {
-//    NSLog(@"%@ : %d", self.superview, self.superview.translatesAutoresizingMaskIntoConstraints);
     [self.superview addConstraints:@[
         [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0f],
         [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f],
@@ -40,7 +39,7 @@
     ]];
 }
 
-- (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(JUNFlexAlignment)alignment insets:(UIEdgeInsets)insets {
+- (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(JUNStackAlignment)alignment insets:(UIEdgeInsets)insets {
     if (self = [super init]) {
         self.translatesAutoresizingMaskIntoConstraints = false;
         self.items = items;

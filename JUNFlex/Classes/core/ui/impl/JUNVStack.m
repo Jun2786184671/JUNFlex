@@ -9,8 +9,8 @@
 
 @implementation JUNVStack
 
-- (JUNFlexDirection)direction {
-    return JUNFlexDirectionVertical;
+- (bool)isHorizontal {
+    return false;
 }
 
 @end

@@ -11,10 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JUNLinearStack : JUNStack
 
-- (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(JUNFlexAlignment)alignment arrangement:(JUNFlexLinearArrangement)arrangement insets:(UIEdgeInsets)insets;
-@property(nonatomic, assign, readonly) JUNFlexLinearArrangement arrangement;
-
-- (void)_setUpConstraintsForItem:(nullable UIView *)item andSizeBox:(UIView *)sizeBox prevItem:(nullable UIView *)prevItem prevSizeBox:(nullable UIView *)prevSizeBox;
+@property(nonatomic, assign, readonly, getter=isHorizontal) bool horizontal;
 
 @end
 

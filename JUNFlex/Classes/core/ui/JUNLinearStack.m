@@ -7,36 +7,35 @@
 
 #import "JUNLinearStack.h"
 
-#define JUNLayoutAttributeTop (self.isH ? NSLayoutAttributeTop : NSLayoutAttributeLeading)
-#define JUNLayoutAttributeBottom (self.isH ? NSLayoutAttributeBottom : NSLayoutAttributeTrailing)
-#define JUNLayoutAttributeLeading (self.isH ? NSLayoutAttributeLeading : NSLayoutAttributeTop)
-#define JUNLayoutAttributeTrailing (self.isH ? NSLayoutAttributeTrailing : NSLayoutAttributeBottom)
-#define JUNLayoutAttributeWidth (self.isH ? NSLayoutAttributeWidth : NSLayoutAttributeHeight)
-#define JUNLayoutAttributeHeight (self.isH ? NSLayoutAttributeHeight : NSLayoutAttributeWidth)
-#define JUNLayoutAttributeCenterY (self.isH ? NSLayoutAttributeCenterY : NSLayoutAttributeCenterX)
-#define JUNLayoutAttributeCenterX (self.isH ? NSLayoutAttributeCenterX : NSLayoutAttributeCenterY)
+#import "UIView+JUNex4Flex.h"
 
-#define jun_insetsTop (self.isH ? self.insets.top : self.insets.left)
-#define jun_insetsBottom (self.isH ? self.insets.bottom : self.insets.right)
-#define jun_insetsLeft (self.isH ? self.insets.left : self.insets.top)
-#define jun_insetsRight (self.isH ? self.insets.right : self.insets.bottom)
+#define IsHorizontal self.isHorizontal
 
-#define jun_itemW(item) (self.isH ? item.frame.size.width : item.frame.size.height)
-#define jun_itemH(item) (self.isH ? item.frame.size.height : item.frame.size.width)
+#define JUNLayoutAttributeTop (IsHorizontal ? NSLayoutAttributeTop : NSLayoutAttributeLeading)
+#define JUNLayoutAttributeBottom (IsHorizontal ? NSLayoutAttributeBottom : NSLayoutAttributeTrailing)
+#define JUNLayoutAttributeLeading (IsHorizontal ? NSLayoutAttributeLeading : NSLayoutAttributeTop)
+#define JUNLayoutAttributeTrailing (IsHorizontal ? NSLayoutAttributeTrailing : NSLayoutAttributeBottom)
+#define JUNLayoutAttributeWidth (IsHorizontal ? NSLayoutAttributeWidth : NSLayoutAttributeHeight)
+#define JUNLayoutAttributeHeight (IsHorizontal ? NSLayoutAttributeHeight : NSLayoutAttributeWidth)
+#define JUNLayoutAttributeCenterY (IsHorizontal ? NSLayoutAttributeCenterY : NSLayoutAttributeCenterX)
+#define JUNLayoutAttributeCenterX (IsHorizontal ? NSLayoutAttributeCenterX : NSLayoutAttributeCenterY)
+
+#define jun_insetsTop (IsHorizontal ? self.insets.top : self.insets.left)
+#define jun_insetsBottom (IsHorizontal ? self.insets.bottom : self.insets.right)
+#define jun_insetsLeft (IsHorizontal ? self.insets.left : self.insets.top)
+#define jun_insetsRight (IsHorizontal ? self.insets.right : self.insets.bottom)
+
+#define jun_itemW(item) (IsHorizontal ? item.frame.size.width : item.frame.size.height)
+#define jun_itemH(item) (IsHorizontal ? item.frame.size.height : item.frame.size.width)
 
 @interface JUNLinearStack ()
-
-@property(nonatomic, assign) JUNFlexLinearArrangement arrangement;
-
-@property(nonatomic, assign, readonly) bool isH;
 
 @end
 
 @implementation JUNLinearStack
 
-- (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(JUNFlexAlignment)alignment arrangement:(JUNFlexLinearArrangement)arrangement insets:(UIEdgeInsets)insets {
+- (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(JUNStackAlignment)alignment insets:(UIEdgeInsets)insets {
     if (self = [super initWithItems:items alignment:alignment insets:insets]) {
-        self.arrangement = arrangement;
         [self _setUpItems];
     }
     return self;
@@ -47,7 +46,7 @@
     UIView *prevSizeBox = nil;
     for (UIView *item in self.items) {
         item.translatesAutoresizingMaskIntoConstraints = false;
-        [self _setUpItemFrame:item];
+        [item jun_validateFrame];
         [self addSubview:item];
         UIView *sizeBox = [self _createSizeBox];
         [self addSubview:sizeBox];
@@ -60,20 +59,6 @@
     [self _setUpConstraintsForItem:nil andSizeBox:sizeBox prevItem:prevItem prevSizeBox:prevSizeBox];
 }
 
-- (void)_setUpItemFrame:(UIView *)item {
-    CGRect itemFrame = item.frame;
-    CGFloat itemW = itemFrame.size.width;
-    CGFloat itemH = itemFrame.size.height;
-    if (!itemW || !itemH) {
-        [item sizeToFit];
-        itemW = itemW ? itemW : item.frame.size.width;
-        itemH = itemH ? itemH : item.frame.size.height;
-        itemFrame.size.width = itemW;
-        itemFrame.size.height = itemH;
-        item.frame = itemFrame;
-    }
-}
-
 - (UIView *)_createSizeBox {
     UIView *sizeBox = [[UIView alloc] init];
     sizeBox.translatesAutoresizingMaskIntoConstraints = false;
@@ -83,10 +68,6 @@
 - (void)_setUpConstraintsForItem:(UIView *)item andSizeBox:(UIView *)sizeBox prevItem:(UIView *)prevItem prevSizeBox:(UIView *)prevSizeBox {
     [self _setUpMainAxisConstraintsForItem:item andSizeBox:sizeBox prevItem:prevItem prevSizeBox:prevSizeBox];
     [self _setUpCrossAxisConstraintsForItem:item andSizeBox:sizeBox];
-}
-
-- (bool)isH {
-    return self.direction == JUNFlexDirectionHorizontal;
 }
 
 - (void)_setUpMainAxisConstraintsForItem:(UIView *)item andSizeBox:(UIView *)sizeBox prevItem:(UIView *)prevItem prevSizeBox:(UIView *)prevSizeBox {
@@ -130,7 +111,7 @@
          multiplier:1.0f
          constant:jun_insetsLeft]
     ];
-    if (self.arrangement == JUNFlexLinearArrangementSpaceEqual) {
+    if (self.alignment & JUNStackAlignmentMainAxisMax) {
         [self addConstraint:
             [NSLayoutConstraint
              constraintWithItem:sizeBox
@@ -144,9 +125,9 @@
 }
 
 - (void)_setUpRestMainAxisConstraintsForSecondSizeBox:(UIView *)sizeBox prevSizeBox:(UIView *)prevSizeBox {
-    if (self.arrangement == JUNFlexLinearArrangementSpaceEqual) return;
+    if (self.alignment & JUNStackAlignmentMainAxisMax) return;
     CGFloat multiplier = 1.0f;
-    if (self.arrangement == JUNFlexLinearArrangementSpaceSurround) {
+    if (self.alignment & JUNStackAlignmentMainAxisCenter) {
         multiplier = 2.0f;
     }
     [self addConstraint:
@@ -172,9 +153,9 @@
          constant:-jun_insetsRight]
     ];
     CGFloat multiplier = 1.0f;
-    if (self.arrangement == JUNFlexLinearArrangementSpaceEqual) {
+    if (self.alignment & JUNStackAlignmentMainAxisMax) {
         multiplier = 0.0f;
-    } else if (self.arrangement == JUNFlexLinearArrangementSpaceSurround) {
+    } else if (self.alignment & JUNStackAlignmentMainAxisCenter) {
         multiplier = 0.5f;
     }
     [self addConstraint:
@@ -213,14 +194,16 @@
     [self _setUpRatioConstraintsForItem:item toPrevItem:prevItem];
     if ([item isKindOfClass:[JUNStack class]]) return;
     NSAssert(jun_itemW(item), @"item added to flex must have a valid length on main axis");
+    NSLayoutConstraint *mainAxisLengthConstraint = [NSLayoutConstraint
+                                      constraintWithItem:item
+                                      attribute:JUNLayoutAttributeWidth
+                                      relatedBy:NSLayoutRelationEqual
+                                      toItem:nil
+                                      attribute:NSLayoutAttributeNotAnAttribute
+                                      multiplier:1.0f constant:jun_itemW(item)];
+    mainAxisLengthConstraint.priority = UILayoutPriorityDefaultHigh;
     [self addConstraint:
-         [NSLayoutConstraint
-          constraintWithItem:item
-          attribute:JUNLayoutAttributeWidth
-          relatedBy:NSLayoutRelationEqual
-          toItem:nil
-          attribute:NSLayoutAttributeNotAnAttribute
-          multiplier:1.0f constant:jun_itemW(item)]
+         mainAxisLengthConstraint
     ];
 }
 
@@ -298,7 +281,7 @@
           multiplier:1.0f
           constant:jun_itemH(item)]
     ];
-    if (self.alignment == JUNFlexAlignmentMin) {
+    if (self.alignment & JUNStackAlignmentCrossAxisMin) {
         [self addConstraint:
              [NSLayoutConstraint
               constraintWithItem:item
@@ -308,7 +291,7 @@
               attribute:JUNLayoutAttributeTop
               multiplier:1.0f constant:jun_insetsTop]
         ];
-    } else if (self.alignment == JUNFlexAlignmentCenter) {
+    } else if (self.alignment & JUNStackAlignmentCrossAxisCenter) {
         [self addConstraint:
              [NSLayoutConstraint
               constraintWithItem:item
