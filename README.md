@@ -1,6 +1,5 @@
 # JUNFlex
 
-[![CI Status](https://img.shields.io/travis/Jun Ma/JUNFlex.svg?style=flat)](https://travis-ci.org/Jun Ma/JUNFlex)
 [![Version](https://img.shields.io/cocoapods/v/JUNFlex.svg?style=flat)](https://cocoapods.org/pods/JUNFlex)
 [![License](https://img.shields.io/cocoapods/l/JUNFlex.svg?style=flat)](https://cocoapods.org/pods/JUNFlex)
 [![Platform](https://img.shields.io/cocoapods/p/JUNFlex.svg?style=flat)](https://cocoapods.org/pods/JUNFlex)
@@ -8,8 +7,6 @@
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
 
 ## Installation
 
@@ -19,6 +16,121 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'JUNFlex'
 ```
+
+## Guide
+1. ```#import <JUNFlex/UIFlex.h>``` into your project.
+2. JUNFlex provides six magic tools to help you quickly build interfaces.
+	+ ```$Hstack```
+		* Hstack is a horizontal layout, all of the UIViews wrapped by it are laid out in x-axis direction.
+		```objc
+		$Hstack
+      	.children(@[
+			aLabel,
+      		aButton,
+      		aSwitch,
+      		...
+      	]);
+		```
+
+	+ ```$Vstack```
+		* Vstack is a vertical layout, similar to Hstack, all of its components are wrapped by it are laid out in y-axis direction.
+		```objc
+		$Vstack
+		.width(100) // Yes, you can set some properties here.
+		.height(200)
+      	.children(@[
+			aLabel,
+      		aButton,
+      		aSwitch,
+      		...
+      	]);
+		```
+	+ ```$Zstack```
+		* Zstack is a stack layout where all UIViews wrapped by it are stacked in the z-axis direction.
+		```objc
+		$Vstack
+		.size(CGSizeMake(80, 80))
+		.align(CGPointMake(-1, -1)) // This makes all contents in stack lean to the left top corner.
+      	.children(@[
+			aLabel,
+      		aButton,
+      		aSwitch,
+      		...
+      	]);
+		```
+	+ ```$Padding```
+		* Padding is used to wrap a UIView, you can use it to specify the insets, as well as implicitly constraining its content by setting the wrapper's size.
+		```objc
+		$Padding
+		.left(20).right(20) // This makes edge insets.
+		.size(CGSizeMake(80, 80)) // Constrain its content implicitly.
+		.radius(30)
+		.maskBounds(true)
+        .color(UIColor.orangeColor) // Color and radius, you can even use it to wrap and decorate a view!
+      	.child(
+			aView
+      	);
+		```
+	+ ```$Item```
+		* Item is a nice tool in JUNFlex that allows you to quickly create many types of views, from UIImageView to UILabel or UIButton
+		```objc
+		$Vstack
+      	.children(@[
+
+			$Item // This makes a UIImageView
+           	.size(CGSizeMake(80, 80))
+           	.image(@"http:///path/to/image")
+         	.radius(30),
+
+         	$Hstack // Yes, you can nest stacks in stacks.
+          	.children(@[
+
+           		$Item // This makes it responds to ui events.
+           		.text(@"Hello World!!!", 20, UIColor.blueColor)
+           		.onTap(self, @selector(buttonOnTap)), 
+
+           		UISwitch.new,
+
+           		[self createAnyView],
+           		...
+          	]),
+      		...
+      	]);
+		```
+	+ ```$List```
+		* List is an encapsulation of [JUNCollectionView](https://github.com/Jun2786184671/JUNCollectionView) that you can use to create either a horizontal or vertical scrollable list or a flowlayout.
+		```objc
+		$List
+		.horizontal(true)
+		.size(CGSizeMake(535, 1000))
+		,itemSize(CGSizeMake(80, 80))
+        .alwaysBounce(true)
+        .showIndicator(true)
+        .count(100, ^id (NSUInteger i) { // There are four other builders, such as forEach loop builder...
+        	return
+        	$Vstack
+        	.children(@[
+        		$Item
+        		.size(CGSizeMake(80, 80))
+        		.image(@"aBundleImageName")
+        		.radius(30),
+
+        		$Hstack
+        		.children(@[
+        			$Item
+        			.text(@"hello", 20, UIColor.blueColor)
+        			.onTap(self, @selector(buttonOnTap)),
+
+        			UISwitch.new,
+        		]),
+
+        		$Item
+        		.width(120)
+        		.text(@"world", 20, UIColor.blueColor)
+        		.color(UIColor.greenColor),
+            ]);
+        });
+		```
 
 ## Author
 
