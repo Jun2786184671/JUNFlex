@@ -145,7 +145,7 @@ pod 'JUNFlex'
 	```objc
 	User *user = User.map(@{
 		@"nom" : @"Jun Ma",
-		@"email" : @"maxinchun5@gmail.com",
+		@"mail" : @"maxinchun5@gmail.com",
 		@"avatar" : @"http://www.example.com/path/to/resource",
 		...
 	});
