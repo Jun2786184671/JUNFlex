@@ -33,7 +33,7 @@ pod 'JUNFlex'
 		```
 
 	+ ```$Vstack```
-		* Vstack is a vertical layout, similar to Hstack, all of its components are wrapped by it are laid out in y-axis direction.
+		* Vstack is a vertical layout, similar to Hstack, all of its components wrapped by it are laid out in y-axis direction.
 		```objc
 		$Vstack
 		.width(100) // Yes, you can set some properties here.
