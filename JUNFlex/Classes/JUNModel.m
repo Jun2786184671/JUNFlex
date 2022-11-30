@@ -6,12 +6,13 @@
 //
 
 #import "JUNModel.h"
+#import "JUNItemBuilder.h"
 
 @interface JUNModelInfo : NSObject
 
 @property(nonatomic, weak) Class clz;
 @property(nonatomic, strong) void (^dataMapper)(id json, JUNModel *);
-@property(nonatomic, strong) UIView *(^uiMapper)(JUNModel *model);
+@property(nonatomic, strong) id (^uiMapper)(JUNModel *model);
 
 @end
 
@@ -78,8 +79,8 @@
     };
 }
 
-+ (void (^)(UIView * _Nonnull (^ _Nonnull)(__kindof JUNModel * _Nonnull)))layout {
-    return ^(UIView *(^builder)(JUNModel *)) {
++ (void (^)(id _Nonnull (^ _Nonnull)(__kindof JUNModel * _Nonnull)))layout {
+    return ^(id (^builder)(JUNModel *)) {
         JUNModelInfo *modelInfo = [[JUNModelInfo alloc] init];
         modelInfo.clz = [self class];
         modelInfo.uiMapper = builder;
@@ -123,7 +124,16 @@
 #endif
         return [[UIView alloc] init];
     }
-    return modelInfo.uiMapper(self);
+    id item = modelInfo.uiMapper(self);
+    if ([item isKindOfClass:[JUNItemBuilder class]]) {
+        return [(JUNItemBuilder *)item end];
+    } else if ([item isKindOfClass:[UIView class]]) {
+#ifdef DEBUG
+        NSAssert(false, @"child of padding must be a uiview or itembuilder");
+#endif
+        return [[UIView alloc] init];
+    }
+    return item;
 }
 
 @end

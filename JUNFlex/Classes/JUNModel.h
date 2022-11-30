@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) __kindof JUNModel *(^map)(id json);
 @property(class, nonatomic, readonly) __kindof JUNModel *(^map)(id json);
 
-@property(class, nonatomic, readonly) void (^layout)(UIView *(^builder)(__kindof JUNModel *_));
+@property(class, nonatomic, readonly) void (^layout)(id (^builder)(__kindof JUNModel *_));
 @property(nonatomic, readonly) __kindof UIView *render;
 
 @end
