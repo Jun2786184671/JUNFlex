@@ -131,7 +131,7 @@ pod 'JUNFlex'
             ]);
         });
 		```
-3. Introduction to ```JUNModel```
+3. Introduce to ```JUNModel```
 	+ ```JUNModel``` is an abstract class for ORM and ui binding. You can make your model class extend to ```JUNModel``` ,then specify how json map to a model and bind ui to it.
 	```objc
 	User.mapper(^(id $, User *_) {
