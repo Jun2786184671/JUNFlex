@@ -103,7 +103,7 @@ pod 'JUNFlex'
 		$List
 		.horizontal(true)
 		.size(CGSizeMake(535, 1000))
-		,itemSize(CGSizeMake(80, 80))
+		.itemSize(CGSizeMake(80, 80))
         .alwaysBounce(true)
         .showIndicator(true)
         .count(100, ^id (NSUInteger i) { // There are four other builders, such as forEach loop builder...
