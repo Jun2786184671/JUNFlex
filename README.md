@@ -152,7 +152,7 @@ pod 'JUNFlex'
 	```
 	To bind ui, you just need to call ```.layout``` method.
 	```objc
-	User.layout(^UIView *(JUNAppModel *_) {
+	User.layout(^id (User *_) {
 		return
 		$Vstack
 		.width(300)
