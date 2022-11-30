@@ -175,7 +175,7 @@ pod 'JUNFlex'
 	```objc
 	UIView *userView = user.render;
 	```
-	Nice ```(^_^)```
+	Nice ```v(^_^)v```
 
 ## Author
 
