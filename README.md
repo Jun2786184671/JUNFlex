@@ -131,6 +131,51 @@ pod 'JUNFlex'
             ]);
         });
 		```
+3. Introduction to ```JUNModel```
+	+ ```JUNModel``` is an abstract class for ORM and ui binding. You can make your model class extend to ```JUNModel``` ,then specify how json map to a model and bind ui to it.
+	```objc
+	User.mapper(^(id $, User *_) {
+        _.name = $[@"nom"];
+        _.email = $[@"mail"];
+        _.profileURL = [$[@"avatar"] integerValue];
+        ...
+    });
+	```
+	And then when you recieve a json response from server, you can quickly map it to model.
+	```objc
+	User *user = User.map(@{
+		@"nom" : @"Jun Ma",
+		@"email" : @"maxinchun5@gmail.com",
+		@"avatar" : @"http://www.example.com/path/to/resource",
+		...
+	});
+	```
+	To bind ui, you just need to call ```.layout``` method.
+	```objc
+	User.layout(^UIView *(JUNAppModel *_) {
+		return
+		$Vstack
+		.width(300)
+		.height(600)
+		.align(CGPointMake(0 /* main axis (y) */, -1 /* cross axis (x)*/))
+		.children(@[
+			$Item
+			.image(_.profileURL)
+
+			$Item
+			.text(_.name, 20, UIColor.blackColor),
+
+			$item
+			.text(_.email, 18, UIColor.blueColor),
+			.onTap(anyTarget, @selector(sendMailToJun))
+		]);
+	}
+	```
+	Then whenever you want to draw a user's info to interface, you only need to call ```.render``` method.
+	```objc
+	UIView *userView = user.render;
+	```
+	Nice ```(^_^)```
 
 ## Author
 
