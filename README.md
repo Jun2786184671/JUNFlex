@@ -33,7 +33,7 @@ pod 'JUNFlex'
 		```
 
 	+ ```$Vstack```
-		* Vstack is a vertical layout, similar to Hstack, all of its components wrapped by it are laid out in y-axis direction.
+		* Vstack is a vertical layout, similar to Hstack, all of its components are laid out in y-axis direction.
 		```objc
 		$Vstack
 		.width(100) // Yes, you can set some properties here.
@@ -46,7 +46,7 @@ pod 'JUNFlex'
       	]);
 		```
 	+ ```$Zstack```
-		* Zstack is a stack layout where all UIViews wrapped by it are stacked in the z-axis direction.
+		* Zstack is a stack layout where all of its components are stacked in the z-axis direction.
 		```objc
 		$Vstack
 		.size(CGSizeMake(80, 80))
@@ -72,7 +72,7 @@ pod 'JUNFlex'
       	);
 		```
 	+ ```$Item```
-		* Item is a nice tool in JUNFlex that allows you to quickly create many types of views, from UIImageView to UILabel or UIButton
+		* Item is a nice tool in JUNFlex that allows you to quickly create many types of views, from UIImageView to UILabel and even UIButton.
 		```objc
 		$Vstack
       	.children(@[
