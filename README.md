@@ -169,7 +169,7 @@ pod 'JUNFlex'
 			.text(_.email, 18, UIColor.blueColor),
 			.onTap(anyTarget, @selector(sendMailToJun))
 		]);
-	}
+	});
 	```
 	Then whenever you want to draw a user's info to interface, you only need to call ```.render``` method.
 	```objc
