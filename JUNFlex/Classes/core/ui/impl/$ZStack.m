@@ -5,11 +5,11 @@
 //  Created by Jun Ma on 2022/11/28.
 //
 
-#import "JUNZStack.h"
+#import "$ZStack.h"
 
 #import "UIView+JUNex4Flex.h"
 
-@implementation JUNZStack
+@implementation $ZStack
 
 - (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(CGPoint)alignment {
     if (self = [super initWithItems:items alignment:alignment]) {

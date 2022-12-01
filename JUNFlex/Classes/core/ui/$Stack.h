@@ -5,11 +5,11 @@
 //  Created by Jun Ma on 2022/11/27.
 //
 
-#import "JUNItem.h"
+#import "$Item.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNStack : JUNItem
+@interface $Stack : $Item
 
 - (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(CGPoint)alignment;
 

@@ -5,11 +5,11 @@
 //  Created by Jun Ma on 2022/11/26.
 //
 
-#import "JUNLinearStack.h"
+#import "$LinearStack.h"
 #import "JUNPadding.h"
 #import "UIView+JUNex4Flex.h"
 
-@implementation JUNLinearStack
+@implementation $LinearStack
 
 - (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(CGPoint)alignment {
     if (self = [super initWithItems:items alignment:alignment]) {

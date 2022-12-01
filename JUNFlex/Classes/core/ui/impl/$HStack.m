@@ -5,9 +5,9 @@
 //  Created by Jun Ma on 2022/11/27.
 //
 
-#import "JUNHStack.h"
+#import "$HStack.h"
 
-@implementation JUNHStack
+@implementation $HStack
 
 - (bool)isHorizontal {
     return true;

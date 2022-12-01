@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNLinearStack : JUNStack
+@interface $LinearStack : JUNStack
 
 @property(nonatomic, assign, readonly, getter=isHorizontal) bool horizontal;
 

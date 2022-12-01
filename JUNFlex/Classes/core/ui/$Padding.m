@@ -5,8 +5,8 @@
 //  Created by Jun Ma on 2022/12/1.
 //
 
-#import "JUNPadding.h"
+#import "$Padding.h"
 
-@implementation JUNPadding
+@implementation $Padding
 
 @end

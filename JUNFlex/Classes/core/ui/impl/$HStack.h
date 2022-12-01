@@ -1,15 +1,15 @@
 //
-//  JUNHStackBuilder.h
+//  JUNHStack.h
 //  JUNFlex
 //
 //  Created by Jun Ma on 2022/11/27.
 //
 
-#import "$StackBuilder.h"
+#import "$LinearStack.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNHStackBuilder : $StackBuilder
+@interface $HStack : $LinearStack
 
 @end
 

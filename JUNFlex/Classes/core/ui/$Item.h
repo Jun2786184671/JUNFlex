@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNItem : UIButton
+@interface $Item : UIButton
 
 @end
 
