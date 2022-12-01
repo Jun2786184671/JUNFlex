@@ -79,7 +79,7 @@
     };
 }
 
-- (id _Nonnull (^)(NSArray<id> * _Nonnull))children {
+- (UIView * _Nonnull (^)(NSArray<id> * _Nonnull))children {
     return ^(NSArray<id> *items) {
         NSMutableArray *$items = [NSMutableArray arrayWithArray:items];
         for (int i = 0; i < items.count; i++) {
@@ -151,7 +151,7 @@
     };
 }
 
-- (id _Nonnull (^)(NSUInteger (^ _Nonnull)(void), id _Nonnull (^ _Nonnull)(NSUInteger)))countBy {
+- (UIView * _Nonnull (^)(NSUInteger (^ _Nonnull)(void), id _Nonnull (^ _Nonnull)(NSUInteger)))countBy {
     return ^(NSUInteger (^count)(void), id (^builder)(NSUInteger)) {
         UIView *(^$builder)(NSUInteger i) = ^(NSUInteger i) {
             id item = builder(i);
