@@ -137,7 +137,7 @@ pod 'JUNFlex'
 	User.mapper(^(id $, User *_) {
         _.name = $[@"nom"];
         _.email = $[@"mail"];
-        _.profileURL = [$[@"avatar"] integerValue];
+        _.profileURL = $[@"avatar"];
         ...
     });
 	```
