@@ -11,11 +11,20 @@
 
 @implementation JUNLinearStack
 
-- (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(JUNStackAlignment)alignment insets:(UIEdgeInsets)insets {
-    if (self = [super initWithItems:items alignment:alignment insets:insets]) {
+- (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(CGPoint)alignment {
+    if (self = [super initWithItems:items alignment:alignment]) {
+        [self _addCrossHugConstraints];
         [self _setUpItems];
     }
     return self;
+}
+
+- (void)_addCrossHugConstraints {
+    NSLayoutAttribute crossSpanAttribute = self.isHorizontal? NSLayoutAttributeHeight : NSLayoutAttributeWidth;
+
+    NSLayoutConstraint *crossHugConstraint = [NSLayoutConstraint constraintWithItem:self attribute:crossSpanAttribute relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:0.0f];
+    crossHugConstraint.priority = UILayoutPriorityDefaultHigh - 1;
+    [self addConstraint:crossHugConstraint];
 }
 
 - (void)_setUpItems {
@@ -47,8 +56,8 @@
     
     CGSize itemSize = item.frame.size;
     CGFloat mainSpan = isHorizontal ? itemSize.width : itemSize.height;
-    CGFloat mainInfInset = isHorizontal ? self.insets.left : self.insets.top;
-    CGFloat mainSupInset = isHorizontal ? self.insets.right : self.insets.bottom;
+    CGFloat mainAlign = self.alignment.x;
+    CGFloat crossAlign = self.alignment.y;
     
     NSLayoutAttribute mainSpanAttribute = isHorizontal ? NSLayoutAttributeWidth : NSLayoutAttributeHeight;
     NSLayoutAttribute mainInfAttribute = isHorizontal ? NSLayoutAttributeLeading : NSLayoutAttributeTop;
@@ -56,8 +65,6 @@
 //    NSLayoutAttribute mainMidAttribute = isHorizontal ? NSLayoutAttributeCenterX : NSLayoutAttributeCenterY;
     
     CGFloat crossSpan = isHorizontal ? itemSize.height : itemSize.width;
-    CGFloat crossInfInset = isHorizontal ? self.insets.top : self.insets.left;
-    CGFloat crossSupInset = isHorizontal ? self.insets.bottom : self.insets.right;
     
     NSLayoutAttribute crossSpanAttribute = isHorizontal ? NSLayoutAttributeHeight : NSLayoutAttributeWidth;
     NSLayoutAttribute crossInfAttribute = isHorizontal ? NSLayoutAttributeTop : NSLayoutAttributeLeading;
@@ -73,9 +80,9 @@
     
     if (prevItem == nil) { // first item
         [self addConstraint:
-            [NSLayoutConstraint constraintWithItem:sizeBox attribute:mainInfAttribute relatedBy:NSLayoutRelationEqual toItem:self attribute:mainInfAttribute multiplier:1.0f constant:mainInfInset]
+            [NSLayoutConstraint constraintWithItem:sizeBox attribute:mainInfAttribute relatedBy:NSLayoutRelationEqual toItem:self attribute:mainInfAttribute multiplier:1.0f constant:0.0f]
         ];
-        if (self.alignment & JUNStackAlignmentMainAxisMax) { // make sizebox invisible
+        if (mainAlign > 0) { // make sizebox invisible
             [self addConstraints:@[
                 [NSLayoutConstraint constraintWithItem:sizeBox attribute:mainSpanAttribute relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:0.0f],
             ]];
@@ -89,30 +96,30 @@
         if (item == nil && prevItem == [self.items firstObject]) { // last additional sizebox when only have one item in stack
             [self addConstraints:@[
                 [NSLayoutConstraint constraintWithItem:sizeBox attribute:mainSpanAttribute relatedBy:NSLayoutRelationEqual toItem:prevSizeBox attribute:mainSpanAttribute multiplier:1.0f constant:0.0f],
-                [NSLayoutConstraint constraintWithItem:self attribute:mainSupAttribute relatedBy:NSLayoutRelationEqual toItem:sizeBox attribute:mainSupAttribute multiplier:1.0f constant:mainSupInset]
+                [NSLayoutConstraint constraintWithItem:self attribute:mainSupAttribute relatedBy:NSLayoutRelationEqual toItem:sizeBox attribute:mainSupAttribute multiplier:1.0f constant:0.0f]
             ]];
             return;
         }
         
         if (prevItem == [self.items firstObject]) { // second item
-            if (self.alignment & JUNStackAlignmentMainAxisCenter) { // sizebox span double to prevSizebox
+            if (mainAlign == 0) { // sizebox span double to prevSizebox
                 [self addConstraint:
                     [NSLayoutConstraint constraintWithItem:sizeBox attribute:mainSpanAttribute relatedBy:NSLayoutRelationEqual toItem:prevSizeBox attribute:mainSpanAttribute multiplier:2.0f constant:0.0f]
                 ];
-            } else if (self.alignment & JUNStackAlignmentMainAxisMin) { // sizebox span equal to prevSizeBox
+            } else if (mainAlign < 0) { // sizebox span equal to prevSizeBox
                 [self addConstraint:
                     [NSLayoutConstraint constraintWithItem:sizeBox attribute:mainSpanAttribute relatedBy:NSLayoutRelationEqual toItem:prevSizeBox attribute:mainSpanAttribute multiplier:1.0f constant:0.0f]
                 ];
             }
         } else if (item == nil) { // last additional sizebox
             [self addConstraint:
-                [NSLayoutConstraint constraintWithItem:self attribute:mainSupAttribute relatedBy:NSLayoutRelationEqual toItem:sizeBox attribute:mainSupAttribute multiplier:1.0f constant:mainSupInset]
+                [NSLayoutConstraint constraintWithItem:self attribute:mainSupAttribute relatedBy:NSLayoutRelationEqual toItem:sizeBox attribute:mainSupAttribute multiplier:1.0f constant:0.0f]
             ];
-            if (self.alignment & JUNStackAlignmentMainAxisMax) { // make sizebox invisible
+            if (mainAlign > 0) { // make sizebox invisible
                 [self addConstraints:@[
                     [NSLayoutConstraint constraintWithItem:sizeBox attribute:mainSpanAttribute relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:0.0f],
                 ]];
-            } else if (self.alignment & JUNStackAlignmentMainAxisCenter) { // sizebox span half to prevSizebox
+            } else if (mainAlign == 0) { // sizebox span half to prevSizebox
                 [self addConstraints:@[
                     [NSLayoutConstraint constraintWithItem:sizeBox attribute:mainSpanAttribute relatedBy:NSLayoutRelationEqual toItem:prevSizeBox attribute:mainSpanAttribute multiplier:0.5f constant:0.0f],
                 ]];
@@ -189,17 +196,17 @@
     }
     
     [self addConstraints:@[
-        [NSLayoutConstraint constraintWithItem:item attribute:crossInfAttribute relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self attribute:crossInfAttribute multiplier:1.0f constant:crossInfInset],
-        [NSLayoutConstraint constraintWithItem:self attribute:crossSupAttribute relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:item attribute:crossSupAttribute multiplier:1.0f constant:crossSupInset],
+        [NSLayoutConstraint constraintWithItem:item attribute:crossInfAttribute relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self attribute:crossInfAttribute multiplier:1.0f constant:0.0f],
+        [NSLayoutConstraint constraintWithItem:self attribute:crossSupAttribute relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:item attribute:crossSupAttribute multiplier:1.0f constant:0.0f],
     ]];
     
-    if (self.alignment & JUNStackAlignmentCrossAxisMin) {
+    if (crossAlign < 0) {
         [self addConstraint:
-            [NSLayoutConstraint constraintWithItem:item attribute:crossInfAttribute relatedBy:NSLayoutRelationEqual toItem:self attribute:crossInfAttribute multiplier:1.0f constant:crossInfInset]
+            [NSLayoutConstraint constraintWithItem:item attribute:crossInfAttribute relatedBy:NSLayoutRelationEqual toItem:self attribute:crossInfAttribute multiplier:1.0f constant:0.0f]
         ];
-    } else if (self.alignment & JUNStackAlignmentCrossAxisMax) {
+    } else if (crossAlign > 0) {
         [self addConstraint:
-            [NSLayoutConstraint constraintWithItem:self attribute:crossSupAttribute relatedBy:NSLayoutRelationEqual toItem:item attribute:crossSupAttribute multiplier:1.0f constant:crossSupInset]
+            [NSLayoutConstraint constraintWithItem:self attribute:crossSupAttribute relatedBy:NSLayoutRelationEqual toItem:item attribute:crossSupAttribute multiplier:1.0f constant:0.0f]
         ];
     } else {
         [self addConstraint:

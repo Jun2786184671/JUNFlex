@@ -6,7 +6,8 @@
 //
 
 #import "JUNStackBuilder.h"
-#import "JUNStackBuilder+JUNex.h"
+#import "JUNStackBuilder+Private.h"
+#import "JUNItemBuilder+Private.h"
 #import "JUNStack.h"
 #import "JUNItemBuilder.h"
 
@@ -25,67 +26,6 @@
 
 @implementation JUNStackBuilder
 
-- (JUNStackBuilder * _Nonnull (^)(NSString * _Nonnull))ID {
-    return ^(NSString *ID) {
-        self.$ID = ID;
-        return self;
-    };
-}
-
-- (JUNStackBuilder * _Nonnull (^)(UIColor * _Nonnull))color {
-    return ^(UIColor *color) {
-        self.$color = color;
-        return self;
-    };
-}
-
-- (JUNStackBuilder * _Nonnull (^)(CGFloat))radius {
-    return ^(CGFloat radius) {
-        self.$radius = radius;
-        return self;
-    };
-}
-
-- (JUNStackBuilder * _Nonnull (^)(bool))maskBounds {
-    return ^(bool maskBounds) {
-        self.$maskBounds = maskBounds;
-        return self;
-    };
-}
-
-- (JUNStackBuilder * _Nonnull (^)(CGFloat))alpha {
-    return ^(CGFloat alpha) {
-        self.$alpha = alpha;
-        return self;
-    };
-}
-
-- (JUNStackBuilder * _Nonnull (^)(CGFloat))width {
-    return ^(CGFloat width) {
-        self.$width = width;
-        return self;
-    };
-}
-
-- (JUNStackBuilder * _Nonnull (^)(CGFloat))height {
-    return ^(CGFloat height) {
-        self.$height = height;
-        return self;
-    };
-}
-
-- (JUNStackBuilder * _Nonnull (^)(CGSize))size {
-    return ^(CGSize size) {
-        self.width(size.width);
-        self.height(size.height);
-        return self;
-    };
-}
-
-- (JUNStack *)_getStackWithItems:(NSArray<UIView *> *)items alignment:(JUNStackAlignment)alignment insets:(UIEdgeInsets)insets {
-    return nil;
-}
-
 - (JUNStackBuilder * _Nonnull (^)(CGPoint))align {
     return ^(CGPoint align) {
         self.$align = align;
@@ -96,65 +36,23 @@
 // build method
 - (UIView * _Nonnull (^)(NSArray<UIView *> * _Nonnull))children {
     return ^(NSArray<UIView *> *items) {
-        
-        JUNStackAlignment alignMain = JUNStackAlignmentMainAxisCenter;
-        if (self.$align.x > 0) {
-            alignMain = JUNStackAlignmentMainAxisMax;
-        } else if (self.$align.x < 0) {
-            alignMain = JUNStackAlignmentMainAxisMin;
+        if (items.count == 0) {
+            NSAssert(false, @"stack must contain at least onw child");
+            return [[UIView alloc] init];
         }
-        
-        JUNStackAlignment alignCross = JUNStackAlignmentCrossAxisCenter;
-        if (self.$align.y > 0) {
-            alignCross = JUNStackAlignmentCrossAxisMax;
-        } else if (self.$align.y < 0) {
-            alignCross = JUNStackAlignmentCrossAxisMin;
-        }
-        
-        JUNStackAlignment align = alignMain | alignCross;
         
         NSArray<UIView *> *validItems = [self _validateItems:items];
-        JUNStack *stack = [self _getStackWithItems:validItems alignment:align insets:UIEdgeInsetsZero];
-        CGRect frame = stack.frame;
+        JUNStack *stack = [self _getStackWithItems:validItems alignment:self.$align];
         
-        if (self.$width) {
-            NSLayoutConstraint *wConstraint = [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:self.$width];
-            wConstraint.priority = UILayoutPriorityDefaultHigh;
-            [stack addConstraints:@[
-                wConstraint,
-                [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:self.$width],
-            ]];
-            frame.size.width = self.$width;
-        }
-        
-        if (self.$height) {
-            NSLayoutConstraint *hConstraint = [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:self.$height];
-            hConstraint.priority = UILayoutPriorityDefaultHigh;
-            [stack addConstraints:@[
-                hConstraint,
-                [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:self.$height],
-            ]];
-            frame.size.height = self.$height;
-        }
-        
-        stack.frame = frame;
-        
-        if (self.$ID) {
-            stack.accessibilityIdentifier = self.$ID;
-        }
-        if (self.$radius) {
-            stack.layer.cornerRadius = self.$radius;
-        }
-        
-        stack.layer.masksToBounds = self.$maskBounds;
-        
-        if (self.$color) {
-            stack.backgroundColor = self.$color;
-        }
-        if (self.$alpha) {
-            stack.alpha = self.$alpha;
-        }
-        return stack;
+        stack.translatesAutoresizingMaskIntoConstraints = false;
+        [self.target addSubview:stack];
+        [self.target addConstraints:@[
+            [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0f],
+            [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f],
+            [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f],
+            [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0.0f],
+        ]];
+        return (UIView *)self.target;
     };
 }
 
@@ -168,6 +66,10 @@
         }
     }
     return [validItems copy];
+}
+
+- (JUNStack *)_getStackWithItems:(NSArray<UIView *> *)items alignment:(CGPoint)alignment {
+    return nil;
 }
 
 @end

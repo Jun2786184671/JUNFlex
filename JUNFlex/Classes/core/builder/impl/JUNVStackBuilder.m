@@ -6,13 +6,13 @@
 //
 
 #import "JUNVStackBuilder.h"
-#import "JUNStackBuilder+JUNex.h"
+#import "JUNStackBuilder+Private.h"
 #import "JUNVStack.h"
 
 @implementation JUNVStackBuilder
 
-- (JUNStack *)_getStackWithItems:(NSArray<UIView *> *)items alignment:(JUNStackAlignment)alignment insets:(UIEdgeInsets)insets {
-    return [[JUNVStack alloc] initWithItems:items alignment:alignment insets:insets];
+- (JUNStack *)_getStackWithItems:(NSArray<UIView *> *)items alignment:(CGPoint)alignment {
+    return [[JUNVStack alloc] initWithItems:items alignment:alignment];
 }
 
 @end

@@ -5,11 +5,11 @@
 //  Created by Jun Ma on 2022/11/29.
 //
 
-#import <UIKit/UIKit.h>
+#import "JUNItemBuilder.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNPaddingBuilder : NSObject
+@interface JUNPaddingBuilder : JUNItemBuilder
 
 @property(nonatomic, readonly) JUNPaddingBuilder *(^ID)(NSString *ID);
 @property(nonatomic, readonly) JUNPaddingBuilder *(^color)(UIColor *color);
@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) JUNPaddingBuilder *(^width)(CGFloat width);
 @property(nonatomic, readonly) JUNPaddingBuilder *(^height)(CGFloat height);
 @property(nonatomic, readonly) JUNPaddingBuilder *(^size)(CGSize size);
+
+
 @property(nonatomic, readonly) JUNPaddingBuilder *(^top)(CGFloat top);
 @property(nonatomic, readonly) JUNPaddingBuilder *(^left)(CGFloat left);
 @property(nonatomic, readonly) JUNPaddingBuilder *(^bottom)(CGFloat bottom);

@@ -11,8 +11,8 @@
 
 @implementation JUNZStack
 
-- (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(JUNStackAlignment)alignment insets:(UIEdgeInsets)insets {
-    if (self = [super initWithItems:items alignment:alignment insets:insets]) {
+- (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(CGPoint)alignment {
+    if (self = [super initWithItems:items alignment:alignment]) {
         [self _setUpItems];
     }
     return self;
@@ -37,11 +37,7 @@
 - (void)_setUpConstraintsForItem:(UIView *)item prevItem:(UIView *)prevItem axis:(bool)isMainAxis {
     CGSize itemSize = item.frame.size;
     CGFloat itemSpan = isMainAxis ? itemSize.width : itemSize.height;
-    CGFloat infInset = isMainAxis ? self.insets.left : self.insets.top;
-    CGFloat supInset = isMainAxis ? self.insets.right : self.insets.bottom;
-    
-    JUNStackAlignment infAlign = isMainAxis ? JUNStackAlignmentMainAxisMin : JUNStackAlignmentCrossAxisMin;
-    JUNStackAlignment supAlign = isMainAxis ? JUNStackAlignmentMainAxisMax : JUNStackAlignmentCrossAxisMax;
+    CGFloat axisAlign = isMainAxis ? self.alignment.x : self.alignment.y;
     
     NSLayoutAttribute spanAttribute = isMainAxis ? NSLayoutAttributeWidth : NSLayoutAttributeHeight;
     NSLayoutAttribute infAttribute = isMainAxis ? NSLayoutAttributeLeading : NSLayoutAttributeTop;
@@ -73,7 +69,7 @@
                                               relatedBy:boundConstraintRelation
                                               toItem:prevItem
                                               attribute:infAttribute
-                                              multiplier:1.0f constant:infInset];
+                                              multiplier:1.0f constant:0.0f];
     
     NSLayoutConstraint *supConstraint = [NSLayoutConstraint
                                               constraintWithItem:prevItem
@@ -81,7 +77,7 @@
                                               relatedBy:boundConstraintRelation
                                               toItem:item
                                               attribute:supAttribute
-                                              multiplier:1.0f constant:supInset];
+                                              multiplier:1.0f constant:0.0f];
     
     [prevItem addConstraints:@[
         infConstraint,
@@ -89,10 +85,10 @@
     ]];
     
     NSLayoutConstraint *positionConstraint;
-    if (self.alignment & infAlign) {
-        positionConstraint = [NSLayoutConstraint constraintWithItem:item attribute:infAttribute relatedBy:NSLayoutRelationEqual toItem:prevItem attribute:infAttribute multiplier:1.0f constant:infInset];
-    } else if (self.alignment & supAlign) {
-        positionConstraint = [NSLayoutConstraint constraintWithItem:prevItem attribute:supAttribute relatedBy:NSLayoutRelationEqual toItem:item attribute:supAttribute multiplier:1.0f constant:supInset];
+    if (axisAlign < 0) {
+        positionConstraint = [NSLayoutConstraint constraintWithItem:item attribute:infAttribute relatedBy:NSLayoutRelationEqual toItem:prevItem attribute:infAttribute multiplier:1.0f constant:0.0f];
+    } else if (axisAlign > 0) {
+        positionConstraint = [NSLayoutConstraint constraintWithItem:prevItem attribute:supAttribute relatedBy:NSLayoutRelationEqual toItem:item attribute:supAttribute multiplier:1.0f constant:0.0f];
     } else {
         positionConstraint = [NSLayoutConstraint constraintWithItem:prevItem attribute:midAttribute relatedBy:NSLayoutRelationEqual toItem:item attribute:midAttribute multiplier:1.0f constant:0.0f];
     }

@@ -1,17 +1,12 @@
 //
-//  JUNWrap.m
+//  JUNPadding.m
 //  JUNFlex
 //
-//  Created by Jun Ma on 2022/11/29.
+//  Created by Jun Ma on 2022/12/1.
 //
 
 #import "JUNPadding.h"
-#import "UIView+JUNex4Flex.h"
 
 @implementation JUNPadding
-
-- (void)didMoveToWindow {
-    [self jun_addDefaultConstraintsIfNeeded];
-}
 
 @end

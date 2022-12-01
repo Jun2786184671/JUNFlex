@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (CGRect)jun_validateFrame;
 - (void)jun_addDefaultConstraintsIfNeeded;
-- (UIView *)jun_wrapWithInset:(UIEdgeInsets)insets;
 
 @end
 

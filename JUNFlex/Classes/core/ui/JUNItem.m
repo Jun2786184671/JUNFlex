@@ -14,4 +14,9 @@
     [self jun_addDefaultConstraintsIfNeeded];
 }
 
+- (void)sizeToFit {
+    if (!self.currentImage || !self.currentTitle.length) return;
+    [super sizeToFit];
+}
+
 @end

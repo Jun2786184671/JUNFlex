@@ -6,7 +6,7 @@
 //
 
 #import "JUNPaddingBuilder.h"
-#import "JUNItemBuilder.h"
+#import "JUNItemBuilder+Private.h"
 #import "UIView+JUNex4Flex.h"
 
 @interface JUNPaddingBuilder ()
@@ -29,63 +29,6 @@
         self.$paddings = UIEdgeInsetsZero;
     }
     return self;
-}
-
-- (JUNPaddingBuilder * _Nonnull (^)(NSString * _Nonnull))ID {
-    return ^(NSString *ID) {
-        self.$ID = ID;
-        return self;
-    };
-}
-
-- (JUNPaddingBuilder * _Nonnull (^)(UIColor * _Nonnull))color {
-    return ^(UIColor *color) {
-        self.$color = color;
-        return self;
-    };
-}
-
-- (JUNPaddingBuilder * _Nonnull (^)(CGFloat))radius {
-    return ^(CGFloat radius) {
-        self.$radius = radius;
-        return self;
-    };
-}
-
-- (JUNPaddingBuilder * _Nonnull (^)(bool))maskBounds {
-    return ^(bool maskBounds) {
-        self.$maskBounds = maskBounds;
-        return self;
-    };
-}
-
-- (JUNPaddingBuilder * _Nonnull (^)(CGFloat))alpha {
-    return ^(CGFloat alpha) {
-        self.$alpha = alpha;
-        return self;
-    };
-}
-
-- (JUNPaddingBuilder * _Nonnull (^)(CGFloat))width {
-    return ^(CGFloat width) {
-        self.$width = width;
-        return self;
-    };
-}
-
-- (JUNPaddingBuilder * _Nonnull (^)(CGFloat))height {
-    return ^(CGFloat height) {
-        self.$height = height;
-        return self;
-    };
-}
-
-- (JUNPaddingBuilder * _Nonnull (^)(CGSize))size {
-    return ^(CGSize size) {
-        self.width(size.width);
-        self.height(size.height);
-        return self;
-    };
 }
 
 - (JUNPaddingBuilder * _Nonnull (^)(CGFloat))top {
@@ -139,48 +82,18 @@
 }
 
 - (UIView * _Nonnull (^)(id _Nonnull))child {
-    return ^(id target) {
-        UIView *validTarget = [self _validateTarget:target];
-        UIView *wrappedTarget = [validTarget jun_wrapWithInset:self.$paddings];
-        CGRect frame = wrappedTarget.frame;
+    return ^(id content) {
+        UIView *validContent = [self _validateTarget:content];
         
-        if (self.$width) {
-            NSLayoutConstraint *wConstraint = [NSLayoutConstraint constraintWithItem:wrappedTarget attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:self.$width];
-            wConstraint.priority = UILayoutPriorityDefaultHigh;
-            [wrappedTarget addConstraints:@[
-                [NSLayoutConstraint constraintWithItem:wrappedTarget attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:self.$width],
-                wConstraint,
-            ]];
-            frame.size.width = self.$width;
-        }
-        if (self.$height) {
-            NSLayoutConstraint *hConstraint = [NSLayoutConstraint constraintWithItem:wrappedTarget attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:self.$height];
-            hConstraint.priority = UILayoutPriorityDefaultHigh;
-            [wrappedTarget addConstraints:@[
-                [NSLayoutConstraint constraintWithItem:wrappedTarget attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:self.$height],
-                hConstraint,
-            ]];
-            frame.size.height = self.$height;
-        }
-        
-        wrappedTarget.frame = frame;
-        
-        if (self.$ID) {
-            wrappedTarget.accessibilityIdentifier = self.$ID;
-        }
-        if (self.$radius) {
-            wrappedTarget.layer.cornerRadius = self.$radius;
-        }
-        
-        wrappedTarget.layer.masksToBounds = self.$maskBounds;
-        
-        if (self.$color) {
-            wrappedTarget.backgroundColor = self.$color;
-        }
-        if (self.$alpha) {
-            wrappedTarget.alpha = self.$alpha;
-        }
-        return wrappedTarget;
+        validContent.translatesAutoresizingMaskIntoConstraints = false;
+        [self.target addSubview:validContent];
+        [self.target addConstraints:@[
+            [NSLayoutConstraint constraintWithItem:validContent attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeTop multiplier:1.0f constant:self.$paddings.top],
+            [NSLayoutConstraint constraintWithItem:validContent attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-self.$paddings.bottom],
+            [NSLayoutConstraint constraintWithItem:validContent attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeLeading multiplier:1.0f constant:self.$paddings.left],
+            [NSLayoutConstraint constraintWithItem:validContent attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:-self.$paddings.right],
+        ]];
+        return self.end;
     };
 }
 
@@ -192,7 +105,7 @@
         return builder.end;
     }
     NSAssert(false, @"child of padding must be a uiview or itembuilder");
-    return nil;
+    return [[UIView alloc] init];
 }
 
 @end

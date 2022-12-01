@@ -1,5 +1,5 @@
 //
-//  JUNStackBuilder+JUNex.h
+//  JUNStackBuilder+Private.h
 //  JUNFlex
 //
 //  Created by Jun Ma on 2022/11/27.
@@ -12,8 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JUNStackBuilder ()
 
-- (JUNStack *)_getStackWithItems:(NSArray<UIView *> *)items alignment:(JUNStackAlignment)alignment insets:(UIEdgeInsets)insets;
-//- (NSDictionary *)configurations;
+- (JUNStack *)_getStackWithItems:(NSArray<UIView *> *)items alignment:(CGPoint)alignment;
 
 @end
 

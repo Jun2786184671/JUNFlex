@@ -5,26 +5,16 @@
 //  Created by Jun Ma on 2022/11/27.
 //
 
-#import <UIKit/UIKit.h>
-
-typedef enum {
-    JUNStackAlignmentCrossAxisMax = 1 << 0,
-    JUNStackAlignmentCrossAxisCenter = 1 << 1,
-    JUNStackAlignmentCrossAxisMin = 1 << 2,
-    JUNStackAlignmentMainAxisMax = 1 << 3,
-    JUNStackAlignmentMainAxisCenter = 1 << 4,
-    JUNStackAlignmentMainAxisMin = 1 << 5,
-} JUNStackAlignment;
+#import "JUNItem.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNStack : UIView
+@interface JUNStack : JUNItem
 
-- (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(JUNStackAlignment)alignment insets:(UIEdgeInsets)insets;
+- (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(CGPoint)alignment;
 
 @property(nonatomic, strong, readonly) NSArray<UIView *> *items;
-@property(nonatomic, assign, readonly) JUNStackAlignment alignment;
-@property(nonatomic, assign, readonly) UIEdgeInsets insets;
+@property(nonatomic, assign, readonly) CGPoint alignment;
 
 @end
 

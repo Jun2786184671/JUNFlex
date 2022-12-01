@@ -1,15 +1,15 @@
 //
-//  JUNWrap.h
+//  JUNPadding.h
 //  JUNFlex
 //
-//  Created by Jun Ma on 2022/11/29.
+//  Created by Jun Ma on 2022/12/1.
 //
 
-#import <UIKit/UIKit.h>
+#import "JUNItem.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNPadding : UIView
+@interface JUNPadding : JUNItem
 
 @end
 

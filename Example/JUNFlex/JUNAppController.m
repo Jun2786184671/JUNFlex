@@ -41,7 +41,26 @@
 // for storyboard
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [self bindUI];
+    [self bindUI2];
+}
+
+- (void)bindUI3 {
+    JUNAppModel.layout(^id (JUNAppModel *_) {
+        return
+        $Zstack.children(@[
+            $Vstack
+            .children(@[
+                $Item
+                .size(CGSizeMake(80, 80))
+                .image(_.image)
+                .radius(30),
+                 $Item
+                 .text(_.title, 20, UIColor.blueColor)
+                 .onTap(self, @selector(buttonOnTap)),
+                  UISwitch.new
+            ])
+        ]);
+    });
 }
 
 - (void)bindUI {
@@ -50,11 +69,11 @@
         $List
         .width(300)
         .height(500)
-//        .horizontal(true)
-        .itemSize(CGSizeMake(80, 80))
+        .horizontal(true)
+//        .itemSize(CGSizeMake(80, 80))
         .alwaysBounce(true)
         .showIndicator(true)
-        .count(100, ^id (NSUInteger i) {
+        .count(10, ^id (NSUInteger i) {
             return
             $Vstack
             .width(300)
@@ -65,9 +84,10 @@
                  .image(_.image)
                  .radius(30),
                   $Hstack
+//                  .width(1000)
                   .children(@[
                     $Item
-                    .text(_.message, 20, UIColor.blueColor)
+                    .text(_.title, 20, UIColor.blueColor)
                     .onTap(self, @selector(buttonOnTap)),
                      UISwitch.new
                   ]),
@@ -86,6 +106,7 @@
     JUNAppModel.layout(^(JUNAppModel *_) {
         return
         $Vstack
+        .align(CGPointMake(0, 0))
         .height(852)
         .children(@[
             $Padding
@@ -125,24 +146,25 @@
             ),
             $Item
             .text(_.title, 30, UIColor.blackColor),
-            $Padding
-            .color(UIColor.cyanColor)
-            .alpha(0.6)
-            .radius(20)
-            .left(20).right(20)
-            .child(
+//            $Padding
+//            .color(UIColor.cyanColor)
+//            .alpha(0.6)
+//            .radius(20)
+//            .left(20).right(20)
+//            .child(
                 $Item
                 .text(_.message, 40, UIColor.blueColor)
-                .onTap(self, @selector(buttonOnTap))
-            ),
+                .onTap(self, @selector(buttonOnTap)),
+//            ),
             $Hstack
             .children(@[
                 $Padding
-                .radius(30)
+//                .radius(30)
                 .maskBounds(true)
                 .child(
                     $Item
-                    .radius(30)
+                    .width(200)
+//                    .radius(30)
                     .height(100)
                     .image(_.image)
                 ),

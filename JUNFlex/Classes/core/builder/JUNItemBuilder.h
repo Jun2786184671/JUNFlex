@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class JUNItem;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JUNItemBuilder : NSObject
@@ -23,7 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) JUNItemBuilder *(^height)(CGFloat height);
 @property(nonatomic, readonly) JUNItemBuilder *(^size)(CGSize size);
 @property(nonatomic, readonly) JUNItemBuilder *(^onTap)(id target, SEL selector);
+/// call when end an item build
 @property(nonatomic, readonly) UIView *end;
+
 
 @end
 

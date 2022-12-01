@@ -6,24 +6,18 @@
 //
 
 #import "JUNItemBuilder.h"
+#import "JUNItemBuilder+Private.h"
 #import "UIColor+JUNex4Flex.h"
 #import "NSURL+JUNex4Flex.h"
-#import "JUNItem.h"
 #import <SDWebImage/SDWebImage.h>
 
-@interface JUNItemBuilder ()
-
-@property(nonatomic, strong) UIButton *target;
-
-@end
-
 @implementation JUNItemBuilder
+@synthesize target = _target;
 
-- (UIButton *)target {
+- (JUNItem *)target {
     if (_target == nil) {
         _target = [JUNItem buttonWithType:UIButtonTypeCustom];
         _target.translatesAutoresizingMaskIntoConstraints = false;
-        _target.userInteractionEnabled = false;
         _target.backgroundColor = [UIColor clearColor];
     }
     return _target;
@@ -63,11 +57,9 @@
     return ^(NSString *nameOrURL) {
         NSURL *url = [NSURL URLWithString:nameOrURL];
         if ([url jun_isValid]) {
-//            [self.target.imageView sd_setImageWithURL:url placeholderImage:nil];
             [self.target sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:nil];
         } else {
             UIImage *image = [UIImage imageNamed:nameOrURL];
-//            [self.target setImage:image forState:UIControlStateNormal];
             [self.target setBackgroundImage:image forState:UIControlStateNormal];
         }
         return self;
@@ -90,9 +82,9 @@
 
 - (JUNItemBuilder * _Nonnull (^)(CGFloat))width {
     return ^(CGFloat width) {
-        NSLayoutConstraint *wConstraint = [NSLayoutConstraint constraintWithItem:self.target attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:width];
-        wConstraint.priority = UILayoutPriorityDefaultHigh;
-        [self.target addConstraint:wConstraint];
+        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self.target attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:width];
+        widthConstraint.priority = UILayoutPriorityDefaultHigh;
+        [self.target addConstraint:widthConstraint];
         CGRect frame = self.target.frame;
         frame.size.width = width;
         self.target.frame = frame;
@@ -102,9 +94,9 @@
 
 - (JUNItemBuilder * _Nonnull (^)(CGFloat))height {
     return ^(CGFloat height) {
-        NSLayoutConstraint *hConstraint = [NSLayoutConstraint constraintWithItem:self.target attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:height];
-        hConstraint.priority = UILayoutPriorityDefaultHigh;
-        [self.target addConstraint:hConstraint];
+        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.target attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:height];
+        heightConstraint.priority = UILayoutPriorityDefaultHigh;
+        [self.target addConstraint:heightConstraint];
         CGRect frame = self.target.frame;
         frame.size.height = height;
         self.target.frame = frame;
@@ -122,13 +114,12 @@
 
 - (JUNItemBuilder * _Nonnull (^)(id _Nonnull, SEL _Nonnull))onTap {
     return ^(id target, SEL selector) {
-        self.target.userInteractionEnabled = true;
         [self.target addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
         return self;
     };
 }
 
-- (UIView *)end {
+- (JUNItem *)end {
     return self.target;
 }
 
