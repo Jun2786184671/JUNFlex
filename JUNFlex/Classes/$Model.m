@@ -70,7 +70,7 @@
 
 @implementation $Model
 
-+ (void (^)(void (^ _Nonnull)(id _Nonnull, __kindof $Model *)))mapper {
++ (void (^)(void (^ _Nonnull)(id _Nonnull, __kindof $Model *)))$Mapper {
     return ^(void (^builder)(id json, $Model *model)) {
         JUNModelInfo *modelInfo = [[JUNModelInfo alloc] init];
         modelInfo.clz = [self class];
@@ -79,7 +79,7 @@
     };
 }
 
-+ (void (^)(id _Nonnull (^ _Nonnull)(__kindof $Model * _Nonnull)))layout {
++ (void (^)(id _Nonnull (^ _Nonnull)(__kindof $Model * _Nonnull)))$Layout {
     return ^(id (^builder)($Model *)) {
         JUNModelInfo *modelInfo = [[JUNModelInfo alloc] init];
         modelInfo.clz = [self class];
@@ -88,7 +88,7 @@
     };
 }
 
-- (__kindof $Model * _Nonnull (^)(id _Nonnull))map {
+- (__kindof $Model * _Nonnull (^)(id _Nonnull))$map {
     return ^(id json) {
         JUNModelInfo *modelInfo = [[JUNModelManager sharedInstance] modelInfoWithClass:[self class]];
         if (modelInfo.dataMapper) {
@@ -101,7 +101,7 @@
     };
 }
 
-+ (__kindof $Model * _Nonnull (^)(id _Nonnull))map {
++ (__kindof $Model * _Nonnull (^)(id _Nonnull))$map {
     return ^(id json) {
         JUNModelInfo *modelInfo = [[JUNModelManager sharedInstance] modelInfoWithClass:[self class]];
         $Model *model = [[self alloc] init];
@@ -116,7 +116,7 @@
     };
 }
 
-- (UIView *)render {
+- (UIView *)$render {
     JUNModelInfo *modelInfo = [[JUNModelManager sharedInstance] modelInfoWithClass:[self class]];
     if (!modelInfo.uiMapper) {
 #ifdef DEBUG

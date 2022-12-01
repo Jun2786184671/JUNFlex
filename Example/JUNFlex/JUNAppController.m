@@ -21,7 +21,7 @@
 + (void)load {
     // register data mapper
     
-    JUNAppModel.mapper(^(id $, JUNAppModel *_) {
+    JUNAppModel.$Mapper(^(id $, JUNAppModel *_) {
         _.name = $[@"name"];
         _.title = $[@"text"];
         _.message = $[@"mes"];
@@ -45,7 +45,7 @@
 }
 
 - (void)bindUI3 {
-    JUNAppModel.layout(^id (JUNAppModel *_) {
+    JUNAppModel.$Layout(^id (JUNAppModel *_) {
         return
         $Zstack.children(@[
             $Vstack
@@ -64,7 +64,7 @@
 }
 
 - (void)bindUI {
-    JUNAppModel.layout(^UIView *(JUNAppModel *_) {
+    JUNAppModel.$Layout(^UIView *(JUNAppModel *_) {
         return
         $List
         .width(300)
@@ -103,7 +103,7 @@
 
 - (void)bindUI2 {
     
-    JUNAppModel.layout(^(JUNAppModel *_) {
+    JUNAppModel.$Layout(^(JUNAppModel *_) {
         return
         $Vstack
         .align(CGPointMake(0, 0))
@@ -211,8 +211,8 @@
     // Do any additional setup after loading the view.
     
     [self loadData:^(id json) {
-        self.appModel = JUNAppModel.map(json);
-        [self.view addSubview:self.appModel.render];
+        self.appModel = JUNAppModel.$map(json);
+        [self.view addSubview:self.appModel.$render];
     }];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
