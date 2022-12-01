@@ -137,8 +137,8 @@ pod 'JUNFlex'
 	self.view.$query0(@"anyIdentifier"); // Query first matched view.
 
 	```
-4. Introduce to ```JUNModel```
-	+ ```JUNModel``` is an abstract class for ORM and ui binding. You can make your model class extend to ```JUNModel``` ,then specify how json map to a model and bind ui to it.
+4. Introduce to ```$Model```
+	+ ```$Model``` is an abstract class for ORM and ui binding. You can make your model class extend to ```$Model``` ,then specify how json map to a model and bind ui to it.
 	```objc
 	User.mapper(^(id $, User *_) {
         _.name = $[@"nom"];
