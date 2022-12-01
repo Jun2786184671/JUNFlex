@@ -140,7 +140,7 @@ pod 'JUNFlex'
 4. Introduce to ```$Model```
 	+ ```$Model``` is an abstract class for ORM and ui binding. You can make your model class extend to ```$Model``` ,then specify how json map to a model and bind ui to it.
 	```objc
-	User.mapper(^(id $, User *_) {
+	User.$Mapper(^(id $, User *_) {
         _.name = $[@"nom"];
         _.email = $[@"mail"];
         _.profileURL = $[@"avatar"];
@@ -149,7 +149,7 @@ pod 'JUNFlex'
 	```
 	And then when you recieve a json response from server, you can quickly map it to model.
 	```objc
-	User *user = User.map(@{
+	User *user = User.$map(@{
 		@"nom" : @"Jun Ma",
 		@"mail" : @"maxinchun5@gmail.com",
 		@"avatar" : @"http://www.example.com/path/to/resource",
@@ -158,7 +158,7 @@ pod 'JUNFlex'
 	```
 	To bind ui, you just need to call ```.layout``` method.
 	```objc
-	User.layout(^id (User *_) {
+	User.$Layout(^id (User *_) {
 		return
 		$Vstack
 		.width(300)
@@ -171,7 +171,7 @@ pod 'JUNFlex'
 			$Item
 			.text(_.name, 20, UIColor.blackColor),
 
-			$item
+			$Item
 			.text(_.email, 18, UIColor.blueColor),
 			.onTap(anyTarget, @selector(sendMailToJun))
 		]);
@@ -179,7 +179,7 @@ pod 'JUNFlex'
 	```
 	Then whenever you want to draw a user's info to interface, you only need to call ```.render``` method.
 	```objc
-	UIView *userView = user.render;
+	UIView *userView = user.$render;
 	```
 	Nice ```v(^_^)v```
 
