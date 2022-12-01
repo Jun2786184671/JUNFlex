@@ -48,7 +48,7 @@ pod 'JUNFlex'
 	+ ```$Zstack```
 		* Zstack is a stack layout where all of its components are stacked in the z-axis direction.
 		```objc
-		$Vstack
+		$Zstack
 		.size(CGSizeMake(80, 80))
 		.align(CGPointMake(-1, -1)) // This makes all contents in stack lean to the left top corner.
       	.children(@[
