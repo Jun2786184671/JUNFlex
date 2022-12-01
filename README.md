@@ -134,7 +134,7 @@ pod 'JUNFlex'
 		.size(CGSizeMake(100, 100))
 	];
 
-	self.view.$query(@"anyIdentifier");
+	self.view.$query0(@"anyIdentifier"); // Query first matched view.
 
 	```
 4. Introduce to ```JUNModel```
