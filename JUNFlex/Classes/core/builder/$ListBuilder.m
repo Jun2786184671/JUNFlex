@@ -5,11 +5,11 @@
 //  Created by Jun Ma on 2022/11/30.
 //
 
-#import "JUNListBuilder.h"
+#import "$ListBuilder.h"
 #import "JUNItemBuilder+Private.h"
 #import "UICollectionView+JUNex.h"
 
-@interface JUNListBuilder ()
+@interface $ListBuilder ()
 
 @property(nonatomic, assign) bool $maskBounds;
 @property(nonatomic, assign) CGSize $itemSize;
@@ -21,44 +21,44 @@
 
 @end
 
-@implementation JUNListBuilder
+@implementation $ListBuilder
 
-- (JUNListBuilder * _Nonnull (^)(bool))horizontal {
+- ($ListBuilder * _Nonnull (^)(bool))horizontal {
     return ^(bool isHorizontal) {
         self.$isHorizontal = isHorizontal;
         return self;
     };
 }
 
-- (JUNListBuilder * _Nonnull (^)(bool))alwaysBounce {
+- ($ListBuilder * _Nonnull (^)(bool))alwaysBounce {
     return ^(bool isAlwaysBounce) {
         self.$isAlwaysBounce = isAlwaysBounce;
         return self;
     };
 }
 
-- (JUNListBuilder * _Nonnull (^)(bool))showIndicator {
+- ($ListBuilder * _Nonnull (^)(bool))showIndicator {
     return ^(bool isShowIndicator) {
         self.$isShowIndicator = isShowIndicator;
         return self;
     };
 }
 
-- (JUNListBuilder * _Nonnull (^)(CGSize))itemSize {
+- ($ListBuilder * _Nonnull (^)(CGSize))itemSize {
     return ^(CGSize itemSize) {
         self.$itemSize = itemSize;
         return self;
     };
 }
 
-- (JUNListBuilder * _Nonnull (^)(CGFloat))itemSpacing {
+- ($ListBuilder * _Nonnull (^)(CGFloat))itemSpacing {
     return ^(CGFloat itemSpacing) {
         self.$itemSpacing = itemSpacing;
         return self;
     };
 }
 
-- (JUNListBuilder * _Nonnull (^)(CGFloat))lineSpacing {
+- ($ListBuilder * _Nonnull (^)(CGFloat))lineSpacing {
     return ^(CGFloat lineSpacing) {
         self.$lineSpacing = lineSpacing;
         return self;
@@ -70,8 +70,8 @@
         NSMutableArray *validItems = [NSMutableArray arrayWithArray:items];
         for (int i = 0; i < items.count; i++) {
             id item = items[i];
-            if ([item isKindOfClass:[JUNItemBuilder class]]) {
-                JUNItemBuilder *builder = (JUNItemBuilder *)item;
+            if ([item isKindOfClass:[$ItemBuilder class]]) {
+                $ItemBuilder *builder = ($ItemBuilder *)item;
                 [validItems replaceObjectAtIndex:i withObject:builder.end];
             } else if (![item isKindOfClass:[UIView class]]) {
                 NSAssert(false, @"item must be a uiview or itembuilder");
@@ -89,8 +89,8 @@
             NSMutableArray *validItems = [NSMutableArray arrayWithArray:items];
             for (int i = 0; i < items.count; i++) {
                 id item = items[i];
-                if ([item isKindOfClass:[JUNItemBuilder class]]) {
-                    JUNItemBuilder *builder = (JUNItemBuilder *)item;
+                if ([item isKindOfClass:[$ItemBuilder class]]) {
+                    $ItemBuilder *builder = ($ItemBuilder *)item;
                     [validItems replaceObjectAtIndex:i withObject:builder.end];
                 } else if (![item isKindOfClass:[UIView class]]) {
                     NSAssert(false, @"item must be a uiview or itembuilder");
@@ -107,8 +107,8 @@
     return ^(NSArray *elements, UIView *(^builder)(NSUInteger i, id each)) {
         UIView *(^wrappedBuilder)(NSUInteger i, id each) = ^(NSUInteger i, id each) {
             id item = builder(i, each);
-            if ([item isKindOfClass:[JUNItemBuilder class]]) {
-                JUNItemBuilder *builder = (JUNItemBuilder *)item;
+            if ([item isKindOfClass:[$ItemBuilder class]]) {
+                $ItemBuilder *builder = ($ItemBuilder *)item;
                 return builder.end;
             } else if (![item isKindOfClass:[UIView class]]) {
                 NSAssert(false, @"item must be a uiview or itembuilder");
@@ -124,8 +124,8 @@
     return ^(NSUInteger count, UIView *(^builder)(NSUInteger)) {
         UIView *(^wrappedBuilder)(NSUInteger i) = ^(NSUInteger i) {
             id item = builder(i);
-            if ([item isKindOfClass:[JUNItemBuilder class]]) {
-                JUNItemBuilder *builder = (JUNItemBuilder *)item;
+            if ([item isKindOfClass:[$ItemBuilder class]]) {
+                $ItemBuilder *builder = ($ItemBuilder *)item;
                 return builder.end;
             } else if (![item isKindOfClass:[UIView class]]) {
                 NSAssert(false, @"item must be a uiview or itembuilder");
@@ -141,8 +141,8 @@
     return ^(NSUInteger (^count)(void), UIView *(^builder)(NSUInteger)) {
         UIView *(^wrappedBuilder)(NSUInteger i) = ^(NSUInteger i) {
             id item = builder(i);
-            if ([item isKindOfClass:[JUNItemBuilder class]]) {
-                JUNItemBuilder *builder = (JUNItemBuilder *)item;
+            if ([item isKindOfClass:[$ItemBuilder class]]) {
+                $ItemBuilder *builder = ($ItemBuilder *)item;
                 return builder.end;
             } else if (![item isKindOfClass:[UIView class]]) {
                 NSAssert(false, @"item must be a uiview or itembuilder");

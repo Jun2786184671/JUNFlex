@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNItemBuilder ()
+@interface $ItemBuilder ()
 
 @property(nonatomic, strong, readonly) JUNItem *target;
 

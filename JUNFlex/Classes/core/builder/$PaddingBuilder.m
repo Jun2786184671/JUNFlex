@@ -5,11 +5,11 @@
 //  Created by Jun Ma on 2022/11/29.
 //
 
-#import "JUNPaddingBuilder.h"
+#import "$PaddingBuilder.h"
 #import "JUNItemBuilder+Private.h"
 #import "UIView+JUNex4Flex.h"
 
-@interface JUNPaddingBuilder ()
+@interface $PaddingBuilder ()
 
 @property(nonatomic, copy) NSString *$ID;
 @property(nonatomic, strong) UIColor *$color;
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation JUNPaddingBuilder
+@implementation $PaddingBuilder
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -31,7 +31,7 @@
     return self;
 }
 
-- (JUNPaddingBuilder * _Nonnull (^)(CGFloat))top {
+- ($PaddingBuilder * _Nonnull (^)(CGFloat))top {
     return ^(CGFloat top) {
         UIEdgeInsets paddings = self.$paddings;
         paddings.top = top;
@@ -40,7 +40,7 @@
     };
 }
 
-- (JUNPaddingBuilder * _Nonnull (^)(CGFloat))left {
+- ($PaddingBuilder * _Nonnull (^)(CGFloat))left {
     return ^(CGFloat left) {
         UIEdgeInsets paddings = self.$paddings;
         paddings.left = left;
@@ -49,7 +49,7 @@
     };
 }
 
-- (JUNPaddingBuilder * _Nonnull (^)(CGFloat))bottom {
+- ($PaddingBuilder * _Nonnull (^)(CGFloat))bottom {
     return ^(CGFloat bottom) {
         UIEdgeInsets paddings = self.$paddings;
         paddings.bottom = bottom;
@@ -58,7 +58,7 @@
     };
 }
 
-- (JUNPaddingBuilder * _Nonnull (^)(CGFloat))right {
+- ($PaddingBuilder * _Nonnull (^)(CGFloat))right {
     return ^(CGFloat right) {
         UIEdgeInsets paddings = self.$paddings;
         paddings.right = right;
@@ -67,14 +67,14 @@
     };
 }
 
-- (JUNPaddingBuilder * _Nonnull (^)(CGFloat))all {
+- ($PaddingBuilder * _Nonnull (^)(CGFloat))all {
     return ^(CGFloat all) {
         self.$paddings = UIEdgeInsetsMake(all, all, all, all);
         return self;
     };
 }
 
-- (JUNPaddingBuilder * _Nonnull (^)(CGFloat, CGFloat, CGFloat, CGFloat))make {
+- ($PaddingBuilder * _Nonnull (^)(CGFloat, CGFloat, CGFloat, CGFloat))make {
     return ^(CGFloat t, CGFloat l, CGFloat b, CGFloat r) {
         self.$paddings = UIEdgeInsetsMake(t, l, b, r);
         return self;
@@ -100,8 +100,8 @@
 - (UIView *)_validateTarget:(id)target {
     if ([target isKindOfClass:[UIView class]]) {
         return target;
-    } else if ([target isKindOfClass:[JUNItemBuilder class]]) {
-        JUNItemBuilder *builder = (JUNItemBuilder *)target;
+    } else if ([target isKindOfClass:[$ItemBuilder class]]) {
+        $ItemBuilder *builder = ($ItemBuilder *)target;
         return builder.end;
     }
     NSAssert(false, @"child of padding must be a uiview or itembuilder");

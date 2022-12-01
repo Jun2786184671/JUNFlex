@@ -5,13 +5,13 @@
 //  Created by Jun Ma on 2022/11/27.
 //
 
-#import "JUNStackBuilder.h"
+#import "$StackBuilder.h"
 #import "JUNStackBuilder+Private.h"
 #import "JUNItemBuilder+Private.h"
 #import "JUNStack.h"
-#import "JUNItemBuilder.h"
+#import "$ItemBuilder.h"
 
-@interface JUNStackBuilder ()
+@interface $StackBuilder ()
 
 @property(nonatomic, copy) NSString *$ID;
 @property(nonatomic, strong) UIColor *$color;
@@ -24,9 +24,9 @@
 
 @end
 
-@implementation JUNStackBuilder
+@implementation $StackBuilder
 
-- (JUNStackBuilder * _Nonnull (^)(CGPoint))align {
+- ($StackBuilder * _Nonnull (^)(CGPoint))align {
     return ^(CGPoint align) {
         self.$align = align;
         return self;
@@ -38,7 +38,7 @@
     return ^(NSArray<UIView *> *items) {
         if (items.count == 0) {
             NSAssert(false, @"stack must contain at least onw child");
-            return [[UIView alloc] init];
+            return self.end;
         }
         
         NSArray<UIView *> *validItems = [self _validateItems:items];
@@ -52,7 +52,7 @@
             [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f],
             [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0.0f],
         ]];
-        return (UIView *)self.target;
+        return self.end;
     };
 }
 
@@ -60,8 +60,8 @@
     NSMutableArray *validItems = [NSMutableArray arrayWithArray:items];
     for (int i = 0; i < items.count; i++) {
         id item = items[i];
-        if ([item isKindOfClass:[JUNItemBuilder class]]) {
-            JUNItemBuilder *builder = (JUNItemBuilder *)item;
+        if ([item isKindOfClass:[$ItemBuilder class]]) {
+            $ItemBuilder *builder = ($ItemBuilder *)item;
             [validItems replaceObjectAtIndex:i withObject:builder.end];
         }
     }

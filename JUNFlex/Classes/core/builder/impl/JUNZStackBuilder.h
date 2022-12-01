@@ -5,11 +5,11 @@
 //  Created by Jun Ma on 2022/11/28.
 //
 
-#import <JUNFlex/JUNFlex.h>
+#import <JUNFlex/$Flex.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNZStackBuilder : JUNStackBuilder
+@interface JUNZStackBuilder : $StackBuilder
 
 @end
 

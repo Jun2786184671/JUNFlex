@@ -18,10 +18,9 @@ pod 'JUNFlex'
 ```
 
 ## Guide
-1. ```#import <JUNFlex/JUNFlex.h>``` into your project.
+1. ```#import <JUNFlex/$Flex.h>``` into your project.
 2. JUNFlex provides six widgets to help you build interfaces quickly.
-	+ ```$Hstack```
-		* Hstack is a horizontal layout, all of the UIViews wrapped by it are laid out in x-axis direction.
+	+ ```$Hstack``` is a horizontal layout, all of the UIViews wrapped by it are laid out in x-axis direction.
 		```objc
 		$Hstack
       	.children(@[
@@ -32,8 +31,7 @@ pod 'JUNFlex'
       	]);
 		```
 
-	+ ```$Vstack```
-		* Vstack is a vertical layout, similar to Hstack, all of its components are laid out in y-axis direction.
+	+ ```$Vstack``` is a vertical layout, similar to Hstack, all of its components are laid out in y-axis direction.
 		```objc
 		$Vstack
 		.width(100) // Yes, you can set some properties here.
@@ -45,8 +43,7 @@ pod 'JUNFlex'
       		...
       	]);
 		```
-	+ ```$Zstack```
-		* Zstack is a stack layout where all of its components are stacked in the z-axis direction.
+	+ ```$Zstack``` is a stack layout where all of its components are stacked in the z-axis direction.
 		```objc
 		$Zstack
 		.size(CGSizeMake(80, 80))
@@ -58,8 +55,7 @@ pod 'JUNFlex'
       		...
       	]);
 		```
-	+ ```$Padding```
-		* Padding is used to wrap a UIView, you can use it to specify the insets, as well as implicitly constraining its content by setting the wrapper's size.
+	+ ```$Padding``` is used to wrap a UIView, you can use it to specify the insets, as well as implicitly constraining its content by setting the wrapper's size.
 		```objc
 		$Padding
 		.left(20).right(20) // This makes edge insets.
@@ -71,8 +67,7 @@ pod 'JUNFlex'
 			aView
       	);
 		```
-	+ ```$Item```
-		* Item is a nice tool in JUNFlex that allows you to quickly create many types of views, from UIImageView to UILabel and even UIButton.
+	+ ```$Item``` is a nice tool in JUNFlex that allows you to quickly create many types of views, from UIImageView to UILabel and even UIButton.
 		```objc
 		$Vstack
       	.children(@[
@@ -97,8 +92,7 @@ pod 'JUNFlex'
       		...
       	]);
 		```
-	+ ```$List```
-		* List is an encapsulation of [JUNCollectionView](https://github.com/Jun2786184671/JUNCollectionView) that you can use to create either a horizontal or vertical scrollable list or a flowlayout.
+	+ ```$List``` is an encapsulation of [JUNCollectionView](https://github.com/Jun2786184671/JUNCollectionView) that you can use to create either a horizontal or vertical scrollable list or a flowlayout.
 		```objc
 		$List
 		.horizontal(true)
@@ -131,7 +125,19 @@ pod 'JUNFlex'
             ]);
         });
 		```
-3. Introduce to ```JUNModel```
+3. You can register and query the identifier of views.
+	```objc
+	[self.view addSubview:
+		$Item
+		.ID(@"anyIdentifier")
+		.color(UIColor.orangeColor)
+		.size(CGSizeMake(100, 100))
+	];
+
+	self.view.$query(@"anyIdentifier");
+
+	```
+4. Introduce to ```JUNModel```
 	+ ```JUNModel``` is an abstract class for ORM and ui binding. You can make your model class extend to ```JUNModel``` ,then specify how json map to a model and bind ui to it.
 	```objc
 	User.mapper(^(id $, User *_) {

@@ -5,14 +5,14 @@
 //  Created by Jun Ma on 2022/11/29.
 //
 
-#import "JUNModel.h"
-#import "JUNItemBuilder.h"
+#import "$Model.h"
+#import "$ItemBuilder.h"
 
 @interface JUNModelInfo : NSObject
 
 @property(nonatomic, weak) Class clz;
-@property(nonatomic, strong) void (^dataMapper)(id json, JUNModel *);
-@property(nonatomic, strong) id (^uiMapper)(JUNModel *model);
+@property(nonatomic, strong) void (^dataMapper)(id json, $Model *);
+@property(nonatomic, strong) id (^uiMapper)($Model *model);
 
 @end
 
@@ -68,10 +68,10 @@
 @end
 
 
-@implementation JUNModel
+@implementation $Model
 
-+ (void (^)(void (^ _Nonnull)(id _Nonnull, __kindof JUNModel *)))mapper {
-    return ^(void (^builder)(id json, JUNModel *model)) {
++ (void (^)(void (^ _Nonnull)(id _Nonnull, __kindof $Model *)))mapper {
+    return ^(void (^builder)(id json, $Model *model)) {
         JUNModelInfo *modelInfo = [[JUNModelInfo alloc] init];
         modelInfo.clz = [self class];
         modelInfo.dataMapper = builder;
@@ -79,8 +79,8 @@
     };
 }
 
-+ (void (^)(id _Nonnull (^ _Nonnull)(__kindof JUNModel * _Nonnull)))layout {
-    return ^(id (^builder)(JUNModel *)) {
++ (void (^)(id _Nonnull (^ _Nonnull)(__kindof $Model * _Nonnull)))layout {
+    return ^(id (^builder)($Model *)) {
         JUNModelInfo *modelInfo = [[JUNModelInfo alloc] init];
         modelInfo.clz = [self class];
         modelInfo.uiMapper = builder;
@@ -88,7 +88,7 @@
     };
 }
 
-- (__kindof JUNModel * _Nonnull (^)(id _Nonnull))map {
+- (__kindof $Model * _Nonnull (^)(id _Nonnull))map {
     return ^(id json) {
         JUNModelInfo *modelInfo = [[JUNModelManager sharedInstance] modelInfoWithClass:[self class]];
         if (modelInfo.dataMapper) {
@@ -101,10 +101,10 @@
     };
 }
 
-+ (__kindof JUNModel * _Nonnull (^)(id _Nonnull))map {
++ (__kindof $Model * _Nonnull (^)(id _Nonnull))map {
     return ^(id json) {
         JUNModelInfo *modelInfo = [[JUNModelManager sharedInstance] modelInfoWithClass:[self class]];
-        JUNModel *model = [[self alloc] init];
+        $Model *model = [[self alloc] init];
         if (!modelInfo.dataMapper) {
 #ifdef DEBUG
             NSAssert(false, @"current model class has not a data mapper");
@@ -125,8 +125,8 @@
         return [[UIView alloc] init];
     }
     id item = modelInfo.uiMapper(self);
-    if ([item isKindOfClass:[JUNItemBuilder class]]) {
-        JUNItemBuilder *builder = (JUNItemBuilder *)item;
+    if ([item isKindOfClass:[$ItemBuilder class]]) {
+        $ItemBuilder *builder = ($ItemBuilder *)item;
         return builder.end;
     } else if (![item isKindOfClass:[UIView class]]) {
 #ifdef DEBUG

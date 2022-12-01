@@ -8,7 +8,7 @@
 
 #import "JUNAppController.h"
 #import "JUNAppModel.h"
-#import <JUNFlex/JUNFlex.h>
+#import <JUNFlex/$Flex.h>
 
 @interface JUNAppController ()
 
@@ -119,6 +119,7 @@
                 .align(CGPointMake(-1, -1))
                 .children(@[
                     $Item
+                    .ID(@"test")
                     .color(UIColor.orangeColor)
                     .size(CGSizeMake(100, 100))
                     .radius(30),
@@ -213,6 +214,12 @@
         self.appModel = JUNAppModel.map(json);
         [self.view addSubview:self.appModel.render];
     }];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        UIView *view = self.view.$query(@"test");
+        NSLog(@"%@", view);
+        view.backgroundColor = [UIColor greenColor];
+    });
 }
 
 - (void)buttonOnTap {

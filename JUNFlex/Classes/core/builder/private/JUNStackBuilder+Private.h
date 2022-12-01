@@ -5,12 +5,12 @@
 //  Created by Jun Ma on 2022/11/27.
 //
 
-#import "JUNStackBuilder.h"
+#import "$StackBuilder.h"
 #import "JUNStack.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNStackBuilder ()
+@interface $StackBuilder ()
 
 - (JUNStack *)_getStackWithItems:(NSArray<UIView *> *)items alignment:(CGPoint)alignment;
 

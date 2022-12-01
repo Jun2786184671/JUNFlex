@@ -5,11 +5,11 @@
 //  Created by Jun Ma on 2022/11/27.
 //
 
-#import "JUNStackBuilder.h"
+#import "$StackBuilder.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNHStackBuilder : JUNStackBuilder
+@interface JUNHStackBuilder : $StackBuilder
 
 @end
 

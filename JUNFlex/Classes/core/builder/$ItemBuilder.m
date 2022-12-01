@@ -5,13 +5,13 @@
 //  Created by Jun Ma on 2022/11/29.
 //
 
-#import "JUNItemBuilder.h"
+#import "$ItemBuilder.h"
 #import "JUNItemBuilder+Private.h"
 #import "UIColor+JUNex4Flex.h"
 #import "NSURL+JUNex4Flex.h"
 #import <SDWebImage/SDWebImage.h>
 
-@implementation JUNItemBuilder
+@implementation $ItemBuilder
 @synthesize target = _target;
 
 - (JUNItem *)target {
@@ -19,32 +19,34 @@
         _target = [JUNItem buttonWithType:UIButtonTypeCustom];
         _target.translatesAutoresizingMaskIntoConstraints = false;
         _target.backgroundColor = [UIColor clearColor];
+        _target.adjustsImageWhenDisabled = false;
+        _target.adjustsImageWhenHighlighted = false;
     }
     return _target;
 }
 
-- (JUNItemBuilder * _Nonnull (^)(NSString * _Nonnull))ID {
-    return ^(NSString *ID) {
-        self.target.accessibilityIdentifier = ID;
+- ($ItemBuilder * _Nonnull (^)(NSString * _Nonnull))ID {
+    return ^(NSString *identifier) {
+        self.target.accessibilityIdentifier = identifier;
         return self;
     };
 }
 
-- (JUNItemBuilder * _Nonnull (^)(UIColor *))color {
+- ($ItemBuilder * _Nonnull (^)(UIColor *))color {
     return ^(UIColor *color) {
         self.target.backgroundColor = color;
         return self;
     };
 }
 
-- (JUNItemBuilder * _Nonnull (^)(CGFloat))alpha {
-    return ^(CGFloat a) {
-        self.target.alpha = a;
+- ($ItemBuilder * _Nonnull (^)(CGFloat))alpha {
+    return ^(CGFloat alpha) {
+        self.target.alpha = alpha;
         return self;
     };
 }
 
-- (JUNItemBuilder * _Nonnull (^)(NSString * _Nonnull, CGFloat, UIColor *))text {
+- ($ItemBuilder * _Nonnull (^)(NSString * _Nonnull, CGFloat, UIColor *))text {
     return ^(NSString *text, CGFloat fontSize, UIColor *color) {
         [self.target setTitle:text forState:UIControlStateNormal];
         [self.target setTitleColor:color forState:UIControlStateNormal];
@@ -53,7 +55,7 @@
     };
 }
 
-- (JUNItemBuilder * _Nonnull (^)(NSString * _Nonnull))image {
+- ($ItemBuilder * _Nonnull (^)(NSString * _Nonnull))image {
     return ^(NSString *nameOrURL) {
         NSURL *url = [NSURL URLWithString:nameOrURL];
         if ([url jun_isValid]) {
@@ -66,21 +68,21 @@
     };
 }
 
-- (JUNItemBuilder * _Nonnull (^)(CGFloat))radius {
+- ($ItemBuilder * _Nonnull (^)(CGFloat))radius {
     return ^(CGFloat radius) {
         self.target.layer.cornerRadius = radius;
         return self;
     };
 }
 
-- (JUNItemBuilder * _Nonnull (^)(bool))maskBounds {
+- ($ItemBuilder * _Nonnull (^)(bool))maskBounds {
     return ^(bool maskBounds) {
         self.target.layer.masksToBounds = maskBounds;
         return self;
     };
 }
 
-- (JUNItemBuilder * _Nonnull (^)(CGFloat))width {
+- ($ItemBuilder * _Nonnull (^)(CGFloat))width {
     return ^(CGFloat width) {
         NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self.target attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:width];
         widthConstraint.priority = UILayoutPriorityDefaultHigh;
@@ -92,7 +94,7 @@
     };
 }
 
-- (JUNItemBuilder * _Nonnull (^)(CGFloat))height {
+- ($ItemBuilder * _Nonnull (^)(CGFloat))height {
     return ^(CGFloat height) {
         NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.target attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:height];
         heightConstraint.priority = UILayoutPriorityDefaultHigh;
@@ -104,7 +106,7 @@
     };
 }
 
-- (JUNItemBuilder * _Nonnull (^)(CGSize))size {
+- ($ItemBuilder * _Nonnull (^)(CGSize))size {
     return ^(CGSize size) {
         self.width(size.width);
         self.height(size.height);
@@ -112,7 +114,7 @@
     };
 }
 
-- (JUNItemBuilder * _Nonnull (^)(id _Nonnull, SEL _Nonnull))onTap {
+- ($ItemBuilder * _Nonnull (^)(id _Nonnull, SEL _Nonnull))onTap {
     return ^(id target, SEL selector) {
         [self.target addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
         return self;
