@@ -6,8 +6,8 @@
 //
 
 #import "UIView+JUNex4Flex.h"
-#import "JUNPadding.h"
-#import "JUNItem.h"
+#import "$Padding.h"
+#import "$Item.h"
 
 @implementation UIView (JUNex4Flex)
 
@@ -60,7 +60,7 @@
 
 - (UIView *)jun_wrapWithInset:(UIEdgeInsets)insets {
     self.translatesAutoresizingMaskIntoConstraints = false;
-    UIView *wrapper = [[JUNPadding alloc] init];
+    UIView *wrapper = [[$Padding alloc] init];
     wrapper.translatesAutoresizingMaskIntoConstraints = false;
     [wrapper addSubview:self];
     [wrapper addConstraints:@[

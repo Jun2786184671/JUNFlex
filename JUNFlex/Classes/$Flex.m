@@ -6,22 +6,22 @@
 //
 
 #import "$Flex.h"
-#import "JUNHStackBuilder.h"
-#import "JUNVStackBuilder.h"
-#import "JUNZStackBuilder.h"
+#import "$HStackBuilder.h"
+#import "$VStackBuilder.h"
+#import "$ZStackBuilder.h"
 
 @implementation $Flex
 
 + ($StackBuilder *)Hstack {
-    return [[JUNHStackBuilder alloc] init];
+    return [[$HStackBuilder alloc] init];
 }
 
 + ($StackBuilder *)Vstack {
-    return [[JUNVStackBuilder alloc] init];
+    return [[$VStackBuilder alloc] init];
 }
 
 + ($StackBuilder *)Zstack {
-    return [[JUNZStackBuilder alloc] init];
+    return [[$ZStackBuilder alloc] init];
 }
 
 + ($ListBuilder *)List {

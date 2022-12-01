@@ -6,29 +6,29 @@
 //
 
 #import "$PaddingBuilder.h"
-#import "JUNItemBuilder+Private.h"
+#import "$AbstractBuilder+Private.h"
+#import "$Item.h"
 #import "UIView+JUNex4Flex.h"
 
 @interface $PaddingBuilder ()
 
-@property(nonatomic, copy) NSString *$ID;
-@property(nonatomic, strong) UIColor *$color;
-@property(nonatomic, assign) CGFloat $alpha;
-@property(nonatomic, assign) CGFloat $radius;
-@property(nonatomic, assign) bool $maskBounds;
-@property(nonatomic, assign) CGFloat $width;
-@property(nonatomic, assign) CGFloat $height;
+@property(nonatomic, strong) $Item *$product;
+
 @property(nonatomic, assign) UIEdgeInsets $paddings;
 
 @end
 
 @implementation $PaddingBuilder
 
-- (instancetype)init {
-    if (self = [super init]) {
-        self.$paddings = UIEdgeInsetsZero;
+- (id)product {
+    return self.$product;
+}
+
+- ($Item *)$product {
+    if (_$product == nil) {
+        _$product = [[$Item alloc] init];
     }
-    return self;
+    return _$product;
 }
 
 - ($PaddingBuilder * _Nonnull (^)(CGFloat))top {
@@ -82,27 +82,27 @@
 }
 
 - (UIView * _Nonnull (^)(id _Nonnull))child {
-    return ^(id content) {
-        UIView *validContent = [self _validateTarget:content];
+    return ^(id child) {
+        UIView *$child = [self _validateChild:child];
         
-        validContent.translatesAutoresizingMaskIntoConstraints = false;
-        [self.target addSubview:validContent];
-        [self.target addConstraints:@[
-            [NSLayoutConstraint constraintWithItem:validContent attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeTop multiplier:1.0f constant:self.$paddings.top],
-            [NSLayoutConstraint constraintWithItem:validContent attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-self.$paddings.bottom],
-            [NSLayoutConstraint constraintWithItem:validContent attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeLeading multiplier:1.0f constant:self.$paddings.left],
-            [NSLayoutConstraint constraintWithItem:validContent attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:-self.$paddings.right],
+        $child.translatesAutoresizingMaskIntoConstraints = false;
+        [self.$product addSubview:$child];
+        [self.$product addConstraints:@[
+            [NSLayoutConstraint constraintWithItem:$child attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.$product attribute:NSLayoutAttributeTop multiplier:1.0f constant:self.$paddings.top],
+            [NSLayoutConstraint constraintWithItem:$child attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.$product attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-self.$paddings.bottom],
+            [NSLayoutConstraint constraintWithItem:$child attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.$product attribute:NSLayoutAttributeLeading multiplier:1.0f constant:self.$paddings.left],
+            [NSLayoutConstraint constraintWithItem:$child attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.$product attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:-self.$paddings.right],
         ]];
-        return self.end;
+        return self.EOB;
     };
 }
 
-- (UIView *)_validateTarget:(id)target {
-    if ([target isKindOfClass:[UIView class]]) {
-        return target;
-    } else if ([target isKindOfClass:[$ItemBuilder class]]) {
-        $ItemBuilder *builder = ($ItemBuilder *)target;
-        return builder.end;
+- (UIView *)_validateChild:(id)child {
+    if ([child isKindOfClass:[UIView class]]) {
+        return child;
+    } else if ([child isKindOfClass:[$AbstractBuilder class]]) {
+        $AbstractBuilder *builder = ($AbstractBuilder *)child;
+        return builder.EOB;
     }
     NSAssert(false, @"child of padding must be a uiview or itembuilder");
     return [[UIView alloc] init];

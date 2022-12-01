@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <JUNFlex/$AbstractBuilder.h>
 #import <JUNFlex/$StackBuilder.h>
 #import <JUNFlex/$ListBuilder.h>
 #import <JUNFlex/$PaddingBuilder.h>

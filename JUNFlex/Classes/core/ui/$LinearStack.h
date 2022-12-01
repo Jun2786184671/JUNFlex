@@ -5,11 +5,11 @@
 //  Created by Jun Ma on 2022/11/26.
 //
 
-#import "JUNStack.h"
+#import "$Stack.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface $LinearStack : JUNStack
+@interface $LinearStack : $Stack
 
 @property(nonatomic, assign, readonly, getter=isHorizontal) bool horizontal;
 

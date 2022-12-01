@@ -127,7 +127,7 @@
     id item = modelInfo.uiMapper(self);
     if ([item isKindOfClass:[$ItemBuilder class]]) {
         $ItemBuilder *builder = ($ItemBuilder *)item;
-        return builder.end;
+        return builder.EOB;
     } else if (![item isKindOfClass:[UIView class]]) {
 #ifdef DEBUG
         NSAssert(false, @"child of padding must be a uiview or itembuilder");

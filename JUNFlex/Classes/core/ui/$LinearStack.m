@@ -6,7 +6,7 @@
 //
 
 #import "$LinearStack.h"
-#import "JUNPadding.h"
+#import "$Padding.h"
 #import "UIView+JUNex4Flex.h"
 
 @implementation $LinearStack
@@ -187,7 +187,7 @@
                                                   attribute:crossSpanAttribute
                                                   multiplier:1.0f constant:0.0f];
         
-        if ([item isKindOfClass:[JUNPadding class]]) {
+        if ([item isKindOfClass:[$Padding class]]) {
             crossSpanConstraint.priority = UILayoutPriorityFittingSizeLevel;
         } else {
             crossSpanConstraint.priority = UILayoutPriorityDefaultHigh;

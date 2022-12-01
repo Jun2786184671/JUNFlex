@@ -15,11 +15,27 @@
     };
 }
 
-- (UIView * _Nullable (^)(NSString * _Nonnull))$query {
+- (NSArray<UIView *> * _Nullable (^)(NSString * _Nonnull))$query {
+    return ^NSArray<UIView *> *(NSString *identifier) {
+        NSMutableArray<UIView *> *results = [NSMutableArray arrayWithCapacity:self.subviews.count + 1];
+        if ([self.accessibilityIdentifier isEqualToString:identifier]) {
+            [results addObject:self];
+        }
+        for (UIView *subview in self.subviews) {
+            NSArray<UIView *> *result = subview.$query(identifier);
+            if (result) {
+                [results addObjectsFromArray:result];
+            }
+        }
+        return results;
+    };
+}
+
+- (UIView * _Nullable (^)(NSString * _Nonnull))$query0 {
     return ^UIView *(NSString *identifier) {
         if ([self.accessibilityIdentifier isEqualToString:identifier]) return self;
         for (UIView *subview in self.subviews) {
-            UIView *result = subview.$query(identifier);
+            UIView *result = subview.$query0(identifier);
             if (result) return result;
         }
         return nil;

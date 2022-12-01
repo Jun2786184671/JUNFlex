@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIView ($Flex)
 
 @property(nonatomic, readonly) void (^$ID)(NSString *identifier);
-@property(nonatomic, readonly) UIView * _Nullable (^$query)(NSString *identifier);
+@property(nonatomic, readonly) NSArray<UIView *> * _Nullable (^$query)(NSString *identifier);
+@property(nonatomic, readonly) UIView * _Nullable (^$query0)(NSString *identifier);
 
 @end
 

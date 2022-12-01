@@ -6,25 +6,30 @@
 //
 
 #import "$StackBuilder.h"
-#import "JUNStackBuilder+Private.h"
-#import "JUNItemBuilder+Private.h"
-#import "JUNStack.h"
-#import "$ItemBuilder.h"
+#import "$StackBuilder+Private.h"
+#import "$AbstractBuilder+Private.h"
+#import "$Stack.h"
 
 @interface $StackBuilder ()
 
-@property(nonatomic, copy) NSString *$ID;
-@property(nonatomic, strong) UIColor *$color;
-@property(nonatomic, assign) CGFloat $alpha;
-@property(nonatomic, assign) CGFloat $radius;
-@property(nonatomic, assign) CGFloat $width;
-@property(nonatomic, assign) CGFloat $height;
+@property(nonatomic, strong) $Item *$product;
+
 @property(nonatomic, assign) CGPoint $align;
-@property(nonatomic, assign) bool $maskBounds;
 
 @end
 
 @implementation $StackBuilder
+
+- (id)product {
+    return self.$product;
+}
+
+- ($Item *)$product {
+    if (_$product == nil) {
+        _$product = [[$Item alloc] init];
+    }
+    return _$product;
+}
 
 - ($StackBuilder * _Nonnull (^)(CGPoint))align {
     return ^(CGPoint align) {
@@ -35,40 +40,40 @@
 
 // build method
 - (UIView * _Nonnull (^)(NSArray<UIView *> * _Nonnull))children {
-    return ^(NSArray<UIView *> *items) {
-        if (items.count == 0) {
+    return ^(NSArray<UIView *> *children) {
+        if (children.count == 0) {
             NSAssert(false, @"stack must contain at least onw child");
-            return self.end;
+            return self.EOB;
         }
         
-        NSArray<UIView *> *validItems = [self _validateItems:items];
-        JUNStack *stack = [self _getStackWithItems:validItems alignment:self.$align];
+        NSArray<UIView *> *$children = [self _validateChildren:children];
+        $Stack *stack = [self _getProductWithChildren:$children alignment:self.$align];
         
         stack.translatesAutoresizingMaskIntoConstraints = false;
-        [self.target addSubview:stack];
-        [self.target addConstraints:@[
-            [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0f],
-            [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f],
-            [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f],
-            [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0.0f],
+        [self.$product addSubview:stack];
+        [self.$product addConstraints:@[
+            [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.$product attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0f],
+            [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.$product attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f],
+            [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.$product attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f],
+            [NSLayoutConstraint constraintWithItem:stack attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.$product attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0.0f],
         ]];
-        return self.end;
+        return self.EOB;
     };
 }
 
-- (NSArray<UIView *> *)_validateItems:(NSArray<UIView *> *)items {
-    NSMutableArray *validItems = [NSMutableArray arrayWithArray:items];
-    for (int i = 0; i < items.count; i++) {
-        id item = items[i];
-        if ([item isKindOfClass:[$ItemBuilder class]]) {
-            $ItemBuilder *builder = ($ItemBuilder *)item;
-            [validItems replaceObjectAtIndex:i withObject:builder.end];
+- (NSArray<UIView *> *)_validateChildren:(NSArray<UIView *> *)children {
+    NSMutableArray *$children = [NSMutableArray arrayWithArray:children];
+    for (int i = 0; i < children.count; i++) {
+        id child = children[i];
+        if ([child isKindOfClass:[$ItemBuilder class]]) {
+            $ItemBuilder *builder = ($ItemBuilder *)child;
+            [$children replaceObjectAtIndex:i withObject:builder.EOB];
         }
     }
-    return [validItems copy];
+    return [$children copy];
 }
 
-- (JUNStack *)_getStackWithItems:(NSArray<UIView *> *)items alignment:(CGPoint)alignment {
+- ($Stack *)_getProductWithChildren:(NSArray<UIView *> *)children alignment:(CGPoint)alignment {
     return nil;
 }
 

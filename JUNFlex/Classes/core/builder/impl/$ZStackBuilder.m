@@ -6,13 +6,13 @@
 //
 
 #import "$ZStackBuilder.h"
-#import "JUNStackBuilder+Private.h"
-#import "JUNZStack.h"
+#import "$StackBuilder+Private.h"
+#import "$ZStack.h"
 
 @implementation $ZStackBuilder
 
-- (JUNStack *)_getStackWithItems:(NSArray<UIView *> *)items alignment:(CGPoint)alignment {
-    return [[JUNZStack alloc] initWithItems:items alignment:alignment];
+- ($Stack *)_getProductWithChildren:(NSArray<UIView *> *)items alignment:(CGPoint)alignment {
+    return [[$ZStack alloc] initWithItems:items alignment:alignment];
 }
 
 @end

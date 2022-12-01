@@ -5,11 +5,14 @@
 //  Created by Jun Ma on 2022/11/30.
 //
 
+#import "$AbstractBuilder+Private.h"
 #import "$ListBuilder.h"
-#import "JUNItemBuilder+Private.h"
+#import "$Item.h"
 #import "UICollectionView+JUNex.h"
 
 @interface $ListBuilder ()
+
+@property(nonatomic, strong) $Item *$product;
 
 @property(nonatomic, assign) bool $maskBounds;
 @property(nonatomic, assign) CGSize $itemSize;
@@ -22,6 +25,17 @@
 @end
 
 @implementation $ListBuilder
+
+- (id)product {
+    return self.$product;
+}
+
+- ($Item *)$product {
+    if (_$product == nil) {
+        _$product = [[$Item alloc] init];
+    }
+    return _$product;
+}
 
 - ($ListBuilder * _Nonnull (^)(bool))horizontal {
     return ^(bool isHorizontal) {
@@ -65,117 +79,117 @@
     };
 }
 
-- (UIView * _Nonnull (^)(NSArray<id> * _Nonnull))children {
+- (id _Nonnull (^)(NSArray<id> * _Nonnull))children {
     return ^(NSArray<id> *items) {
-        NSMutableArray *validItems = [NSMutableArray arrayWithArray:items];
+        NSMutableArray *$items = [NSMutableArray arrayWithArray:items];
         for (int i = 0; i < items.count; i++) {
             id item = items[i];
-            if ([item isKindOfClass:[$ItemBuilder class]]) {
-                $ItemBuilder *builder = ($ItemBuilder *)item;
-                [validItems replaceObjectAtIndex:i withObject:builder.end];
+            if ([item isKindOfClass:[$AbstractBuilder class]]) {
+                $AbstractBuilder *builder = ($AbstractBuilder *)item;
+                [$items replaceObjectAtIndex:i withObject:builder.EOB];
             } else if (![item isKindOfClass:[UIView class]]) {
                 NSAssert(false, @"item must be a uiview or itembuilder");
             }
         }
-        UICollectionView *listView = [UICollectionView jun_collectionViewWithItems:validItems direction:self.$isHorizontal];
-        return [self _wrapListView:listView];
+        UICollectionView *product = [UICollectionView jun_collectionViewWithItems:[$items copy] direction:self.$isHorizontal];
+        return [self _wrapProduct:product];
     };
 }
 
 - (UIView * _Nonnull (^)(NSArray<id> * _Nonnull (^ _Nonnull)(void)))build {
     return ^(NSArray<id> * (^builder)(void)) {
-        NSArray<UIView *> *(^wrappedBuilder)(void) = ^(void) {
+        NSArray<id> *(^$builder)(void) = ^(void) {
             NSArray *items = [NSMutableArray arrayWithArray:builder()];
-            NSMutableArray *validItems = [NSMutableArray arrayWithArray:items];
+            NSMutableArray *$items = [NSMutableArray arrayWithArray:items];
             for (int i = 0; i < items.count; i++) {
                 id item = items[i];
-                if ([item isKindOfClass:[$ItemBuilder class]]) {
-                    $ItemBuilder *builder = ($ItemBuilder *)item;
-                    [validItems replaceObjectAtIndex:i withObject:builder.end];
+                if ([item isKindOfClass:[$AbstractBuilder class]]) {
+                    $AbstractBuilder *builder = ($AbstractBuilder *)item;
+                    [$items replaceObjectAtIndex:i withObject:builder.EOB];
                 } else if (![item isKindOfClass:[UIView class]]) {
                     NSAssert(false, @"item must be a uiview or itembuilder");
                 }
             }
-            return [validItems copy];
+            return [$items copy];
         };
-        UICollectionView *listView = [UICollectionView jun_collectionViewWithItemsBuilder:wrappedBuilder direction:self.$isHorizontal];
-        return [self _wrapListView:listView];
+        UICollectionView *product = [UICollectionView jun_collectionViewWithItemsBuilder:$builder direction:self.$isHorizontal];
+        return [self _wrapProduct:product];
     };
 }
 
 - (UIView * _Nonnull (^)(NSArray * _Nonnull, id _Nonnull (^ _Nonnull)(NSUInteger, id _Nonnull)))forEach {
-    return ^(NSArray *elements, UIView *(^builder)(NSUInteger i, id each)) {
-        UIView *(^wrappedBuilder)(NSUInteger i, id each) = ^(NSUInteger i, id each) {
+    return ^(NSArray *elements, id (^builder)(NSUInteger i, id each)) {
+        UIView *(^$builder)(NSUInteger i, id each) = ^(NSUInteger i, id each) {
             id item = builder(i, each);
-            if ([item isKindOfClass:[$ItemBuilder class]]) {
-                $ItemBuilder *builder = ($ItemBuilder *)item;
-                return builder.end;
+            if ([item isKindOfClass:[$AbstractBuilder class]]) {
+                $AbstractBuilder *builder = ($AbstractBuilder *)item;
+                return builder.EOB;
             } else if (![item isKindOfClass:[UIView class]]) {
                 NSAssert(false, @"item must be a uiview or itembuilder");
             }
-            return (UIView *)item;
+            return item;
         };
-        UICollectionView *listView = [UICollectionView jun_collectionViewWithForEach:elements itemBuilder:wrappedBuilder direction:self.$isHorizontal];
-        return [self _wrapListView:listView];
+        UICollectionView *product = [UICollectionView jun_collectionViewWithForEach:elements itemBuilder:$builder direction:self.$isHorizontal];
+        return [self _wrapProduct:product];
     };
 }
 
 - (UIView * _Nonnull (^)(NSUInteger, id _Nonnull (^ _Nonnull)(NSUInteger)))count {
     return ^(NSUInteger count, UIView *(^builder)(NSUInteger)) {
-        UIView *(^wrappedBuilder)(NSUInteger i) = ^(NSUInteger i) {
+        UIView *(^$builder)(NSUInteger i) = ^(NSUInteger i) {
             id item = builder(i);
-            if ([item isKindOfClass:[$ItemBuilder class]]) {
-                $ItemBuilder *builder = ($ItemBuilder *)item;
-                return builder.end;
+            if ([item isKindOfClass:[$AbstractBuilder class]]) {
+                $AbstractBuilder *builder = ($AbstractBuilder *)item;
+                return builder.EOB;
             } else if (![item isKindOfClass:[UIView class]]) {
                 NSAssert(false, @"item must be a uiview or itembuilder");
             }
-            return (UIView *)item;
+            return item;
         };
-        UICollectionView *listView = [UICollectionView jun_collectionViewWithItemCount:count itemBuilder:wrappedBuilder direction:self.$isHorizontal];
-        return [self _wrapListView:listView];
+        UICollectionView *product = [UICollectionView jun_collectionViewWithItemCount:count itemBuilder:$builder direction:self.$isHorizontal];
+        return [self _wrapProduct:product];
     };
 }
 
-- (UIView * _Nonnull (^)(NSUInteger (^ _Nonnull)(void), id _Nonnull (^ _Nonnull)(NSUInteger)))countBy {
-    return ^(NSUInteger (^count)(void), UIView *(^builder)(NSUInteger)) {
-        UIView *(^wrappedBuilder)(NSUInteger i) = ^(NSUInteger i) {
+- (id _Nonnull (^)(NSUInteger (^ _Nonnull)(void), id _Nonnull (^ _Nonnull)(NSUInteger)))countBy {
+    return ^(NSUInteger (^count)(void), id (^builder)(NSUInteger)) {
+        UIView *(^$builder)(NSUInteger i) = ^(NSUInteger i) {
             id item = builder(i);
-            if ([item isKindOfClass:[$ItemBuilder class]]) {
-                $ItemBuilder *builder = ($ItemBuilder *)item;
-                return builder.end;
+            if ([item isKindOfClass:[$AbstractBuilder class]]) {
+                $AbstractBuilder *builder = ($AbstractBuilder *)item;
+                return builder.EOB;
             } else if (![item isKindOfClass:[UIView class]]) {
                 NSAssert(false, @"item must be a uiview or itembuilder");
             }
-            return (UIView *)item;
+            return item;
         };
-        UICollectionView *listView = [UICollectionView jun_collectionViewWithItemCountBuilder:count itemBuilder:wrappedBuilder direction:self.$isHorizontal];
-        return [self _wrapListView:listView];
+        UICollectionView *product = [UICollectionView jun_collectionViewWithItemCountBuilder:count itemBuilder:$builder direction:self.$isHorizontal];
+        return [self _wrapProduct:product];
     };
 }
 
-- (UIView *)_wrapListView:(UICollectionView *)listView {
-    listView.translatesAutoresizingMaskIntoConstraints = false;
-    listView.jun_minimumInteritemSpacing = self.$itemSpacing;
-    listView.jun_minimumLineSpacing = self.$lineSpacing;
-    listView.jun_itemSize = self.$itemSize;
+- (UIView *)_wrapProduct:(UICollectionView *)product {
+    product.translatesAutoresizingMaskIntoConstraints = false;
+    product.jun_minimumInteritemSpacing = self.$itemSpacing;
+    product.jun_minimumLineSpacing = self.$lineSpacing;
+    product.jun_itemSize = self.$itemSize;
     
-    listView.alwaysBounceVertical = !self.$isHorizontal ? self.$isAlwaysBounce : false;
-    listView.alwaysBounceHorizontal = self.$isHorizontal ? self.$isAlwaysBounce : false;
+    product.alwaysBounceVertical = !self.$isHorizontal ? self.$isAlwaysBounce : false;
+    product.alwaysBounceHorizontal = self.$isHorizontal ? self.$isAlwaysBounce : false;
     
-    listView.showsVerticalScrollIndicator = !self.$isHorizontal ? self.$isShowIndicator : false;
-    listView.showsHorizontalScrollIndicator = self.$isHorizontal ? self.$isShowIndicator : false;
+    product.showsVerticalScrollIndicator = !self.$isHorizontal ? self.$isShowIndicator : false;
+    product.showsHorizontalScrollIndicator = self.$isHorizontal ? self.$isShowIndicator : false;
     
-    self.target.translatesAutoresizingMaskIntoConstraints = false;
-    [self.target addSubview:listView];
-    [self.target addConstraints:@[
+    self.$product.translatesAutoresizingMaskIntoConstraints = false;
+    [self.$product addSubview:product];
+    [self.$product addConstraints:@[
         
-        [NSLayoutConstraint constraintWithItem:listView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0f],
-        [NSLayoutConstraint constraintWithItem:listView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f],
-        [NSLayoutConstraint constraintWithItem:listView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f],
-        [NSLayoutConstraint constraintWithItem:listView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.target attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0.0f],
+        [NSLayoutConstraint constraintWithItem:product attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.$product attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0f],
+        [NSLayoutConstraint constraintWithItem:product attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.$product attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f],
+        [NSLayoutConstraint constraintWithItem:product attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.$product attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f],
+        [NSLayoutConstraint constraintWithItem:product attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.$product attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0.0f],
     ]];
-    return self.end;
+    return self.EOB;
 }
 
 @end

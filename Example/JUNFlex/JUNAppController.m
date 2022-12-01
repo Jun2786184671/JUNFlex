@@ -41,7 +41,7 @@
 // for storyboard
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [self bindUI2];
+    [self bindUI];
 }
 
 - (void)bindUI3 {
@@ -70,7 +70,7 @@
         .width(300)
         .height(500)
         .horizontal(true)
-//        .itemSize(CGSizeMake(80, 80))
+        .itemSize(CGSizeMake(80, 80))
         .alwaysBounce(true)
         .showIndicator(true)
         .count(10, ^id (NSUInteger i) {
@@ -215,10 +215,9 @@
         [self.view addSubview:self.appModel.render];
     }];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        UIView *view = self.view.$query(@"test");
-        NSLog(@"%@", view);
-        view.backgroundColor = [UIColor greenColor];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSArray *results = self.view.$query(@"test");
+        NSLog(@"%@", results);
     });
 }
 

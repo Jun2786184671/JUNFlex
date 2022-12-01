@@ -6,13 +6,14 @@
 //
 
 #import "$VStackBuilder.h"
-#import "JUNStackBuilder+Private.h"
-#import "JUNVStack.h"
+#import "$StackBuilder+Private.h"
+#import "$VStack.h"
 
 @implementation $VStackBuilder
 
-- (JUNStack *)_getStackWithItems:(NSArray<UIView *> *)items alignment:(CGPoint)alignment {
-    return [[JUNVStack alloc] initWithItems:items alignment:alignment];
+
+- ($Stack *)_getProductWithChildren:(NSArray<UIView *> *)items alignment:(CGPoint)alignment {
+    return [[$VStack alloc] initWithItems:items alignment:alignment];
 }
 
 @end
