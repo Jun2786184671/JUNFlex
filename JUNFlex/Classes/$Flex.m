@@ -45,3 +45,7 @@ void $Mapper(Class clz, void (^mapper)(id $, __kindof NSObject *_)) {
 void $Layout(Class clz, id (^builder)(__kindof NSObject *_)) {
     [clz $layout](builder);
 }
+
+UIView *$Render(__kindof NSObject *o) {
+    return o.$render;
+}

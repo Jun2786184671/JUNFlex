@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 extern void $Mapper(Class clz, void (^mapper)(id $, __kindof NSObject *_));
 extern void $Layout(Class clz, id (^builder)(__kindof NSObject *_));
+extern UIView *$Render(__kindof NSObject *);
 
 NS_ASSUME_NONNULL_END
 
