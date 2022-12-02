@@ -45,6 +45,14 @@
     };
 }
 
+- (id  _Nonnull (^)(CGFloat, UIColor * _Nonnull))border {
+    return ^(CGFloat width, UIColor *color) {
+        self.product.layer.borderWidth = width;
+        self.product.layer.borderColor = color.CGColor;
+        return self;
+    };
+}
+
 - (id _Nonnull (^)(bool))maskBounds {
     return ^(bool maskBounds) {
         self.product.layer.masksToBounds = maskBounds;

@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) ClassType (^alpha)(CGFloat alpha);
 
 @property(nonatomic, readonly) ClassType (^radius)(CGFloat radius);
+@property(nonatomic, readonly) ClassType (^border)(CGFloat width, UIColor *color);
 @property(nonatomic, readonly) ClassType (^maskBounds)(bool maskBounds);
 
 @property(nonatomic, readonly) ClassType (^width)(CGFloat width);
