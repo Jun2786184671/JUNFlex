@@ -6,6 +6,7 @@
 //
 
 #import "$AbstractBuilder.h"
+#import "UIView+$Flex.h"
 
 @interface $AbstractBuilder ()
 
@@ -20,6 +21,13 @@
 - (id _Nonnull (^)(NSString * _Nonnull))ID {
     return ^(NSString *identifier) {
         self.product.accessibilityIdentifier = identifier;
+        return self;
+    };
+}
+
+- (id  _Nonnull (^)(id _Nonnull))data {
+    return ^(id data) {
+        self.product.$data = data;
         return self;
     };
 }

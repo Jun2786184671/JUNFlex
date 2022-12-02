@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface $AbstractBuilder<__covariant ClassType, __covariant ProductType> : NSObject
 
 @property(nonatomic, readonly) ClassType (^ID)(NSString *identifier);
+@property(nonatomic, readonly) ClassType (^data)(id data);
 @property(nonatomic, readonly) ClassType (^color)(UIColor *color);
 @property(nonatomic, readonly) ClassType (^alpha)(CGFloat alpha);
 

@@ -42,4 +42,12 @@
     };
 }
 
+- (void)set$data:(id)$data {
+    return;
+}
+
+- (id _Nullable)$data {
+    return nil;
+}
+
 @end

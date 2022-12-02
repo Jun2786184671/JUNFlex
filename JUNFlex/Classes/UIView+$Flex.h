@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) NSArray<UIView *> * _Nullable (^$query)(NSString *identifier);
 @property(nonatomic, readonly) UIView * _Nullable (^$query0)(NSString *identifier);
 
+@property(nonatomic, strong, nullable) id $data;
+
 @end
 
 NS_ASSUME_NONNULL_END

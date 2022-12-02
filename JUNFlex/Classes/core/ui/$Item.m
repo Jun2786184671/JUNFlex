@@ -6,7 +6,14 @@
 //
 
 #import "$Item.h"
+#import "UIView+$Flex.h"
 #import "UIView+JUNex4Flex.h"
+
+@interface $Item ()
+
+@property(nonatomic, strong, nullable) id $data;
+
+@end
 
 @implementation $Item
 
