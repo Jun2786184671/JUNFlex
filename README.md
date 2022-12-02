@@ -137,8 +137,8 @@ pod 'JUNFlex'
 	self.view.$query0(@"anyIdentifier"); // Query first matched view.
 
 	```
-4. Introduce to ```$Model```
-	+ ```$Model``` is an abstract class for ORM and ui binding. You can make your model class extend to ```$Model``` ,then specify how json map to a model and bind ui to it.
+4. Introduce to ```$Mapper```
+	+ ```$Mapper``` used for ORM. You can register your model class by it, then specify how json map to a model and bind ui to it.
 	```objc
 	$Mapper(User.class, ^(id $, User *_) {
         _.name = $[@"nom"];
@@ -156,7 +156,7 @@ pod 'JUNFlex'
 		...
 	});
 	```
-	To bind ui, you just need to call ```.layout``` method.
+	To bind ui, you just need to use ```$Layout```.
 	```objc
 	$Layout(User.class, ^id (User *_) {
 		return
@@ -177,7 +177,7 @@ pod 'JUNFlex'
 		]);
 	});
 	```
-	Then whenever you want to draw a user's info to interface, you only need to call ```.render``` method.
+	Then whenever you want to draw a user's info to interface, you only need to call ```.$render``` method.
 	```objc
 	UIView *userView = user.$render;
 	```
