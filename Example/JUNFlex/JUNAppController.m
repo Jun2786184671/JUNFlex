@@ -20,8 +20,7 @@
 
 + (void)load {
     // register data mapper
-    
-    JUNAppModel.$Mapper(^(id $, JUNAppModel *_) {
+    $Mapper(JUNAppModel.class, ^(id $, JUNAppModel *_) {
         _.name = $[@"name"];
         _.title = $[@"text"];
         _.message = $[@"mes"];
@@ -45,7 +44,7 @@
 }
 
 - (void)bindUI3 {
-    JUNAppModel.$Layout(^id (JUNAppModel *_) {
+    $Layout(JUNAppModel.class, ^id (JUNAppModel *_) {
         return
         $Zstack.children(@[
             $Vstack
@@ -64,7 +63,7 @@
 }
 
 - (void)bindUI {
-    JUNAppModel.$Layout(^UIView *(JUNAppModel *_) {
+    $Layout(JUNAppModel.class, ^UIView *(JUNAppModel *_) {
         return
         $List
         .width(300)
@@ -103,7 +102,7 @@
 
 - (void)bindUI2 {
     
-    JUNAppModel.$Layout(^(JUNAppModel *_) {
+    $Layout(JUNAppModel.class, ^(JUNAppModel *_) {
         return
         $Vstack
         .align(CGPointMake(0, 0))

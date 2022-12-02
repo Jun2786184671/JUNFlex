@@ -1,5 +1,5 @@
 //
-//  JUNFlex.m
+//  $Flex.m
 //  FBSnapshotTestCase
 //
 //  Created by Jun Ma on 2022/11/27.
@@ -37,3 +37,11 @@
 }
 
 @end
+
+void $Mapper(Class clz, void (^mapper)(id $, __kindof NSObject *_)) {
+    [clz $mapper](mapper);
+}
+
+void $Layout(Class clz, id (^builder)(__kindof NSObject *_)) {
+    [clz $layout](builder);
+}

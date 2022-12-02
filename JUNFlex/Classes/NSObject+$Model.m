@@ -1,18 +1,18 @@
 //
-//  JUNContent.m
+//  NSObject+$Model.m
 //  JUNFlex
 //
-//  Created by Jun Ma on 2022/11/29.
+//  Created by Jun Ma on 2022/12/2.
 //
 
-#import "$Model.h"
+#import "NSObject+$Model.h"
 #import "$ItemBuilder.h"
 
 @interface JUNModelInfo : NSObject
 
 @property(nonatomic, weak) Class clz;
-@property(nonatomic, strong) void (^dataMapper)(id json, $Model *);
-@property(nonatomic, strong) id (^uiMapper)($Model *model);
+@property(nonatomic, strong) void (^dataMapper)(id json, id);
+@property(nonatomic, strong) id (^uiMapper)(id model);
 
 @end
 
@@ -67,11 +67,10 @@
 
 @end
 
+@implementation NSObject ($Model)
 
-@implementation $Model
-
-+ (void (^)(void (^ _Nonnull)(id _Nonnull, __kindof $Model *)))$Mapper {
-    return ^(void (^builder)(id json, $Model *model)) {
++ (void (^)(void (^ _Nonnull)(id _Nonnull, __kindof NSObject *)))$mapper {
+    return ^(void (^builder)(id json, __kindof NSObject *model)) {
         JUNModelInfo *modelInfo = [[JUNModelInfo alloc] init];
         modelInfo.clz = [self class];
         modelInfo.dataMapper = builder;
@@ -79,8 +78,8 @@
     };
 }
 
-+ (void (^)(id _Nonnull (^ _Nonnull)(__kindof $Model * _Nonnull)))$Layout {
-    return ^(id (^builder)($Model *)) {
++ (void (^)(id _Nonnull (^ _Nonnull)(__kindof NSObject * _Nonnull)))$layout {
+    return ^(id (^builder)(__kindof NSObject *)) {
         JUNModelInfo *modelInfo = [[JUNModelInfo alloc] init];
         modelInfo.clz = [self class];
         modelInfo.uiMapper = builder;
@@ -88,7 +87,7 @@
     };
 }
 
-- (__kindof $Model * _Nonnull (^)(id _Nonnull))$map {
+- (__kindof NSObject * _Nonnull (^)(id _Nonnull))$map {
     return ^(id json) {
         JUNModelInfo *modelInfo = [[JUNModelManager sharedInstance] modelInfoWithClass:[self class]];
         if (modelInfo.dataMapper) {
@@ -101,10 +100,10 @@
     };
 }
 
-+ (__kindof $Model * _Nonnull (^)(id _Nonnull))$map {
++ (__kindof NSObject * _Nonnull (^)(id _Nonnull))$map {
     return ^(id json) {
         JUNModelInfo *modelInfo = [[JUNModelManager sharedInstance] modelInfoWithClass:[self class]];
-        $Model *model = [[self alloc] init];
+        NSObject *model = [[self alloc] init];
         if (!modelInfo.dataMapper) {
 #ifdef DEBUG
             NSAssert(false, @"current model class has not a data mapper");

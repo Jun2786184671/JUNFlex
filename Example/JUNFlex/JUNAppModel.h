@@ -6,11 +6,11 @@
 //  Copyright © 2022 Jun Ma. All rights reserved.
 //
 
-#import <JUNFlex/$Flex.h>
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNAppModel : $Model
+@interface JUNAppModel : NSObject
 
 @property(nonatomic, copy) NSString *name;
 @property(nonatomic, assign) NSUInteger reserveCount;

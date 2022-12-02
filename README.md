@@ -140,7 +140,7 @@ pod 'JUNFlex'
 4. Introduce to ```$Model```
 	+ ```$Model``` is an abstract class for ORM and ui binding. You can make your model class extend to ```$Model``` ,then specify how json map to a model and bind ui to it.
 	```objc
-	User.$Mapper(^(id $, User *_) {
+	$Mapper(User.class, ^(id $, User *_) {
         _.name = $[@"nom"];
         _.email = $[@"mail"];
         _.profileURL = $[@"avatar"];
@@ -158,7 +158,7 @@ pod 'JUNFlex'
 	```
 	To bind ui, you just need to call ```.layout``` method.
 	```objc
-	User.$Layout(^id (User *_) {
+	$Layout(User.class, ^id (User *_) {
 		return
 		$Vstack
 		.width(300)

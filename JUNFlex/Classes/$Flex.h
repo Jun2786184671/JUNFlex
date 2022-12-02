@@ -1,5 +1,5 @@
 //
-//  JUNFlex.h
+//  $Flex.h
 //  FBSnapshotTestCase
 //
 //  Created by Jun Ma on 2022/11/27.
@@ -11,8 +11,8 @@
 #import <JUNFlex/$ListBuilder.h>
 #import <JUNFlex/$PaddingBuilder.h>
 #import <JUNFlex/$ItemBuilder.h>
-#import <JUNFlex/$Model.h>
 #import <JUNFlex/UIView+$Flex.h>
+#import <JUNFlex/NSObject+$Model.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -26,6 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(class, nonatomic, readonly) $ItemBuilder *Item;
 
 @end
+
+extern void $Mapper(Class clz, void (^mapper)(id $, __kindof NSObject *_));
+extern void $Layout(Class clz, id (^builder)(__kindof NSObject *_));
 
 NS_ASSUME_NONNULL_END
 
