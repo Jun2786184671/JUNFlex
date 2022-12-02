@@ -156,7 +156,7 @@ pod 'JUNFlex'
 		...
 	});
 	```
-	To bind UI, you just need to use ```$Layout```.
+	+ To bind UI, you just need to use ```$Layout```.
 	```objc
 	$Layout(User.class, ^id (User *_) {
 		return
