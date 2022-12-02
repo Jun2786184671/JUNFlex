@@ -156,7 +156,7 @@ pod 'JUNFlex'
 		...
 	});
 	```
-	+ To bind UI, you just need to use ```$Layout```.
+	+ ```$Layout``` is used for UI binding, you can register a model class with a specific type of view.
 	```objc
 	$Layout(User.class, ^id (User *_) {
 		return
