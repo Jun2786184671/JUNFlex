@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface $StackBuilder : $AbstractBuilder<$StackBuilder *, UIView *>
 
 @property(nonatomic, readonly) $StackBuilder *(^align)(CGPoint align);
-@property(nonatomic, readonly) UIView *(^children)(NSArray<UIView *> *children);
+@property(nonatomic, readonly) UIView *(^children)(NSArray<id> *children);
 
 @end
 

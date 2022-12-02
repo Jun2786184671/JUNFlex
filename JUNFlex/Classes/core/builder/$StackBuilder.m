@@ -39,7 +39,7 @@
 }
 
 // build method
-- (UIView * _Nonnull (^)(NSArray<UIView *> * _Nonnull))children {
+- (UIView * _Nonnull (^)(NSArray<id> * _Nonnull))children {
     return ^(NSArray<UIView *> *children) {
         if (children.count == 0) {
             NSAssert(false, @"stack must contain at least onw child");
@@ -61,7 +61,7 @@
     };
 }
 
-- (NSArray<UIView *> *)_validateChildren:(NSArray<UIView *> *)children {
+- (NSArray<UIView *> *)_validateChildren:(NSArray<id> *)children {
     NSMutableArray *$children = [NSMutableArray arrayWithArray:children];
     for (int i = 0; i < children.count; i++) {
         id child = children[i];
@@ -73,7 +73,7 @@
     return [$children copy];
 }
 
-- ($Stack *)_getProductWithChildren:(NSArray<UIView *> *)children alignment:(CGPoint)alignment {
+- ($Stack *)_getProductWithChildren:(NSArray<id> *)children alignment:(CGPoint)alignment {
     return nil;
 }
 
