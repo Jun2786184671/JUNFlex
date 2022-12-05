@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface $ItemBuilder : $AbstractBuilder<$ItemBuilder *, UIView *>
 
-@property(nonatomic, readonly) $ItemBuilder *(^text)(NSString *text, CGFloat fontSize, UIColor *color);
 @property(nonatomic, readonly) $ItemBuilder *(^contentAlign)(UIControlContentHorizontalAlignment h, UIControlContentVerticalAlignment v);
+@property(nonatomic, readonly) $ItemBuilder *(^text)(NSString *text, CGFloat fontSize, UIColor *color);
 @property(nonatomic, readonly) $ItemBuilder *(^image)(NSString *nameOrURL);
 @property(nonatomic, readonly) $ItemBuilder *(^onTap)(id target, SEL selector);
 
