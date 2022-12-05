@@ -54,7 +54,7 @@
                 .image(_.image)
                 .radius(30),
                  $Item
-                 .text(_.title, 20, NSTextAlignmentCenter, UIColor.blueColor)
+                 .text(_.title, 20, UIColor.blueColor)
                  .onTap(self, @selector(buttonOnTap)),
                   UISwitch.new
             ])
@@ -86,14 +86,14 @@
 //                  .width(1000)
                   .children(@[
                     $Item
-                    .text(_.title, 20, NSTextAlignmentCenter, UIColor.blueColor)
+                    .text(_.title, 20, UIColor.blueColor)
                     .onTap(self, @selector(buttonOnTap)),
                      UISwitch.new
                   ]),
                  
                  $Item
-                 .width(120)
-                 .text(_.message, 20, NSTextAlignmentCenter, UIColor.blueColor)
+                 .width(200)
+                 .text(_.message, 20, UIColor.blueColor)
                  .color(UIColor.greenColor)
             ]);
         });
@@ -129,12 +129,12 @@
                         .color(UIColor.yellowColor)
                         .width(60)
                         .radius(10)
-                        .text(_.name, 20, NSTextAlignmentCenter, UIColor.purpleColor),
+                        .text(_.name, 20, UIColor.purpleColor),
                         $Hstack
                         .align(CGPointMake(-1, 0))
                         .children(@[
-                            $Item.text(@"count", 16, NSTextAlignmentCenter, UIColor.blackColor),
-                            $Item.text(@(_.reserveCount).description, 16, NSTextAlignmentCenter, UIColor.whiteColor),
+                            $Item.text(@"count", 16, UIColor.blackColor),
+                            $Item.text(@(_.reserveCount).description, 16, UIColor.whiteColor),
                         ]),
                     ]),
                     $Item
@@ -145,7 +145,7 @@
                 ])
             ),
             $Item
-            .text(_.title, 30, NSTextAlignmentCenter, UIColor.blackColor),
+            .text(_.title, 30, UIColor.blackColor),
 //            $Padding
 //            .color(UIColor.cyanColor)
 //            .alpha(0.6)
@@ -153,7 +153,7 @@
 //            .left(20).right(20)
 //            .child(
                 $Item
-                .text(_.message, 40, NSTextAlignmentCenter, UIColor.blueColor)
+                .text(_.message, 40, UIColor.blueColor)
                 .onTap(self, @selector(buttonOnTap)),
 //            ),
             $Hstack

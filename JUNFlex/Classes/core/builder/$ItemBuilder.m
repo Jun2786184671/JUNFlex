@@ -29,12 +29,19 @@
     return _$product;
 }
 
-- ($ItemBuilder * _Nonnull (^)(NSString * _Nonnull, CGFloat, NSTextAlignment, UIColor * _Nonnull))text {
-    return ^(NSString *text, CGFloat fontSize, NSTextAlignment align, UIColor *color) {
+- ($ItemBuilder * _Nonnull (^)(NSString * _Nonnull, CGFloat, UIColor * _Nonnull))text {
+    return ^(NSString *text, CGFloat fontSize, UIColor *color) {
         [self.$product setTitle:text forState:UIControlStateNormal];
         [self.$product setTitleColor:color forState:UIControlStateNormal];
         self.$product.titleLabel.font = [UIFont systemFontOfSize:fontSize];
-        self.$product.titleLabel.textAlignment = align;
+        return self;
+    };
+}
+
+- ($ItemBuilder * _Nonnull (^)(UIControlContentHorizontalAlignment, UIControlContentVerticalAlignment))contentAlign {
+    return ^(UIControlContentHorizontalAlignment h, UIControlContentVerticalAlignment v) {
+        [self.$product setContentHorizontalAlignment:h];
+        [self.$product setContentVerticalAlignment:v];
         return self;
     };
 }
