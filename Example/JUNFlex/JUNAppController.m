@@ -51,7 +51,7 @@
             .align(1, -1)
             .children(@[
                 $Item
-                .size(CGSizeMake(80, 80))
+                .size(80, 80)
                 .image(_.image)
                 .radius(30),
                  $Item
@@ -70,7 +70,7 @@
         .width(300)
         .height(500)
         .horizontal(true)
-        .itemSize(CGSizeMake(80, 80))
+        .itemSize(80, 80)
         .alwaysBounce(true)
         .showIndicator(true)
         .count(10, ^id (NSUInteger i) {
@@ -80,7 +80,7 @@
             .height(500)
             .children(@[
                  $Item
-                 .size(CGSizeMake(80, 80))
+                 .size(80, 80)
                  .image(_.image)
                  .radius(30),
                   $Hstack
@@ -121,7 +121,7 @@
                     $Item
                     .ID(@"test")
                     .color(UIColor.orangeColor)
-                    .size(CGSizeMake(100, 100))
+                    .size(100, 100)
                     .radius(30),
                     $Vstack
                     .align(-1, 0)

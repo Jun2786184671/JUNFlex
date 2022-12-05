@@ -92,10 +92,10 @@
     };
 }
 
-- (id _Nonnull (^)(CGSize))size {
-    return ^(CGSize size) {
-        self.width(size.width);
-        self.height(size.height);
+- (id  _Nonnull (^)(CGFloat, CGFloat))size {
+    return ^(CGFloat width, CGFloat height) {
+        self.width(width);
+        self.height(height);
         return self;
     };
 }

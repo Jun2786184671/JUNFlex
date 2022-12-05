@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, readonly) ClassType (^width)(CGFloat width);
 @property(nonatomic, readonly) ClassType (^height)(CGFloat height);
-@property(nonatomic, readonly) ClassType (^size)(CGSize size);
+@property(nonatomic, readonly) ClassType (^size)(CGFloat width, CGFloat height);
 
 /// Call this when end of build. (optional when wrapped by other builders)
 @property(nonatomic, readonly) ProductType EOB;

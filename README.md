@@ -46,7 +46,7 @@ pod 'JUNFlex'
 	+ ```$Zstack``` is a stack layout where all of its components are stacked in the z-axis direction.
 		```objc
 		$Zstack
-		.size(CGSizeMake(80, 80))
+		.size(80, 80)
 		.align(-1, -1) // This makes all contents in stack lean to the left top corner.
       	.children(@[
 			aLabel,
@@ -59,7 +59,7 @@ pod 'JUNFlex'
 		```objc
 		$Padding
 		.left(20).right(20) // This makes edge insets.
-		.size(CGSizeMake(80, 80)) // Constrain its content implicitly.
+		.size(80, 80) // Constrain its content implicitly.
 		.radius(30)
 		.maskBounds(true)
         .color(UIColor.orangeColor) // Color and radius, you can even use it to wrap and decorate a view!
@@ -73,7 +73,7 @@ pod 'JUNFlex'
       	.children(@[
 
 			$Item // This makes a UIImageView
-           	.size(CGSizeMake(80, 80))
+           	.size(80, 80)
            	.image(@"http:///path/to/image")
          	.radius(30),
 
@@ -96,8 +96,8 @@ pod 'JUNFlex'
 		```objc
 		$List
 		.horizontal(true)
-		.size(CGSizeMake(535, 1000))
-		.itemSize(CGSizeMake(80, 80))
+		.size(535, 1000)
+		.itemSize(80, 80)
         .alwaysBounce(true)
         .showIndicator(true)
         .count(100, ^id (NSUInteger i) { // There are four other builders, such as forEach loop builder...
@@ -105,7 +105,7 @@ pod 'JUNFlex'
         	$Vstack
         	.children(@[
         		$Item
-        		.size(CGSizeMake(80, 80))
+        		.size(80, 80)
         		.image(@"aBundleImageName")
         		.radius(30),
 
@@ -131,7 +131,7 @@ pod 'JUNFlex'
 		$Item
 		.ID(@"anyIdentifier")
 		.color(UIColor.orangeColor)
-		.size(CGSizeMake(100, 100))
+		.size(100, 100)
 	];
 
 	self.view.$query0(@"anyIdentifier"); // Query first matched view.

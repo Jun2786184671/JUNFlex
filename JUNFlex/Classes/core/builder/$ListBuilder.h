@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface $ListBuilder : $AbstractBuilder<$ListBuilder *, UIView *>
 
-@property(nonatomic, readonly) $ListBuilder *(^itemSize)(CGSize itemSize);
+@property(nonatomic, readonly) $ListBuilder *(^itemSize)(CGFloat width, CGFloat height);
 @property(nonatomic, readonly) $ListBuilder *(^itemSpacing)(CGFloat itemSpacing);
 @property(nonatomic, readonly) $ListBuilder *(^lineSpacing)(CGFloat lineSpacing);
 @property(nonatomic, readonly) $ListBuilder *(^horizontal)(bool isHorizontal);

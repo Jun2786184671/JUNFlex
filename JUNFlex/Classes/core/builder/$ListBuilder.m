@@ -58,9 +58,9 @@
     };
 }
 
-- ($ListBuilder * _Nonnull (^)(CGSize))itemSize {
-    return ^(CGSize itemSize) {
-        self.$itemSize = itemSize;
+- ($ListBuilder * _Nonnull (^)(CGFloat, CGFloat))itemSize {
+    return ^(CGFloat width, CGFloat height) {
+        self.$itemSize = CGSizeMake(width, height);
         return self;
     };
 }
