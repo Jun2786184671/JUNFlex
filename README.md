@@ -80,7 +80,7 @@ pod 'JUNFlex'
          	$Hstack // Yes, you can nest stacks in stacks.
           	.children(@[
 
-           		$Item // This makes it responds to ui events.
+           		$Item // This makes item responds to ui events.
            		.text(@"Hello World!!!", 20, NSTextAlignmentCenter, UIColor.blueColor)
            		.onTap(self, @selector(buttonOnTap)), 
 
