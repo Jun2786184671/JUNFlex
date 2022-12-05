@@ -47,7 +47,7 @@ pod 'JUNFlex'
 		```objc
 		$Zstack
 		.size(CGSizeMake(80, 80))
-		.align(CGPointMake(-1, -1)) // This makes all contents in stack lean to the left top corner.
+		.align(-1, -1) // This makes all contents in stack lean to the left top corner.
       	.children(@[
 			aLabel,
       		aButton,
@@ -163,7 +163,7 @@ pod 'JUNFlex'
 		$Vstack
 		.width(300)
 		.height(600)
-		.align(CGPointMake(0 /* main axis (y) */, -1 /* cross axis (x)*/))
+		.align(0 /* main axis (y) */, -1 /* cross axis (x)*/)
 		.children(@[
 			$Item
 			.image(_.profileURL)

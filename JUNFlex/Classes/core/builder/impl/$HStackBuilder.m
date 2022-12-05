@@ -11,8 +11,8 @@
 
 @implementation $HStackBuilder
 
-- ($Stack *)_getProductWithChildren:(NSArray<UIView *> *)items alignment:(CGPoint)alignment {
-    return [[$HStack alloc] initWithItems:items alignment:alignment];
+- ($Stack *)_getProductWithChildren:(NSArray<UIView *> *)items mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment {
+    return [[$HStack alloc] initWithItems:items mainAxisAlignment:mainAxisAlignment crossAxisAlignment:crossAxisAlignment];
 }
 
 @end

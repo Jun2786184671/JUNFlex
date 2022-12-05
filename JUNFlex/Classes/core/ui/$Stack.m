@@ -11,16 +11,19 @@
 @interface $Stack ()
 
 @property(nonatomic, strong) NSArray<UIView *> *items;
-@property(nonatomic, assign) CGPoint alignment;
+
+@property(nonatomic, assign) int mainAxisAlignment;
+@property(nonatomic, assign) int crossAxisAlignment;
 
 @end
 
 @implementation $Stack
 
-- (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(CGPoint)alignment {
+- (instancetype)initWithItems:(NSArray<UIView *> *)items mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment {
     if (self = [super init]) {
         self.items = items;
-        self.alignment = alignment;
+        self.mainAxisAlignment = mainAxisAlignment;
+        self.crossAxisAlignment = crossAxisAlignment;
     }
     return self;
 }

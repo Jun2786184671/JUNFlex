@@ -11,8 +11,8 @@
 
 @implementation $LinearStack
 
-- (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(CGPoint)alignment {
-    if (self = [super initWithItems:items alignment:alignment]) {
+- (instancetype)initWithItems:(NSArray<UIView *> *)items mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment {
+    if (self = [super initWithItems:items mainAxisAlignment:mainAxisAlignment crossAxisAlignment:crossAxisAlignment]) {
         [self _addCrossHugConstraints];
         [self _setUpItems];
     }
@@ -56,8 +56,8 @@
     
     CGSize itemSize = item.frame.size;
     CGFloat mainSpan = isHorizontal ? itemSize.width : itemSize.height;
-    CGFloat mainAlign = self.alignment.x;
-    CGFloat crossAlign = self.alignment.y;
+    CGFloat mainAlign = self.mainAxisAlignment;
+    CGFloat crossAlign = self.crossAxisAlignment;
     
     NSLayoutAttribute mainSpanAttribute = isHorizontal ? NSLayoutAttributeWidth : NSLayoutAttributeHeight;
     NSLayoutAttribute mainInfAttribute = isHorizontal ? NSLayoutAttributeLeading : NSLayoutAttributeTop;

@@ -11,8 +11,8 @@
 
 @implementation $ZStack
 
-- (instancetype)initWithItems:(NSArray<UIView *> *)items alignment:(CGPoint)alignment {
-    if (self = [super initWithItems:items alignment:alignment]) {
+- (instancetype)initWithItems:(NSArray<UIView *> *)items mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment {
+    if (self = [super initWithItems:items mainAxisAlignment:mainAxisAlignment crossAxisAlignment:crossAxisAlignment]) {
         [self _setUpItems];
     }
     return self;
@@ -37,7 +37,7 @@
 - (void)_setUpConstraintsForItem:(UIView *)item prevItem:(UIView *)prevItem axis:(bool)isMainAxis {
     CGSize itemSize = item.frame.size;
     CGFloat itemSpan = isMainAxis ? itemSize.width : itemSize.height;
-    CGFloat axisAlign = isMainAxis ? self.alignment.x : self.alignment.y;
+    CGFloat axisAlign = isMainAxis ? self.mainAxisAlignment : self.crossAxisAlignment;
     
     NSLayoutAttribute spanAttribute = isMainAxis ? NSLayoutAttributeWidth : NSLayoutAttributeHeight;
     NSLayoutAttribute infAttribute = isMainAxis ? NSLayoutAttributeLeading : NSLayoutAttributeTop;

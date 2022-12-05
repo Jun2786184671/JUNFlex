@@ -40,7 +40,7 @@
 // for storyboard
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [self bindUI];
+    [self bindUI2];
 }
 
 - (void)bindUI3 {
@@ -48,6 +48,7 @@
         return
         $Zstack.children(@[
             $Vstack
+            .align(1, -1)
             .children(@[
                 $Item
                 .size(CGSizeMake(80, 80))
@@ -105,7 +106,7 @@
     $Layout(JUNAppModel.class, ^(JUNAppModel *_) {
         return
         $Vstack
-        .align(CGPointMake(0, 0))
+        .align(0, 0)
         .height(852)
         .children(@[
             $Padding
@@ -115,7 +116,7 @@
             .child(
                 $Zstack
                 .width(100)
-                .align(CGPointMake(-1, -1))
+                .align(-1, -1)
                 .children(@[
                     $Item
                     .ID(@"test")
@@ -123,7 +124,7 @@
                     .size(CGSizeMake(100, 100))
                     .radius(30),
                     $Vstack
-                    .align(CGPointMake(-1, 0))
+                    .align(-1, 0)
                     .children(@[
                         $Item
                         .color(UIColor.yellowColor)
@@ -131,7 +132,7 @@
                         .radius(10)
                         .text(_.name, 20, UIColor.purpleColor),
                         $Hstack
-                        .align(CGPointMake(-1, 0))
+                        .align(-1, 0)
                         .children(@[
                             $Item.text(@"count", 16, UIColor.blackColor),
                             $Item.text(@(_.reserveCount).description, 16, UIColor.whiteColor),

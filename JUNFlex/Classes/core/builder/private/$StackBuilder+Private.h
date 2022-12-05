@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface $StackBuilder ()
 
-- ($Stack *)_getProductWithChildren:(NSArray<UIView *> *)items alignment:(CGPoint)alignment;
+- ($Stack *)_getProductWithChildren:(NSArray<UIView *> *)items  mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment;
 
 @end
 

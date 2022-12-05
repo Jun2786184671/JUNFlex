@@ -14,7 +14,8 @@
 
 @property(nonatomic, strong) $Item *$product;
 
-@property(nonatomic, assign) CGPoint $align;
+@property(nonatomic, assign) int mainAxisAlignment;
+@property(nonatomic, assign) int crossAxisAlignment;
 
 @end
 
@@ -31,9 +32,10 @@
     return _$product;
 }
 
-- ($StackBuilder * _Nonnull (^)(CGPoint))align {
-    return ^(CGPoint align) {
-        self.$align = align;
+- ($StackBuilder * _Nonnull (^)(int, int))align {
+    return ^(int mainAxisAlignment, int crossAxisAlignment) {
+        self.mainAxisAlignment = mainAxisAlignment;
+        self.crossAxisAlignment = crossAxisAlignment;
         return self;
     };
 }
@@ -47,7 +49,7 @@
         }
         
         NSArray<UIView *> *$children = [self _validateChildren:children];
-        $Stack *stack = [self _getProductWithChildren:$children alignment:self.$align];
+        $Stack *stack = [self _getProductWithChildren:$children mainAxisAlignment:self.mainAxisAlignment crossAxisAlignment:self.crossAxisAlignment];
         
         stack.translatesAutoresizingMaskIntoConstraints = false;
         [self.$product addSubview:stack];
