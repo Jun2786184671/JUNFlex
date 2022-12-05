@@ -81,7 +81,7 @@ pod 'JUNFlex'
           	.children(@[
 
            		$Item // This makes it responds to ui events.
-           		.text(@"Hello World!!!", 20, UIColor.blueColor)
+           		.text(@"Hello World!!!", 20, NSTextAlignmentCenter, UIColor.blueColor)
            		.onTap(self, @selector(buttonOnTap)), 
 
            		UISwitch.new,
@@ -112,7 +112,7 @@ pod 'JUNFlex'
         		$Hstack
         		.children(@[
         			$Item
-        			.text(@"hello", 20, UIColor.blueColor)
+        			.text(@"hello", 20, NSTextAlignmentCenter, UIColor.blueColor)
         			.onTap(self, @selector(buttonOnTap)),
 
         			UISwitch.new,
@@ -120,7 +120,7 @@ pod 'JUNFlex'
 
         		$Item
         		.width(120)
-        		.text(@"world", 20, UIColor.blueColor)
+        		.text(@"world", 20, NSTextAlignmentCenter, UIColor.blueColor)
         		.color(UIColor.greenColor),
             ]);
         });
@@ -169,10 +169,10 @@ pod 'JUNFlex'
 			.image(_.profileURL)
 
 			$Item
-			.text(_.name, 20, UIColor.blackColor),
+			.text(_.name, 20, NSTextAlignmentCenter, UIColor.blackColor),
 
 			$Item
-			.text(_.email, 18, UIColor.blueColor),
+			.text(_.email, 18, NSTextAlignmentCenter, UIColor.blueColor),
 			.onTap(anyTarget, @selector(sendMailToJun))
 		]);
 	});
