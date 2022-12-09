@@ -160,7 +160,7 @@ pod 'JUNFlex'
 	                "width" : 100,
 	                "height" : 200,
 	            },
-	            "content_align" : {
+	            "content" : {
 	                "main" : "min",
 	                "cross" : "center",
 	            },
