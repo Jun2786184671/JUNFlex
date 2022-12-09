@@ -131,7 +131,7 @@
             CGFloat width = [self _floatFromValue:[value valueForKey:@"width"]];
             UIColor *color = [self _colorFromValue:[value valueForKey:@"color"]];
             self.border(width, color);
-        } else if ([key isEqualToString:@"maskBounds"]) {
+        } else if ([key isEqualToString:@"mask_bounds"]) {
             self.maskBounds([self _boolFromValue:value]);
         } else if ([key isEqualToString:@"width"]) {
             self.width([self _floatFromValue:value]);

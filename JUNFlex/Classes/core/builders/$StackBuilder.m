@@ -91,7 +91,7 @@
     id alignment = dict[@"alignment"];
     if (alignment == nil) return;
     NSAssert([alignment isKindOfClass:[NSDictionary class]], @"unexpected alignment format");
-    id mainAlign = [alignment valueForKey:@"mainAxis"];
+    id mainAlign = [alignment valueForKey:@"main_axis"];
     int mainAlignRaw = 0;
     if ([mainAlign isKindOfClass:[NSString class]]) {
         if ([mainAlign isEqualToString:@"min"]) {
@@ -106,7 +106,7 @@
     } else {
         mainAlignRaw = [self _intFromValue:mainAlign];
     }
-    id crossAlign = [alignment valueForKey:@"crossAxis"];
+    id crossAlign = [alignment valueForKey:@"cross_axis"];
     int crossAlignRaw = 0;
     if ([crossAlign isKindOfClass:[NSString class]]) {
         if ([crossAlign isEqualToString:@"min"]) {

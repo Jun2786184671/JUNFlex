@@ -84,7 +84,7 @@
 }
 
 - (void)_configContentAlignmentWithDictionary:(NSDictionary *)dict {
-    id contentAlignment = dict[@"contentAlignment"];
+    id contentAlignment = dict[@"content_alignment"];
     if (contentAlignment == nil) return;
     NSAssert([contentAlignment isKindOfClass:[NSDictionary class]], @"unexpected contentAlignment format");
     id hAlign = [contentAlignment valueForKey:@"horizontal"];

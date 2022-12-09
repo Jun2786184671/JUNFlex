@@ -1,14 +1,14 @@
 {
-    "id" : "hello",
     "type" : "hstack",
+    "id" : "hello",
     "border" : {
         "width" : 10,
         "color" : "orange",
     },
     "color" : "#00ffffff",
     "radius" : "12.5",
-    "maskBounds" : "true",
-    "contentAlignment" : {
+    "mask_bounds" : "true",
+    "content_alignment" : {
         "horizontal" : "leading",
         "vertical" : "bottom",
     },
@@ -18,8 +18,8 @@
         "fontSize" : "18",
     },
     "alignment" : {
-        "mainAxis" : "min",
-        "crossAxis" : "max",
+        "main_axis" : "center",
+        "cross_axis" : "max",
     },
     "children" : [
         {
