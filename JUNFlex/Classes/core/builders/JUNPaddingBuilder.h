@@ -7,11 +7,11 @@
 
 #import "JUNAbstractBuilder.h"
 
-@class JUNPaddingBuilder;
+@class JUNPaddingBuilder, JUNItem;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNPaddingBuilder : JUNAbstractBuilder<JUNPaddingBuilder *, UIView *>
+@interface JUNPaddingBuilder : JUNAbstractBuilder<JUNPaddingBuilder *, JUNItem *>
 
 
 @property(nonatomic, readonly) JUNPaddingBuilder *(^top)(CGFloat top);
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) JUNPaddingBuilder *(^all)(CGFloat all);
 @property(nonatomic, readonly) JUNPaddingBuilder *(^make)(CGFloat t, CGFloat l, CGFloat b, CGFloat r);
 /// target can be a uiview or itembuilder
-@property(nonatomic, readonly) UIView *(^child)(id child);
+@property(nonatomic, readonly) JUNItem *(^child)(id child);
 
 @end
 

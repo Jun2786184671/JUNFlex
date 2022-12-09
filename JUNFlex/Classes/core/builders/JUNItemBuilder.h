@@ -7,11 +7,11 @@
 
 #import "JUNAbstractBuilder.h"
 
-@class JUNItemBuilder;
+@class JUNItemBuilder, JUNItem;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNItemBuilder : JUNAbstractBuilder<JUNItemBuilder *, UIView *>
+@interface JUNItemBuilder : JUNAbstractBuilder<JUNItemBuilder *, JUNItem *>
 
 @property(nonatomic, readonly) JUNItemBuilder *(^contentAlign)(UIControlContentHorizontalAlignment horizontal, UIControlContentVerticalAlignment vertical);
 @property(nonatomic, readonly) JUNItemBuilder *(^text)(NSString *string, CGFloat fontSize, UIColor *color);

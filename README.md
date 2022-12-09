@@ -20,9 +20,9 @@ pod 'JUNFlex'
 ## Guide
 1. ```#import <JUNFlex/JUNFlex.h>``` into your project.
 2. JUNFlex provides six widgets to help you build interfaces quickly.
-	+ ```JUNHstack``` is a horizontal layout, all of the UIViews wrapped by it are laid out in x-axis direction.
+	+ ```Hstack``` is a horizontal layout, all of the UIViews wrapped by it are laid out in x-axis direction.
 		```objc
-		JUNHstack
+		JUNFlex.Hstack
       	.children(@[
 			aLabel,
       		aButton,
@@ -31,9 +31,9 @@ pod 'JUNFlex'
       	]);
 		```
 
-	+ ```JUNVstack``` is a vertical layout, similar to Hstack, all of its components are laid out in y-axis direction.
+	+ ```Vstack``` is a vertical layout, similar to Hstack, all of its components are laid out in y-axis direction.
 		```objc
-		JUNVstack
+		JUNFlex.Vstack
 		.width(100) // Yes, you can set some properties here.
 		.height(200)
       	.children(@[
@@ -43,9 +43,9 @@ pod 'JUNFlex'
       		...
       	]);
 		```
-	+ ```JUNZstack``` is a stack layout where all of its components are stacked in the z-axis direction.
+	+ ```Zstack``` is a stack layout where all of its components are stacked in the z-axis direction.
 		```objc
-		JUNZstack
+		JUNFlex.Zstack
 		.size(80, 80)
 		.align(-1, -1) // This makes all contents in stack lean to the left top corner.
       	.children(@[
@@ -55,9 +55,9 @@ pod 'JUNFlex'
       		...
       	]);
 		```
-	+ ```JUNPadding``` is used to wrap a UIView, you can use it to specify the insets, as well as implicitly constraining its content by setting the wrapper's size.
+	+ ```Padding``` is used to wrap a UIView, you can use it to specify the insets, as well as implicitly constraining its content by setting the wrapper's size.
 		```objc
-		JUNPadding
+		JUNFlex.Padding
 		.left(20).right(20) // This makes edge insets.
 		.size(80, 80) // Constrain its content implicitly.
 		.radius(30)
@@ -67,20 +67,20 @@ pod 'JUNFlex'
 			aView
       	);
 		```
-	+ ```JUNItem``` is a nice tool in JUNFlex that allows you to quickly create many types of views, from UIImageView to UILabel and even UIButton.
+	+ ```Item``` is a nice tool in JUNFlex that allows you to quickly create many types of views, from UIImageView to UILabel and even UIButton.
 		```objc
-		JUNVstack
+		JUNFlex.Vstack
       	.children(@[
 
-			JUNItem // This makes a UIImageView
+			JUNFlex.Item // This makes a UIImageView
            	.size(80, 80)
            	.image(@"http:///path/to/image")
          	.radius(30),
 
-         	JUNHstack // Yes, you can nest stacks in stacks.
+         	JUNFlex.Hstack // Yes, you can nest stacks in stacks.
           	.children(@[
 
-           		JUNItem // This makes item responds to ui events.
+           		JUNFlex.Item // This makes item responds to ui events.
            		.text(@"Hello World!!!", 20, UIColor.blueColor)
            		.onTap(self, @selector(buttonOnTap)), 
 
@@ -92,9 +92,9 @@ pod 'JUNFlex'
       		...
       	]);
 		```
-	+ ```JUNList``` is an encapsulation of [JUNCollectionView](https://github.com/Jun2786184671/JUNCollectionView) that you can use to create either a horizontal or vertical scrollable list or a flowlayout.
+	+ ```List``` is an encapsulation of [JUNCollectionView](https://github.com/Jun2786184671/JUNCollectionView) that you can use to create either a horizontal or vertical scrollable list or a flowlayout.
 		```objc
-		JUNList
+		JUNFlex.List
 		.horizontal(true)
 		.size(535, 1000)
 		.itemSize(80, 80)
@@ -102,23 +102,23 @@ pod 'JUNFlex'
         .showIndicator(true)
         .count(100, ^id (NSUInteger i) { // There are four other builders, such as forEach loop builder...
         	return
-        	JUNVstack
+        	JUNFlex.Vstack
         	.children(@[
-        		JUNItem
+        		JUNFlex.Item
         		.size(80, 80)
         		.image(@"aBundleImageName")
         		.radius(30),
 
-        		JUNHstack
+        		JUNFlex.Hstack
         		.children(@[
-        			JUNItem
+        			JUNFlex.Item
         			.text(@"hello", 20, UIColor.blueColor)
         			.onTap(self, @selector(buttonOnTap)),
 
         			UISwitch.new,
         		]),
 
-        		JUNItem
+        		JUNFlex.Item
         		.width(120)
         		.text(@"world", 20, UIColor.blueColor)
         		.color(UIColor.greenColor),
@@ -128,7 +128,7 @@ pod 'JUNFlex'
 3. You can register and query the identifier of views.
 	```objc
 	[self.view addSubview:
-		JUNItem
+		JUNFlex.Item
 		.ID(@"anyIdentifier")
 		.color(UIColor.orangeColor)
 		.size(100, 100)

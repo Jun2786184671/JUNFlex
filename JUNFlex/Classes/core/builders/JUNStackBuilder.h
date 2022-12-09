@@ -7,14 +7,14 @@
 
 #import "JUNItemBuilder.h"
 
-@class JUNStackBuilder;
+@class JUNStackBuilder, JUNItem;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNStackBuilder : JUNAbstractBuilder<JUNStackBuilder *, UIView *>
+@interface JUNStackBuilder : JUNAbstractBuilder<JUNStackBuilder *, JUNItem *>
 
 @property(nonatomic, readonly) JUNStackBuilder *(^align)(int main, int cross);
-@property(nonatomic, readonly) UIView *(^children)(NSArray<id> *children);
+@property(nonatomic, readonly) JUNItem *(^children)(NSArray<id> *children);
 
 @end
 

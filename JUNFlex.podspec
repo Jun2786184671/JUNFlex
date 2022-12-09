@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JUNFlex'
-  s.version          = '0.3.0'
+  s.version          = '0.3.1'
   s.summary          = 'A ui framework that makes ios development easier.'
 
 # This description is used to generate tags and improve search results.
@@ -36,7 +36,7 @@ TODO: Add long description of the pod here.
   #   'JUNFlex' => ['JUNFlex/Assets/*.png']
   # }
 
-  s.public_header_files = 'JUNFlex/Classes/*.h', 'JUNFlex/Classes/core/builders/*.h'
+  s.public_header_files = 'JUNFlex/Classes/*.h', 'JUNFlex/Classes/core/builders/*.h', 'JUNFlex/Classes/core/widgets/JUNItem.h'
   s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'JUNTableView', '~> 0.1.0'
   s.dependency 'JUNCollectionView', '~> 0.1.0'

@@ -37,7 +37,9 @@
 
 - (id  _Nonnull (^)(id _Nonnull))data {
     return ^(id data) {
-        self.product.jun_data = data;
+        if ([self.product respondsToSelector:@selector(setJun_data:)]) {
+            [self.product performSelector:@selector(setJun_data:) withObject:data];
+        }
         return self;
     };
 }

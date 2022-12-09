@@ -30,13 +30,13 @@
 
 - (UIView *)testCreateHStack {
     return
-    JUNHstack
+    JUNFlex.Hstack
     .children(@[
-        JUNItem
+        JUNFlex.Item
         .width(100)
         .height(200)
         .image(@"test-image.jpg"),
-        JUNItem
+        JUNFlex.Item
         .height(30)
         .text(@"hello world", 20, UIColor.blueColor),
         UISwitch.new,
@@ -45,13 +45,13 @@
 
 - (UIView *)testCreateVStack {
     return
-    JUNVstack
+    JUNFlex.Vstack
     .children(@[
-        JUNItem
+        JUNFlex.Item
         .width(100)
         .height(200)
         .image(@"test-image.jpg"),
-        JUNItem
+        JUNFlex.Item
         .height(30)
         .text(@"hello world", 20, UIColor.blueColor),
         UISwitch.new,
@@ -61,15 +61,15 @@
 
 - (UIView *)testCreateZStack {
     return
-    JUNZstack
+    JUNFlex.Zstack
     .size(100, 100)
     .align(-1, -1)
     .children(@[
-        JUNItem
+        JUNFlex.Item
         .width(100)
         .height(200)
         .image(@"test-image.jpg"),
-        JUNItem
+        JUNFlex.Item
         .height(30)
         .text(@"hello world", 20, UIColor.blueColor),
         UISwitch.new,
@@ -79,7 +79,7 @@
 
 - (UIView *)testCreatePadding {
     return
-    JUNPadding
+    JUNFlex.Padding
     .top(10)
     .left(20)
     .bottom(30)
@@ -91,7 +91,7 @@
 
 - (UIView *)testCreateList {
     return
-    JUNList
+    JUNFlex.List
     .size(300, 500)
     .count(100, ^id _Nonnull(NSUInteger i) {
         return [self testCreateZStack];

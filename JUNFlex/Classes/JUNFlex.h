@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <JUNFlex/JUNItem.h>
 #import <JUNFlex/JUNAbstractBuilder.h>
 #import <JUNFlex/JUNStackBuilder.h>
 #import <JUNFlex/JUNListBuilder.h>
@@ -28,27 +29,3 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
-
-#ifndef JUNHstack
-#define JUNHstack JUNFlex.Hstack
-#endif
-
-#ifndef JUNVstack
-#define JUNVstack JUNFlex.Vstack
-#endif
-
-#ifndef JUNZstack
-#define JUNZstack JUNFlex.Zstack
-#endif
-
-#ifndef JUNPadding
-#define JUNPadding JUNFlex.Padding
-#endif
-
-#ifndef JUNItem
-#define JUNItem JUNFlex.Item
-#endif
-
-#ifndef JUNList
-#define JUNList JUNFlex.List
-#endif

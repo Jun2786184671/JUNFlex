@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Call this when end of build. (optional when wrapped by other builders)
 @property(nonatomic, readonly) ProductType EOB;
 
-- (UIView *)buildWithDictionary:(NSDictionary *)dict;
+- (ProductType)buildWithDictionary:(NSDictionary *)dict;
 
 @end
 

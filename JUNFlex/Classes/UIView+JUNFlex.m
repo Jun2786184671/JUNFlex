@@ -42,10 +42,6 @@
     };
 }
 
-- (void)setJun_data:(id)jun_data {
-    return;
-}
-
 - (id _Nullable)jun_data {
     return nil;
 }

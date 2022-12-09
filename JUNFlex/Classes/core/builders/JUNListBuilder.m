@@ -87,7 +87,7 @@
     };
 }
 
-- (UIView * _Nonnull (^)(NSArray<id> * _Nonnull))children {
+- (UICollectionView * _Nonnull (^)(NSArray<id> * _Nonnull))children {
     return ^(NSArray<id> *items) {
         NSMutableArray *validItems = [NSMutableArray arrayWithArray:items];
         for (int i = 0; i < items.count; i++) {
@@ -104,7 +104,7 @@
     };
 }
 
-- (UIView * _Nonnull (^)(NSArray<id> * _Nonnull (^ _Nonnull)(void)))build {
+- (UICollectionView * _Nonnull (^)(NSArray<id> * _Nonnull (^ _Nonnull)(void)))build {
     return ^(NSArray<id> * (^builder)(void)) {
         NSArray<id> *(^validBuilder)(void) = ^(void) {
             NSArray *items = [NSMutableArray arrayWithArray:builder()];
@@ -125,7 +125,7 @@
     };
 }
 
-- (UIView * _Nonnull (^)(NSArray * _Nonnull, id _Nonnull (^ _Nonnull)(NSUInteger, id _Nonnull)))forEach {
+- (UICollectionView * _Nonnull (^)(NSArray * _Nonnull, id _Nonnull (^ _Nonnull)(NSUInteger, id _Nonnull)))forEach {
     return ^(NSArray *elements, id (^builder)(NSUInteger i, id each)) {
         UIView *(^validBuilder)(NSUInteger i, id each) = ^(NSUInteger i, id each) {
             id item = builder(i, each);
@@ -142,7 +142,7 @@
     };
 }
 
-- (UIView * _Nonnull (^)(NSUInteger, id _Nonnull (^ _Nonnull)(NSUInteger)))count {
+- (UICollectionView * _Nonnull (^)(NSUInteger, id _Nonnull (^ _Nonnull)(NSUInteger)))count {
     return ^(NSUInteger count, UIView *(^builder)(NSUInteger)) {
         UIView *(^validBuilder)(NSUInteger i) = ^(NSUInteger i) {
             id item = builder(i);
@@ -159,7 +159,7 @@
     };
 }
 
-- (UIView * _Nonnull (^)(NSUInteger (^ _Nonnull)(void), id _Nonnull (^ _Nonnull)(NSUInteger)))countBy {
+- (UICollectionView * _Nonnull (^)(NSUInteger (^ _Nonnull)(void), id _Nonnull (^ _Nonnull)(NSUInteger)))countBy {
     return ^(NSUInteger (^count)(void), id (^builder)(NSUInteger)) {
         UIView *(^validBuilder)(NSUInteger i) = ^(NSUInteger i) {
             id item = builder(i);
@@ -176,7 +176,7 @@
     };
 }
 
-- (UIView *)_wrapProduct:(UICollectionView *)product {
+- (UICollectionView *)_wrapProduct:(UICollectionView *)product {
     product.translatesAutoresizingMaskIntoConstraints = false;
     product.jun_minimumInteritemSpacing = self.item_spacing;
     product.jun_minimumLineSpacing = self.line_spacing;
