@@ -132,7 +132,7 @@ pod 'JUNFlex'
 		.ID(@"anyIdentifier")
 		.color(UIColor.orangeColor)
 		.size(100, 100)
-        .EOB
+		.EOB // Must call 'End Of Build' when you use JUNItem without a stack or padding wrapper.
 	];
 
 	self.view.jun_query0(@"anyIdentifier"); // Query first matched view.
