@@ -181,7 +181,66 @@ pod 'JUNFlex'
 	```objc
 	UIView *userView = user.$render;
 	```
-	Nice ```v(^_^)v```
+5. JUNFlex also has the ability to configure the ui using json files to separate the ui from the code.
+	+ First, create a ```demo.json```, Here's an example.
+	```json
+	{
+	    "type" : "hstack",
+	    "id" : "hello",
+	    "border" : {
+	        "width" : 10,
+	        "color" : "orange",
+	    },
+	    "radius" : "12.5",
+	    "contentAlignment" : {
+	        "horizontal" : "leading",
+	        "vertical" : "bottom",
+	    },
+	    "text" : {
+	        "string" : "hello world",
+	        "color" : "#ff00ffff",
+	        "fontSize" : 18,
+	    },
+	    "alignment" : {
+	        "mainAxis" : "min",
+	        "crossAxis" : "max",
+	    },
+	    "children" : [
+
+	        {
+	            "size" : {
+	                "width" : 100,
+	                "height" : 200,
+	            },
+	            "color" : "red",
+	            "text" : "hello"
+	            "image" : "test-image.jpg",
+	        },
+
+	        {
+	            "width" : 100,
+	            "height" : 200,
+	            "color" : "green",
+	        },
+
+	        {
+	            "size" : {
+	                "width" : 100,
+	            },
+	            "height" : 200,
+	            "color" : "blue",
+	        },
+	    ],
+	}
+	```
+	+ Then just need to specify the json file in your controller.
+	```objc
+	- (void)viewDidLoad {
+	    [super viewDidLoad];
+	    self.layout(@"demo.json");
+	}
+	```
+6. Nice ```v(^_^)v```
 
 ## Author
 
