@@ -160,6 +160,10 @@ pod 'JUNFlex'
 	                "width" : 100,
 	                "height" : 200,
 	            },
+	            "content_align" : {
+	                "main" : "min",
+	                "cross" : "center",
+	            },
 	            "color" : "red",
 	            "text" : {
                     "string" : "hello",
