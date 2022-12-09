@@ -51,10 +51,10 @@
 
 - (void)_addDefaultConstraintsToSuperview {
     NSLayoutConstraint *widthContraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeWidth multiplier:1.0f constant:0.0f];
-    widthContraint.priority = UILayoutPriorityDefaultHigh + 1;
+    widthContraint.priority = UILayoutPriorityDefaultHigh;
     
     NSLayoutConstraint *heightContraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeHeight multiplier:1.0f constant:0.0f];
-    heightContraint.priority = UILayoutPriorityDefaultHigh + 1;
+    heightContraint.priority = UILayoutPriorityDefaultHigh;
     
     [self.superview addConstraints:@[
         [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self.superview attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0f],

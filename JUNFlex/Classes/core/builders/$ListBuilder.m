@@ -26,6 +26,14 @@
 
 @implementation $ListBuilder
 
++ (void)load {
+    [super load];
+}
+
++ (NSString *)type {
+    return @"list";
+}
+
 - (id)product {
     return self.$product;
 }

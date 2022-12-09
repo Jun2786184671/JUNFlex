@@ -11,6 +11,14 @@
 
 @implementation $HStackBuilder
 
++ (void)load {
+    [super load];
+}
+
++ (NSString *)type {
+    return @"hstack";
+}
+
 - ($Stack *)_getProductWithChildren:(NSArray<UIView *> *)items mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment {
     return [[$HStack alloc] initWithItems:items mainAxisAlignment:mainAxisAlignment crossAxisAlignment:crossAxisAlignment];
 }

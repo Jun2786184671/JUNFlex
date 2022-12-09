@@ -8,7 +8,6 @@
 
 #import "JUNAppController.h"
 #import "JUNAppModel.h"
-#import <JUNFlex/$Flex.h>
 
 @interface JUNAppController ()
 
@@ -154,6 +153,7 @@
 //            .left(20).right(20)
 //            .child(
                 $Item
+                .width(300)
                 .text(_.message, 40, UIColor.blueColor)
                 .onTap(self, @selector(buttonOnTap)),
 //            ),

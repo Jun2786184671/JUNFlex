@@ -11,6 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface $AbstractBuilder<__covariant ClassType, __covariant ProductType> : NSObject
 
+
+//@property(nonatomic, readonly) ClassType (^type)(NSString *type);
+
 @property(nonatomic, readonly) ClassType (^ID)(NSString *identifier);
 @property(nonatomic, readonly) ClassType (^data)(id data);
 @property(nonatomic, readonly) ClassType (^color)(UIColor *color);
@@ -27,6 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Call this when end of build. (optional when wrapped by other builders)
 @property(nonatomic, readonly) ProductType EOB;
 
+- (UIView *)buildWithDictionary:(NSDictionary *)dict;
+
 @end
 
 NS_ASSUME_NONNULL_END
+

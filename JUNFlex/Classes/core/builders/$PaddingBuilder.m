@@ -8,6 +8,7 @@
 #import "$PaddingBuilder.h"
 #import "$AbstractBuilder+Private.h"
 #import "$Item.h"
+#import "$JSONSerializer.h"
 #import "UIView+JUNex4Flex.h"
 
 @interface $PaddingBuilder ()
@@ -19,6 +20,14 @@
 @end
 
 @implementation $PaddingBuilder
+
++ (void)load {
+    [super load];
+}
+
++ (NSString *)type {
+    return @"padding";
+}
 
 - (id)product {
     return self.$product;
@@ -95,6 +104,39 @@
         ]];
         return self.EOB;
     };
+}
+
+- (UIView *)buildWithDictionary:(NSDictionary *)dict {
+    [super buildWithDictionary:dict];
+    
+    id top = dict[@"top"];
+    if (top) {
+        self.top([self _floatFromValue:top]);
+    }
+    id left = dict[@"left"];
+    if (left) {
+        self.left([self _floatFromValue:left]);
+    }
+    id bottom = dict[@"bottom"];
+    if (bottom) {
+        self.bottom([self _floatFromValue:bottom]);
+    }
+    id right = dict[@"right"];
+    if (right) {
+        self.right([self _floatFromValue:right]);
+    }
+    id all = dict[@"all"];
+    if (all) {
+        self.all([self _floatFromValue:all]);
+    }
+    
+    id childDict = dict[@"child"];
+    if (childDict) {
+        NSAssert([childDict isKindOfClass:[NSDictionary class]], @"unexpected child format");
+        UIView *childView = [[$JSONSerializer sharedInstance] serialize:childDict];
+        self.child(childView);
+    }
+    return self.EOB;
 }
 
 - (UIView *)_validateChild:(id)child {

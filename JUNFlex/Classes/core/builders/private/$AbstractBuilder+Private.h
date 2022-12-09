@@ -11,7 +11,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface $AbstractBuilder<__covariant ClassType, __covariant ProductType> ()
 
+/// serialize identifier in json
+@property(class, nonatomic, readonly) NSString *type;
+
 @property(nonatomic, strong, readonly) ProductType product;
+
+- (NSString *)_stringFromValue:(id)value;
+- (int)_intFromValue:(id)value;
+- (CGFloat)_floatFromValue:(id)value;
+- (bool)_boolFromValue:(id)value;
+- (UIColor *)_colorFromValue:(id)value;
 
 @end
 

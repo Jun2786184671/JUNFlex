@@ -1,0 +1,51 @@
+{
+    "id" : "hello",
+    "type" : "hstack",
+    "border" : {
+        "width" : 10,
+        "color" : "orange",
+    },
+    "color" : "#00ffffff",
+    "radius" : "12.5",
+    "maskBounds" : "true",
+    "contentAlignment" : {
+        "horizontal" : "leading",
+        "vertical" : "bottom",
+    },
+    "text" : {
+        "string" : "hello world",
+        "color" : "#ff00ffff",
+        "fontSize" : "18",
+    },
+    "alignment" : {
+        "mainAxis" : "min",
+        "crossAxis" : "max",
+    },
+    "children" : [
+        {
+            "size" : {
+                "width" : 100,
+                "height" : 200,
+            },
+            "color" : "red",
+            "text" : {
+                "string" : "hello",
+            },
+            "//image" : "test-image.jpg",
+        },
+        {
+            "size" : {
+                "width" : 100,
+                "height" : 200,
+            },
+            "color" : "green",
+        },
+        {
+            "size" : {
+                "width" : 100,
+                "height" : 200,
+            },
+            "color" : "blue",
+        },
+    ],
+}

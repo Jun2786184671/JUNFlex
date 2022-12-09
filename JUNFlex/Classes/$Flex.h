@@ -12,6 +12,7 @@
 #import <JUNFlex/$PaddingBuilder.h>
 #import <JUNFlex/$ItemBuilder.h>
 #import <JUNFlex/UIView+$Flex.h>
+#import <JUNFlex/UIViewController+$Flex.h>
 #import <JUNFlex/NSObject+$Model.h>
 
 NS_ASSUME_NONNULL_BEGIN
