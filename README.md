@@ -181,7 +181,7 @@ pod 'JUNFlex'
 	```objc
 	UIView *userView = user.$render;
 	```
-5. JUNFlex also has the ability to configure the ui using json files to separate the ui from the code.
+5. JUNFlex also has the ability to separate ui from code via json.
 	+ First, create a ```demo.json```, Here's an example.
 	```json
 	{
