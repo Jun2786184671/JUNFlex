@@ -182,7 +182,7 @@ pod 'JUNFlex'
 	UIView *userView = user.$render;
 	```
 5. JUNFlex also has the ability to separate ui from code via json.
-	+ First, create a ```demo.json```, Here's an example.
+	+ First, create a file named ```demo.json```, Here's an example.
 	```json
 	{
 	    "type" : "hstack",
