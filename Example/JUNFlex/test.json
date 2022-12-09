@@ -19,7 +19,7 @@
     },
     "children" : [
         {
-            "content_align" : {
+            "align" : {
                 "main" : "min",
                 "cross" : "center",
             },

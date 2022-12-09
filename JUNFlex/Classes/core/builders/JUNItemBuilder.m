@@ -37,10 +37,35 @@
     return _item;
 }
 
-- (JUNItemBuilder * _Nonnull (^)(UIControlContentHorizontalAlignment, UIControlContentVerticalAlignment))contentAlign {
-    return ^(UIControlContentHorizontalAlignment h, UIControlContentVerticalAlignment v) {
-        [self.item setContentHorizontalAlignment:h];
-        [self.item setContentVerticalAlignment:v];
+- (JUNItemBuilder * _Nonnull (^)(int, int))align {
+    return ^(int mainAxisAlignment, int crossAxisAlignment) {
+        UIControlContentHorizontalAlignment hAlignment = 0;
+        if (mainAxisAlignment < 0) {
+            if (@available(iOS 11.0, *)) {
+                hAlignment = UIControlContentHorizontalAlignmentLeading;
+            } else {
+                hAlignment = UIControlContentHorizontalAlignmentLeft;
+            }
+        } else if (mainAxisAlignment == 0) {
+            hAlignment = UIControlContentHorizontalAlignmentCenter;
+        } else if (mainAxisAlignment > 0) {
+            if (@available(iOS 11.0, *)) {
+                hAlignment = UIControlContentHorizontalAlignmentTrailing;
+            } else {
+                hAlignment = UIControlContentHorizontalAlignmentRight;
+            }
+        }
+        [self.item setContentHorizontalAlignment:hAlignment];
+        
+        UIControlContentVerticalAlignment vAlignment = 0;
+        if (crossAxisAlignment < 0) {
+            vAlignment = UIControlContentVerticalAlignmentTop;
+        } else if (crossAxisAlignment == 0) {
+            vAlignment = UIControlContentVerticalAlignmentCenter;
+        } else if (crossAxisAlignment > 0) {
+            vAlignment = UIControlContentVerticalAlignmentBottom;
+        }
+        [self.item setContentVerticalAlignment:vAlignment];
         return self;
     };
 }
@@ -84,28 +109,18 @@
 }
 
 - (void)_configContentAlignmentWithDictionary:(NSDictionary *)dict {
-    id contentAlignment = dict[@"content_align"];
+    id contentAlignment = dict[@"align"];
     if (contentAlignment == nil) return;
     NSAssert([contentAlignment isKindOfClass:[NSDictionary class]], @"unexpected contentAlignment format");
     id hAlign = [contentAlignment valueForKey:@"main"];
-    UIControlContentHorizontalAlignment hAlignRaw = 0;
+    int hAlignRaw = 0;
     if ([hAlign isKindOfClass:[NSString class]]) {
-        if ([hAlign isEqualToString:@"center"]) {
-            hAlignRaw = UIControlContentHorizontalAlignmentCenter;
-        } else if ([hAlign isEqualToString:@"min"]) {
-            if (@available(iOS 11.0, *)) {
-                hAlignRaw = UIControlContentHorizontalAlignmentLeading;
-            } else {
-                hAlignRaw = UIControlContentHorizontalAlignmentLeft;
-            }
+        if ([hAlign isEqualToString:@"min"]) {
+            hAlignRaw = -1;
+        } else if ([hAlign isEqualToString:@"center"]) {
+            hAlignRaw = 0;
         } else if ([hAlign isEqualToString:@"max"]) {
-            if (@available(iOS 11.0, *)) {
-                hAlignRaw = UIControlContentHorizontalAlignmentTrailing;
-            } else {
-                hAlignRaw = UIControlContentHorizontalAlignmentRight;
-            }
-        } else if ([hAlign isEqualToString:@"fill"]) {
-            hAlignRaw = UIControlContentHorizontalAlignmentFill;
+            hAlignRaw = 1;
         } else {
             hAlignRaw = [self _intFromValue:hAlign];
         }
@@ -113,23 +128,21 @@
         hAlignRaw = [self _intFromValue:hAlign];
     }
     id vAlign = [contentAlignment valueForKey:@"cross"];
-    UIControlContentVerticalAlignment vAlignRaw = 0;
+    int vAlignRaw = 0;
     if ([vAlign isKindOfClass:[NSString class]]) {
-        if ([vAlign isEqualToString:@"center"]) {
-            vAlignRaw = UIControlContentVerticalAlignmentCenter;
-        } else if ([vAlign isEqualToString:@"min"]) {
-            vAlignRaw = UIControlContentVerticalAlignmentTop;
+        if ([vAlign isEqualToString:@"min"]) {
+            vAlignRaw = -1;
+        } else if ([vAlign isEqualToString:@"center"]) {
+            vAlignRaw = 0;
         } else if ([vAlign isEqualToString:@"max"]) {
-            vAlignRaw = UIControlContentVerticalAlignmentBottom;
-        } else if ([vAlign isEqualToString:@"fill"]) {
-            vAlignRaw = UIControlContentVerticalAlignmentFill;
+            vAlignRaw = 1;
         } else {
             vAlignRaw = [self _intFromValue:vAlign];
         }
     } else {
         vAlignRaw = [self _intFromValue:vAlign];
     }
-    self.contentAlign(hAlignRaw, vAlignRaw);
+    self.align(hAlignRaw, vAlignRaw);
 }
 
 - (void)_configTextWithDictionary:(NSDictionary *)dict {
