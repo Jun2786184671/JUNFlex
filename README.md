@@ -18,11 +18,11 @@ pod 'JUNFlex'
 ```
 
 ## Guide
-1. ```#import <JUNFlex/$Flex.h>``` into your project.
+1. ```#import <JUNFlex/JUNFlex.h>``` into your project.
 2. JUNFlex provides six widgets to help you build interfaces quickly.
-	+ ```$Hstack``` is a horizontal layout, all of the UIViews wrapped by it are laid out in x-axis direction.
+	+ ```JUNHstack``` is a horizontal layout, all of the UIViews wrapped by it are laid out in x-axis direction.
 		```objc
-		$Hstack
+		JUNHstack
       	.children(@[
 			aLabel,
       		aButton,
@@ -31,9 +31,9 @@ pod 'JUNFlex'
       	]);
 		```
 
-	+ ```$Vstack``` is a vertical layout, similar to Hstack, all of its components are laid out in y-axis direction.
+	+ ```JUNVstack``` is a vertical layout, similar to Hstack, all of its components are laid out in y-axis direction.
 		```objc
-		$Vstack
+		JUNVstack
 		.width(100) // Yes, you can set some properties here.
 		.height(200)
       	.children(@[
@@ -43,9 +43,9 @@ pod 'JUNFlex'
       		...
       	]);
 		```
-	+ ```$Zstack``` is a stack layout where all of its components are stacked in the z-axis direction.
+	+ ```JUNZstack``` is a stack layout where all of its components are stacked in the z-axis direction.
 		```objc
-		$Zstack
+		JUNZstack
 		.size(80, 80)
 		.align(-1, -1) // This makes all contents in stack lean to the left top corner.
       	.children(@[
@@ -55,9 +55,9 @@ pod 'JUNFlex'
       		...
       	]);
 		```
-	+ ```$Padding``` is used to wrap a UIView, you can use it to specify the insets, as well as implicitly constraining its content by setting the wrapper's size.
+	+ ```JUNPadding``` is used to wrap a UIView, you can use it to specify the insets, as well as implicitly constraining its content by setting the wrapper's size.
 		```objc
-		$Padding
+		JUNPadding
 		.left(20).right(20) // This makes edge insets.
 		.size(80, 80) // Constrain its content implicitly.
 		.radius(30)
@@ -67,20 +67,20 @@ pod 'JUNFlex'
 			aView
       	);
 		```
-	+ ```$Item``` is a nice tool in JUNFlex that allows you to quickly create many types of views, from UIImageView to UILabel and even UIButton.
+	+ ```JUNItem``` is a nice tool in JUNFlex that allows you to quickly create many types of views, from UIImageView to UILabel and even UIButton.
 		```objc
-		$Vstack
+		JUNVstack
       	.children(@[
 
-			$Item // This makes a UIImageView
+			JUNItem // This makes a UIImageView
            	.size(80, 80)
            	.image(@"http:///path/to/image")
          	.radius(30),
 
-         	$Hstack // Yes, you can nest stacks in stacks.
+         	JUNHstack // Yes, you can nest stacks in stacks.
           	.children(@[
 
-           		$Item // This makes item responds to ui events.
+           		JUNItem // This makes item responds to ui events.
            		.text(@"Hello World!!!", 20, UIColor.blueColor)
            		.onTap(self, @selector(buttonOnTap)), 
 
@@ -92,9 +92,9 @@ pod 'JUNFlex'
       		...
       	]);
 		```
-	+ ```$List``` is an encapsulation of [JUNCollectionView](https://github.com/Jun2786184671/JUNCollectionView) that you can use to create either a horizontal or vertical scrollable list or a flowlayout.
+	+ ```JUNList``` is an encapsulation of [JUNCollectionView](https://github.com/Jun2786184671/JUNCollectionView) that you can use to create either a horizontal or vertical scrollable list or a flowlayout.
 		```objc
-		$List
+		JUNList
 		.horizontal(true)
 		.size(535, 1000)
 		.itemSize(80, 80)
@@ -102,23 +102,23 @@ pod 'JUNFlex'
         .showIndicator(true)
         .count(100, ^id (NSUInteger i) { // There are four other builders, such as forEach loop builder...
         	return
-        	$Vstack
+        	JUNVstack
         	.children(@[
-        		$Item
+        		JUNItem
         		.size(80, 80)
         		.image(@"aBundleImageName")
         		.radius(30),
 
-        		$Hstack
+        		JUNHstack
         		.children(@[
-        			$Item
+        			JUNItem
         			.text(@"hello", 20, UIColor.blueColor)
         			.onTap(self, @selector(buttonOnTap)),
 
         			UISwitch.new,
         		]),
 
-        		$Item
+        		JUNItem
         		.width(120)
         		.text(@"world", 20, UIColor.blueColor)
         		.color(UIColor.greenColor),
@@ -128,60 +128,17 @@ pod 'JUNFlex'
 3. You can register and query the identifier of views.
 	```objc
 	[self.view addSubview:
-		$Item
+		JUNItem
 		.ID(@"anyIdentifier")
 		.color(UIColor.orangeColor)
 		.size(100, 100)
+        .EOB
 	];
 
-	self.view.$query0(@"anyIdentifier"); // Query first matched view.
+	self.view.jun_query0(@"anyIdentifier"); // Query first matched view.
 
 	```
-4. ORM and UI binding.
-	+ ```$Mapper``` is used for ORM. You can register your model class by it, then specify how json map to a model and bind ui to it.
-	```objc
-	$Mapper(User.class, ^(id $, User *_) {
-        _.name = $[@"nom"];
-        _.email = $[@"mail"];
-        _.profileURL = $[@"avatar"];
-        ...
-    });
-	```
-	And then when you recieve a json response from server, you can quickly map it to model.
-	```objc
-	User *user = User.$map(@{
-		@"nom" : @"Jun Ma",
-		@"mail" : @"maxinchun5@gmail.com",
-		@"avatar" : @"http://www.example.com/path/to/resource",
-		...
-	});
-	```
-	+ ```$Layout``` is used for UI binding, you can register a model class with a specific type of view.
-	```objc
-	$Layout(User.class, ^id (User *_) {
-		return
-		$Vstack
-		.width(300)
-		.height(600)
-		.align(0 /* main axis (y) */, -1 /* cross axis (x)*/)
-		.children(@[
-			$Item
-			.image(_.profileURL)
-
-			$Item
-			.text(_.name, 20, UIColor.blackColor),
-
-			$Item
-			.text(_.email, 18, UIColor.blueColor),
-			.onTap(anyTarget, @selector(sendMailToJun))
-		]);
-	});
-	```
-	Then whenever you want to draw a user's info to interface, you only need to call ```.$render``` method.
-	```objc
-	UIView *userView = user.$render;
-	```
-5. JUNFlex also has the ability to separate ui from code via json.
+4. JUNFlex also has the ability to separate ui from code via json.
 	+ First, create a file named ```demo.json```, Here's an example.
 	```json
 	{
@@ -192,9 +149,9 @@ pod 'JUNFlex'
 	        "color" : "orange",
 	    },
 	    "radius" : "12.5",
-	    "alignment" : {
-	        "main_axis" : "min",
-	        "cross_axis" : "max",
+	    "align" : {
+	        "main" : "min",
+	        "cross" : "max",
 	    },
 	    "children" : [
 
@@ -233,7 +190,7 @@ pod 'JUNFlex'
 	```objc
 	- (void)viewDidLoad {
 	    [super viewDidLoad];
-	    self.layout(@"demo.json");
+	    self.jun_layout(@"demo.json");
 	}
 	```
 6. Nice ```v(^_^)v```

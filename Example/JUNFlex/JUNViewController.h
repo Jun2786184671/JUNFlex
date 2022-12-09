@@ -1,13 +1,17 @@
 //
-//  JUNViewController.h
-//  JUNFlex
+//  JUNAppController2.h
+//  JUNFlex_Example
 //
-//  Created by Jun Ma on 11/26/2022.
-//  Copyright (c) 2022 Jun Ma. All rights reserved.
+//  Created by Jun Ma on 2022/12/9.
+//  Copyright © 2022 Jun Ma. All rights reserved.
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface JUNViewController : UIViewController
 
 @end
+
+NS_ASSUME_NONNULL_END

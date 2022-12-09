@@ -13,7 +13,6 @@
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F59E195388D20070C39A /* JUNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* JUNAppDelegate.m */; };
-		6003F5A7195388D20070C39A /* JUNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* JUNViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -24,11 +23,9 @@
 		6B224D09C6F87608B1D50500 /* Pods_JUNFlex_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71A9C56EF2342554DDFDA10C /* Pods_JUNFlex_Example.framework */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		B930542829430AF50049BCA3 /* JUNAppController2.m in Sources */ = {isa = PBXBuildFile; fileRef = B930542729430AF50049BCA3 /* JUNAppController2.m */; };
+		B930542829430AF50049BCA3 /* JUNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B930542729430AF50049BCA3 /* JUNViewController.m */; };
 		B930543229432A1C0049BCA3 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = B930543129432A1C0049BCA3 /* test.json */; };
 		B96794462935EC680011BA8C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B96794452935EC680011BA8C /* ViewController.m */; };
-		B9679455293638590011BA8C /* JUNAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9679454293638590011BA8C /* JUNAppModel.m */; };
-		B967945B29363CF60011BA8C /* JUNAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = B967945A29363CF60011BA8C /* JUNAppController.m */; };
 		B9679461293728600011BA8C /* test-image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9679460293728600011BA8C /* test-image.jpg */; };
 /* End PBXBuildFile section */
 
@@ -56,8 +53,6 @@
 		6003F59B195388D20070C39A /* JUNFlex-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JUNFlex-Prefix.pch"; sourceTree = "<group>"; };
 		6003F59C195388D20070C39A /* JUNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JUNAppDelegate.h; sourceTree = "<group>"; };
 		6003F59D195388D20070C39A /* JUNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNAppDelegate.m; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* JUNViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JUNViewController.h; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* JUNViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AE195388D20070C39A /* JUNFlex_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JUNFlex_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -70,15 +65,11 @@
 		71A9C56EF2342554DDFDA10C /* Pods_JUNFlex_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JUNFlex_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B24F9091656343298BE028B1 /* Pods-JUNFlex_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JUNFlex_Example.release.xcconfig"; path = "Target Support Files/Pods-JUNFlex_Example/Pods-JUNFlex_Example.release.xcconfig"; sourceTree = "<group>"; };
-		B930542629430AF50049BCA3 /* JUNAppController2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JUNAppController2.h; sourceTree = "<group>"; };
-		B930542729430AF50049BCA3 /* JUNAppController2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNAppController2.m; sourceTree = "<group>"; };
+		B930542629430AF50049BCA3 /* JUNViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JUNViewController.h; sourceTree = "<group>"; };
+		B930542729430AF50049BCA3 /* JUNViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNViewController.m; sourceTree = "<group>"; };
 		B930543129432A1C0049BCA3 /* test.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		B96794442935EC680011BA8C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		B96794452935EC680011BA8C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		B9679453293638590011BA8C /* JUNAppModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JUNAppModel.h; sourceTree = "<group>"; };
-		B9679454293638590011BA8C /* JUNAppModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNAppModel.m; sourceTree = "<group>"; };
-		B967945929363CF60011BA8C /* JUNAppController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JUNAppController.h; sourceTree = "<group>"; };
-		B967945A29363CF60011BA8C /* JUNAppController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNAppController.m; sourceTree = "<group>"; };
 		B9679460293728600011BA8C /* test-image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "test-image.jpg"; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/Share/Pictures/test-image.jpg"; sourceTree = "<group>"; };
 		C2D76CBDF49596439A90CFF2 /* Pods-JUNFlex_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JUNFlex_Example.debug.xcconfig"; path = "Target Support Files/Pods-JUNFlex_Example/Pods-JUNFlex_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		E3FC218AFEC373E62161DEA4 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -151,20 +142,14 @@
 				6003F59C195388D20070C39A /* JUNAppDelegate.h */,
 				6003F59D195388D20070C39A /* JUNAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
-				6003F5A5195388D20070C39A /* JUNViewController.h */,
-				6003F5A6195388D20070C39A /* JUNViewController.m */,
 				B96794442935EC680011BA8C /* ViewController.h */,
 				B96794452935EC680011BA8C /* ViewController.m */,
-				B967945929363CF60011BA8C /* JUNAppController.h */,
-				B967945A29363CF60011BA8C /* JUNAppController.m */,
-				B930542629430AF50049BCA3 /* JUNAppController2.h */,
-				B930542729430AF50049BCA3 /* JUNAppController2.m */,
+				B930542629430AF50049BCA3 /* JUNViewController.h */,
+				B930542729430AF50049BCA3 /* JUNViewController.m */,
 				B930543129432A1C0049BCA3 /* test.json */,
-				B9679453293638590011BA8C /* JUNAppModel.h */,
-				B9679454293638590011BA8C /* JUNAppModel.m */,
+				B9679460293728600011BA8C /* test-image.jpg */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
-				B9679460293728600011BA8C /* test-image.jpg */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
 			name = "Example for JUNFlex";
@@ -418,12 +403,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* JUNAppDelegate.m in Sources */,
-				6003F5A7195388D20070C39A /* JUNViewController.m in Sources */,
 				B96794462935EC680011BA8C /* ViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
-				B967945B29363CF60011BA8C /* JUNAppController.m in Sources */,
-				B9679455293638590011BA8C /* JUNAppModel.m in Sources */,
-				B930542829430AF50049BCA3 /* JUNAppController2.m in Sources */,
+				B930542829430AF50049BCA3 /* JUNViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
