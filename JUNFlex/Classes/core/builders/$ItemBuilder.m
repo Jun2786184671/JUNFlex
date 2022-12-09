@@ -145,7 +145,7 @@
         self.text(text, defaultFontSize, defaultColor);
     } else if ([text isKindOfClass:[NSDictionary class]]) {
         NSString *string = [self _stringFromValue:[text valueForKey:@"string"]];
-        CGFloat fontSize = [self _floatFromValue:[text valueForKey:@"fontSize"]];
+        CGFloat fontSize = [self _floatFromValue:[text valueForKey:@"font"]];
         UIColor *color = [self _colorFromValue:[text valueForKey:@"color"]];
         self.text(string, fontSize ? fontSize : defaultFontSize, color ? color : defaultColor);
     } else {

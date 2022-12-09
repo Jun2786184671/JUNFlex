@@ -15,7 +15,7 @@
     "text" : {
         "string" : "hello world",
         "color" : "#ff00ffff",
-        "fontSize" : "18",
+        "font" : "28",
     },
     "alignment" : {
         "main_axis" : "center",
@@ -30,16 +30,19 @@
             "color" : "red",
             "text" : {
                 "string" : "hello",
+                "font" : 30,
+                "color" : "yellow",
             },
-            "//image" : "test-image.jpg",
+            "image" : "test-image.jpg",
         },
+
         {
-            "size" : {
-                "width" : 100,
-                "height" : 200,
-            },
+            "width" : 100,
+            "height" : 200,
+            "text" : "world",
             "color" : "green",
         },
+        
         {
             "size" : {
                 "width" : 100,

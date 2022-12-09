@@ -192,18 +192,9 @@ pod 'JUNFlex'
 	        "color" : "orange",
 	    },
 	    "radius" : "12.5",
-	    "contentAlignment" : {
-	        "horizontal" : "leading",
-	        "vertical" : "bottom",
-	    },
-	    "text" : {
-	        "string" : "hello world",
-	        "color" : "#ff00ffff",
-	        "fontSize" : 18,
-	    },
 	    "alignment" : {
-	        "mainAxis" : "min",
-	        "crossAxis" : "max",
+	        "main_axis" : "min",
+	        "cross_axis" : "max",
 	    },
 	    "children" : [
 
@@ -213,13 +204,18 @@ pod 'JUNFlex'
 	                "height" : 200,
 	            },
 	            "color" : "red",
-	            "text" : "hello"
+	            "text" : {
+                    "string" : "hello",
+                    "font" : 18,
+                    "color" : "pink",
+                },
 	            "image" : "test-image.jpg",
 	        },
 
 	        {
 	            "width" : 100,
 	            "height" : 200,
+                "text" : "world", 
 	            "color" : "green",
 	        },
 
