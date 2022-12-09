@@ -20,7 +20,7 @@ pod 'JUNFlex'
 ## Guide
 1. ```#import <JUNFlex/JUNFlex.h>``` into your project.
 2. JUNFlex provides six widgets to help you build interfaces quickly.
-	+ ```Hstack``` is a horizontal layout, all of the UIViews wrapped by it are laid out in x-axis direction.
+	+ ```Hstack``` is an horizontal layout, all of the UIViews wrapped by it are laid out in x-axis direction.
 		```objc
 		JUNFlex.Hstack
       	.children(@[
