@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)sharedInstance;
 
-@property(nonatomic, strong, readonly) NSMutableDictionary<NSString *, Class> *builderMapper;
 - (UIView *)serialize:(NSDictionary *)json;
 
 @end

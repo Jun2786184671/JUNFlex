@@ -9,6 +9,7 @@
 #import "UIView+JUNFlex.h"
 #import "JUNJSONSerializer.h"
 #import "UIColor+JUNFlex_Private.h"
+#import "JUNJSONSerializer+Private.h"
 
 @interface JUNAbstractBuilder ()
 
