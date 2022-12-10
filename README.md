@@ -72,12 +72,12 @@ pod 'JUNFlex'
 		[JUNFlex vstack]
       	.children(@[
 
-			JUNFlex.Item // This makes a UIImageView
+			[JUNFlex item] // This makes a UIImageView
            	.size(80, 80)
            	.image(@"http:///path/to/image")
          	.radius(30),
 
-         	JUNFlex.Hstack // Yes, you can nest stacks in stacks.
+         	[JUNFlex hstack] // Yes, you can nest stacks in stacks.
           	.children(@[
 
            		JUNFlex.Item // This makes item responds to ui events.
