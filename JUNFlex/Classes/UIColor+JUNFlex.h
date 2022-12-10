@@ -7,9 +7,13 @@
 
 #import <UIKit/UIKit.h>
 
+#ifndef JUNColorHex
+#define JUNColorHex(RGBa) [UIColor jun_colorWithRGBa:RGBa]
+#endif
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIColor (JUNFlex_Private)
+@interface UIColor (JUNFlex)
 
 + (UIColor *)jun_colorWithRGBa:(uint32_t)RGBa;
 

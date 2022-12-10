@@ -11,8 +11,8 @@
 
 @implementation JUNLinearStack
 
-- (instancetype)initWithItems:(NSArray<UIView *> *)items mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment {
-    if (self = [super initWithItems:items mainAxisAlignment:mainAxisAlignment crossAxisAlignment:crossAxisAlignment]) {
+- (instancetype)initWithItems:(NSArray<UIView *> *)items mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment aspectRatio:(bool)aspectRatio {
+    if (self = [super initWithItems:items mainAxisAlignment:mainAxisAlignment crossAxisAlignment:crossAxisAlignment aspectRatio:aspectRatio]) {
         [self _addCrossHugConstraints];
         [self _setUpItems];
     }
@@ -142,30 +142,39 @@
     ];
     // main axis span
     if (mainSpan) {
-        // add main span constraint
-        NSLayoutConstraint *mainSpanConstraint = [NSLayoutConstraint
-                                                  constraintWithItem:item
-                                                  attribute:mainSpanAttribute
-                                                  relatedBy:NSLayoutRelationEqual
-                                                  toItem:nil
-                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                  multiplier:1.0f constant:mainSpan];
-        mainSpanConstraint.priority = UILayoutPriorityDefaultHigh;
-        [item addConstraints:@[
-            mainSpanConstraint,
-            [NSLayoutConstraint constraintWithItem:item attribute:mainSpanAttribute relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:mainSpan],
-        ]];
-        // add main span ratio constraint to prevItem
-        CGSize prevItemSize = prevItem.frame.size;
-        CGFloat prevMainSpan = isHorizontal ? prevItemSize.width : prevItemSize.height;
-        if (prevItem && prevMainSpan) {
-            [self addConstraint:
-                [NSLayoutConstraint constraintWithItem:item attribute:mainSpanAttribute relatedBy:NSLayoutRelationEqual toItem:prevItem attribute:mainSpanAttribute multiplier:(mainSpan / prevMainSpan) constant:0.0f]
+        if (mainSpan == CGFLOAT_MAX) {
+            // It's an expand, let the sizebox span be 0, make item display as big as possible.
+            [sizeBox addConstraint:
+                [NSLayoutConstraint constraintWithItem:sizeBox attribute:mainSpanAttribute relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:0.0f]
             ];
+        } else {
+            // add main span constraint
+            NSLayoutConstraint *mainSpanConstraint = [NSLayoutConstraint
+                                                      constraintWithItem:item
+                                                      attribute:mainSpanAttribute
+                                                      relatedBy:NSLayoutRelationEqual
+                                                      toItem:nil
+                                                      attribute:NSLayoutAttributeNotAnAttribute
+                                                      multiplier:1.0f constant:mainSpan];
+            mainSpanConstraint.priority = UILayoutPriorityDefaultHigh;
+            [item addConstraints:@[
+                mainSpanConstraint,
+                [NSLayoutConstraint constraintWithItem:item attribute:mainSpanAttribute relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:mainSpan],
+            ]];
+            // add main span ratio constraint to prevItem if needed
+            if (self.isAspectRatio) {
+                CGSize prevItemSize = prevItem.frame.size;
+                CGFloat prevMainSpan = isHorizontal ? prevItemSize.width : prevItemSize.height;
+                if (prevItem && prevMainSpan) {
+                    [self addConstraint:
+                         [NSLayoutConstraint constraintWithItem:item attribute:mainSpanAttribute relatedBy:NSLayoutRelationEqual toItem:prevItem attribute:mainSpanAttribute multiplier:(mainSpan / prevMainSpan) constant:0.0f]
+                    ];
+                }
+            }
         }
     }
     //  cross axis
-    if (crossSpan) {
+    if (crossSpan && crossSpan != CGFLOAT_MAX) {
         NSLayoutConstraint *crossSpanConstraint = [NSLayoutConstraint
                                                   constraintWithItem:item
                                                   attribute:crossSpanAttribute

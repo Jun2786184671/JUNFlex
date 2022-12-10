@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JUNStackBuilder ()
 
-- (JUNStack *)_getProductWithChildren:(NSArray<UIView *> *)items  mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment;
+- (JUNStack *)_getProductWithChildren:(NSArray<UIView *> *)items  mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment aspectRatio:(bool)aspectRatio;
 
 @end
 

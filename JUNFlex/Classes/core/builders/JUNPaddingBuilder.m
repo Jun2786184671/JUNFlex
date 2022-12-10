@@ -90,7 +90,7 @@
     };
 }
 
-- (UIView * _Nonnull (^)(id _Nonnull))child {
+- (JUNItem * _Nonnull (^)(id _Nonnull))child {
     return ^(id child) {
         UIView *validChild = [self _validateChild:child];
         

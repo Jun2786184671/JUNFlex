@@ -14,16 +14,18 @@
 
 @property(nonatomic, assign) int mainAxisAlignment;
 @property(nonatomic, assign) int crossAxisAlignment;
+@property(nonatomic, assign, getter=isAspectRatio) bool aspectRatio;
 
 @end
 
 @implementation JUNStack
 
-- (instancetype)initWithItems:(NSArray<UIView *> *)items mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment {
+- (instancetype)initWithItems:(NSArray<UIView *> *)items mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment aspectRatio:(bool)aspectRatio {
     if (self = [super init]) {
         self.items = items;
         self.mainAxisAlignment = mainAxisAlignment;
         self.crossAxisAlignment = crossAxisAlignment;
+        self.aspectRatio = aspectRatio;
     }
     return self;
 }

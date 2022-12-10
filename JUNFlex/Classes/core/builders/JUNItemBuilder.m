@@ -10,6 +10,7 @@
 #import "JUNItemBuilder.h"
 #import "JUNItem.h"
 
+#define JUNItemDefaultTextColor [UIColor blackColor]
 #define JUNItemDefaultTextFontSize 20
 #define JUNItemDefaultTextFont [UIFont systemFontOfSize:JUNItemDefaultTextFontSize]
 
@@ -73,11 +74,11 @@
     };
 }
 
-- (JUNItemBuilder * _Nonnull (^)(NSString * _Nonnull, UIFont *, UIColor * _Nonnull))text {
-    return ^(NSString *text, UIFont *font, UIColor *color) {
+- (JUNItemBuilder * _Nonnull (^)(NSString * _Nonnull, UIFont * _Nullable, UIColor * _Nullable))text {
+    return ^(NSString *text, UIFont * _Nullable font, UIColor * _Nullable color) {
         [self.item setTitle:text forState:UIControlStateNormal];
-        [self.item setTitleColor:color forState:UIControlStateNormal];
-        self.item.titleLabel.font = font;
+        [self.item setTitleColor:color ? color : JUNItemDefaultTextColor forState:UIControlStateNormal];
+        self.item.titleLabel.font = font ? font : JUNItemDefaultTextFont;
         return self;
     };
 }
@@ -151,9 +152,8 @@
 - (void)_configTextWithDictionary:(NSDictionary *)dict {
     id text = dict[@"text"];
     if (text == nil) return;
-    UIColor *defaultColor = [UIColor blackColor];
     if ([text isKindOfClass:[NSString class]]) {
-        self.text(text, JUNItemDefaultTextFont, defaultColor);
+        self.text(text, JUNItemDefaultTextFont, JUNItemDefaultTextColor);
     } else if ([text isKindOfClass:[NSDictionary class]]) {
         // text string
         NSString *string = [self _stringFromValue:[text valueForKey:@"string"]];
@@ -163,7 +163,7 @@
         
         // text color
         UIColor *color = [self _colorFromValue:[text valueForKey:@"color"]];
-        self.text(string, font ? font : JUNItemDefaultTextFont, color ? color : defaultColor);
+        self.text(string, font ? font : JUNItemDefaultTextFont, color ? color : JUNItemDefaultTextColor);
     } else {
         NSAssert(false, @"unexpected text format");
     }

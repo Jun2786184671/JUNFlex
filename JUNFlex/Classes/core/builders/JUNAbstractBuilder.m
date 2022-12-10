@@ -8,8 +8,10 @@
 #import "JUNAbstractBuilder.h"
 #import "UIView+JUNFlex.h"
 #import "JUNJSONSerializer.h"
-#import "UIColor+JUNFlex_Private.h"
+#import "UIColor+JUNFlex.h"
 #import "JUNJSONSerializer+Private.h"
+
+#define JUNSystemLayoutConstraintNumberLimit 2777777.0f
 
 @interface JUNAbstractBuilder ()
 
@@ -83,7 +85,7 @@
 
 - (id _Nonnull (^)(CGFloat))width {
     return ^(CGFloat width) {
-        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self.product attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:width];
+        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self.product attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:width == CGFLOAT_MAX ? JUNSystemLayoutConstraintNumberLimit : width];
         widthConstraint.priority = UILayoutPriorityDefaultHigh;
         [self.product addConstraint:widthConstraint];
         CGRect frame = self.product.frame;
@@ -95,7 +97,7 @@
 
 - (id _Nonnull (^)(CGFloat))height {
     return ^(CGFloat height) {
-        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.product attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:height];
+        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.product attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:height == CGFLOAT_MAX ? JUNSystemLayoutConstraintNumberLimit : height];
         heightConstraint.priority = UILayoutPriorityDefaultHigh;
         [self.product addConstraint:heightConstraint];
         CGRect frame = self.product.frame;

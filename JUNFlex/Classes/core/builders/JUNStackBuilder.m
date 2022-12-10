@@ -17,6 +17,7 @@
 
 @property(nonatomic, assign) int mainAxisAlignment;
 @property(nonatomic, assign) int crossAxisAlignment;
+@property(nonatomic, assign, getter=is_aspect_ratio) bool aspect_ratio;
 
 @end
 
@@ -45,8 +46,15 @@
     };
 }
 
+- (JUNStackBuilder * _Nonnull (^)(bool))aspectRatio {
+    return ^(bool aspectRatio) {
+        self.aspect_ratio = aspectRatio;
+        return self;
+    };
+}
+
 // build method
-- (UIView * _Nonnull (^)(NSArray<id> * _Nonnull))children {
+- (JUNItem * _Nonnull (^)(NSArray<id> * _Nonnull))children {
     return ^(NSArray<UIView *> *children) {
         if (children.count == 0) {
             NSAssert(false, @"stack must contain at least onw child");
@@ -54,7 +62,7 @@
         }
         
         NSArray<UIView *> *validChildren = [self _validateChildren:children];
-        JUNStack *stack = [self _getProductWithChildren:validChildren mainAxisAlignment:self.mainAxisAlignment crossAxisAlignment:self.crossAxisAlignment];
+        JUNStack *stack = [self _getProductWithChildren:validChildren mainAxisAlignment:self.mainAxisAlignment crossAxisAlignment:self.crossAxisAlignment aspectRatio:self.is_aspect_ratio];
         
         stack.translatesAutoresizingMaskIntoConstraints = false;
         [self.stack addSubview:stack];
@@ -70,6 +78,7 @@
 
 - (UIView *)buildWithDictionary:(NSDictionary *)dict {
     [super buildWithDictionary:dict];
+    [self _configAspectRatioWithDictionary:dict];
     [self _configAlignmentWithDictionary:dict];
     [self _configChildrenWithDictionary:dict];
     return self.EOB;
@@ -85,6 +94,11 @@
         }
     }
     return [validChildren copy];
+}
+
+- (void)_configAspectRatioWithDictionary:(NSDictionary *)dict {
+    id aspectRatio = dict[@"aspectRatio"];
+    self.aspectRatio([self _boolFromValue:aspectRatio]);
 }
 
 - (void)_configAlignmentWithDictionary:(NSDictionary *)dict {
@@ -136,7 +150,7 @@
     self.children(childrenViews);
 }
 
-- (JUNStack *)_getProductWithChildren:(NSArray<id> *)children mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment {
+- (JUNStack *)_getProductWithChildren:(NSArray<id> *)children mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment aspectRatio:(bool)aspectRatio {
     return nil;
 }
 

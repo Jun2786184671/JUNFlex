@@ -5,9 +5,9 @@
 //  Created by Jun Ma on 2022/11/29.
 //
 
-#import "UIColor+JUNFlex_Private.h"
+#import "UIColor+JUNFlex.h"
 
-@implementation UIColor (JUNFlex_Private)
+@implementation UIColor (JUNFlex)
 
 + (UIColor *)jun_colorWithRGBa:(uint32_t)RGBa {
     uint8_t r = ((RGBa & 0xFF000000) >> 24);

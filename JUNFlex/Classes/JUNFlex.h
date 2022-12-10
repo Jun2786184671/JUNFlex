@@ -12,6 +12,7 @@
 #import <JUNFlex/JUNListBuilder.h>
 #import <JUNFlex/JUNPaddingBuilder.h>
 #import <JUNFlex/JUNItemBuilder.h>
+#import <JUNFlex/UIColor+JUNFlex.h>
 #import <JUNFlex/UIView+JUNFlex.h>
 #import <JUNFlex/UIViewController+JUNFlex.h>
 
