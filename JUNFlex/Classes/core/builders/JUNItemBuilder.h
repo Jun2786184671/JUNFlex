@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JUNItemBuilder : JUNAbstractBuilder<JUNItemBuilder *, JUNItem *>
 
 @property(nonatomic, readonly) JUNItemBuilder *(^align)(int main, int cross);
-@property(nonatomic, readonly) JUNItemBuilder *(^text)(NSString *string, CGFloat fontSize, UIColor *color);
+@property(nonatomic, readonly) JUNItemBuilder *(^text)(NSString *string, UIFont *font, UIColor *color);
 @property(nonatomic, readonly) JUNItemBuilder *(^image)(NSString *nameOrURL);
 @property(nonatomic, readonly) JUNItemBuilder *(^onTap)(id target, SEL selector);
 

@@ -30,7 +30,10 @@
             "color" : "red",
             "text" : {
                 "string" : "hello",
-                "font" : 30,
+                "font" : {
+                    "name" : "PingFang SC",
+                    "size" : 30,
+                },
                 "color" : "purple",
             },
             "image" : "test-image.jpg",

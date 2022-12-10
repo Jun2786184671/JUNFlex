@@ -10,6 +10,9 @@
 #import "JUNItemBuilder.h"
 #import "JUNItem.h"
 
+#define JUNItemDefaultTextFontSize 20
+#define JUNItemDefaultTextFont [UIFont systemFontOfSize:JUNItemDefaultTextFontSize]
+
 @interface JUNItemBuilder ()
 
 @property(nonatomic, strong) JUNItem *item;
@@ -70,11 +73,11 @@
     };
 }
 
-- (JUNItemBuilder * _Nonnull (^)(NSString * _Nonnull, CGFloat, UIColor * _Nonnull))text {
-    return ^(NSString *text, CGFloat fontSize, UIColor *color) {
+- (JUNItemBuilder * _Nonnull (^)(NSString * _Nonnull, UIFont *, UIColor * _Nonnull))text {
+    return ^(NSString *text, UIFont *font, UIColor *color) {
         [self.item setTitle:text forState:UIControlStateNormal];
         [self.item setTitleColor:color forState:UIControlStateNormal];
-        self.item.titleLabel.font = [UIFont systemFontOfSize:fontSize];
+        self.item.titleLabel.font = font;
         return self;
     };
 }
@@ -148,15 +151,19 @@
 - (void)_configTextWithDictionary:(NSDictionary *)dict {
     id text = dict[@"text"];
     if (text == nil) return;
-    CGFloat defaultFontSize = 20;
     UIColor *defaultColor = [UIColor blackColor];
     if ([text isKindOfClass:[NSString class]]) {
-        self.text(text, defaultFontSize, defaultColor);
+        self.text(text, JUNItemDefaultTextFont, defaultColor);
     } else if ([text isKindOfClass:[NSDictionary class]]) {
+        // text string
         NSString *string = [self _stringFromValue:[text valueForKey:@"string"]];
-        CGFloat fontSize = [self _floatFromValue:[text valueForKey:@"font"]];
+        
+        // text font
+        UIFont *font = [self _fontFromValue:[text valueForKey:@"font"]];
+        
+        // text color
         UIColor *color = [self _colorFromValue:[text valueForKey:@"color"]];
-        self.text(string, fontSize ? fontSize : defaultFontSize, color ? color : defaultColor);
+        self.text(string, font ? font : JUNItemDefaultTextFont, color ? color : defaultColor);
     } else {
         NSAssert(false, @"unexpected text format");
     }
@@ -166,6 +173,26 @@
     id image = dict[@"image"];
     if (image == nil) return;
     self.image([self _stringFromValue:image]);
+}
+
+- (UIFont *)_fontFromValue:(id)fontValue {
+    UIFont *font = nil;
+    if ([fontValue isKindOfClass:[NSDictionary class]]) {
+        NSString *fontName = [self _stringFromValue:[fontValue valueForKey:@"name"]];
+        CGFloat fontSize = [self _floatFromValue:[fontValue valueForKey:@"size"]];
+        if (!fontSize) {
+            fontSize = JUNItemDefaultTextFontSize;
+        }
+        if (fontName) {
+            font = [UIFont fontWithName:fontName size:fontSize];
+        } else {
+            font = [UIFont systemFontOfSize:fontSize];
+        }
+    } else {
+        CGFloat fontSize = [self _floatFromValue:fontValue];
+        font = [UIFont systemFontOfSize:fontSize ? fontSize : JUNItemDefaultTextFontSize];
+    }
+    return font ? font : JUNItemDefaultTextFont;
 }
 
 @end

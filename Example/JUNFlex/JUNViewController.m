@@ -17,15 +17,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    self.jun_layout(@"test.json");
+    self.jun_layout(@"test.json");
     [self.view addSubview:
-//        [self testCreateLabel]
+        [self testCreateLabel]
 //        [self testCreateButton]
 //        [self testCreateImage]
 //        [self testCreateHStack]
 //        [self testCreateVStack]
 //        [self testCreateZStack]
-        [self testCreateNestedStack]
+//        [self testCreateNestedStack]
 //        [self testCreatePadding]
 //        [self testCreateList]
     ];
@@ -35,7 +35,9 @@
 - (UIView *)testCreateLabel {
     return
     [JUNFlex item]
-    .text(@"hello world", 40, UIColor.blackColor)
+    .text(@"hello world",
+          [UIFont systemFontOfSize:40],
+          UIColor.blackColor)
     .EOB;
 }
 
@@ -47,7 +49,7 @@
     .radius(10)
     .color(UIColor.whiteColor)
     .border(3, UIColor.blueColor)
-    .text(@"Click me!", 20, UIColor.blueColor)
+    .text(@"Click me!", [UIFont systemFontOfSize:20], UIColor.blueColor)
     .onTap(self, @selector(buttonOnClick))
     .EOB;
 }
@@ -78,7 +80,7 @@
         [JUNFlex item]
         .height(30)
         .color(UIColor.cyanColor)
-        .text(@"hello world", 20, UIColor.blackColor),
+        .text(@"hello world", [UIFont systemFontOfSize:20], UIColor.blackColor),
 
         [JUNFlex item]
         .size(100, 100)
@@ -90,7 +92,7 @@
         .radius(10)
         .color(UIColor.whiteColor)
         .border(3, UIColor.blueColor)
-        .text(@"Click me!", 16, UIColor.blueColor)
+        .text(@"Click me!", [UIFont systemFontOfSize:16], UIColor.blueColor)
         .onTap(self, @selector(buttonOnClick:)),
     ]);
 }
@@ -115,7 +117,7 @@
         JUNFlex.item
         .width(100)
         .color(UIColor.cyanColor)
-        .text(@"hello world", 20, UIColor.blackColor),
+        .text(@"hello world", [UIFont systemFontOfSize:20], UIColor.blackColor),
 
         JUNFlex.item
         .size(100, 100)
@@ -152,7 +154,7 @@
         .width(150)
         .height(80)
         .color(UIColor.cyanColor)
-        .text(@"hello world", 30, UIColor.blackColor),
+        .text(@"hello world", [UIFont systemFontOfSize:30], UIColor.blackColor),
 
         [[UISwitch alloc] init],  // 任何的UIView都能被加到stack的children里
     ]);
@@ -168,7 +170,7 @@
             JUNFlex.item
             .height(30)
             .color(UIColor.cyanColor)
-            .text(@"hello world", 20, UIColor.blackColor),
+            .text(@"hello world", [UIFont systemFontOfSize:20], UIColor.blackColor),
 
              JUNFlex.item
             .size(100, 100)
@@ -180,7 +182,7 @@
             .radius(10)
             .color(UIColor.whiteColor)
             .border(3, UIColor.blueColor)
-            .text(@"Click me!", 16, UIColor.blueColor)
+            .text(@"Click me!", [UIFont systemFontOfSize:16], UIColor.blueColor)
             .onTap(self, @selector(buttonOnClick)),
         ]),
 
@@ -195,7 +197,7 @@
             .width(150)
             .height(80)
             .color(UIColor.cyanColor)
-            .text(@"hello world", 30, UIColor.blackColor),
+            .text(@"hello world", [UIFont systemFontOfSize:30], UIColor.blackColor),
 
             [[UISwitch alloc] init],
         ]),
@@ -206,22 +208,57 @@
 
 - (UIView *)testCreatePadding {
     return
+//    JUNFlex.padding
+//    .top(10)
+//    .left(20)
+//    .bottom(30)
+//    .right(40)
+//    .child(
+//        [self testCreateVStack]
+//    );
     JUNFlex.padding
-    .top(10)
-    .left(20)
-    .bottom(30)
-    .right(40)
-    .child(
-        [self testCreateVStack]
+    .top(10).left(20).bottom(30).right(40)
+    .radius(20)
+    .color(UIColor.cyanColor)
+    .border(4, UIColor.blueColor)
+    .child( // 把需要被装饰的view包裹在child里
+        JUNFlex.item
+        .size(100, 100)
+        .image(@"test-image3.jpeg")
     );
 }
 
 - (UIView *)testCreateList {
     return
     JUNFlex.list
-    .size(300, 500)
-    .count(100, ^id _Nonnull(NSUInteger i) {
-        return [self testCreateZStack];
+    .horizontal(false)
+    .size(500, 500)
+    .lineSpacing(20)
+    .count(100, ^id (NSUInteger i) {
+        return
+        JUNFlex.zstack
+        .size(100, 100)
+        .children(@[
+            JUNFlex.padding
+            .radius(20)
+            .maskBounds(true)
+            .child(
+                JUNFlex.item
+                .alpha(0.6)
+                .image(@"test-image3.jpeg")
+            ),
+            
+            JUNFlex.vstack
+            .height(80)
+            .children(@[
+                JUNFlex.item
+                .text([NSString stringWithFormat:@"第%ld个", i], [UIFont systemFontOfSize:20], UIColor.blackColor),
+                
+                JUNFlex.item
+                .text(@"Click me!", [UIFont systemFontOfSize:18], UIColor.blueColor)
+                .onTap(self, @selector(buttonOnClick)),
+            ]),
+        ]);
     });
 }
 
