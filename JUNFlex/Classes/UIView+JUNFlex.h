@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) void (^jun_ID)(NSString *identifier);
 @property(nonatomic, readonly) NSArray<UIView *> * _Nullable (^jun_query)(NSString *identifier);
 @property(nonatomic, readonly) UIView * _Nullable (^jun_query0)(NSString *identifier);
+@property(nonatomic, readonly) void (^jun_layout)(NSString *fileName);
 
 @property(nonatomic, strong, readonly, nullable) id jun_data;
 
