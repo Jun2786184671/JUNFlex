@@ -12,27 +12,27 @@
 
 @implementation JUNFlex
 
-+ (JUNStackBuilder *)Hstack {
++ (JUNStackBuilder *)hstack {
     return [[JUNHStackBuilder alloc] init];
 }
 
-+ (JUNStackBuilder *)Vstack {
++ (JUNStackBuilder *)vstack {
     return [[JUNVStackBuilder alloc] init];
 }
 
-+ (JUNStackBuilder *)Zstack {
++ (JUNStackBuilder *)zstack {
     return [[JUNZStackBuilder alloc] init];
 }
 
-+ (JUNListBuilder *)List {
++ (JUNListBuilder *)list {
     return [[JUNListBuilder alloc] init];
 }
 
-+ (JUNPaddingBuilder *)Padding {
++ (JUNPaddingBuilder *)padding {
     return [[JUNPaddingBuilder alloc] init];
 }
 
-+ (JUNItemBuilder *)Item {
++ (JUNItemBuilder *)item {
     return [[JUNItemBuilder alloc] init];
 }
 

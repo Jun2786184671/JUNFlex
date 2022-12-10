@@ -34,14 +34,14 @@
 
 - (UIView *)testCreateLabel {
     return
-    JUNFlex.Item
+    [JUNFlex item]
     .text(@"hello world", 40, UIColor.blackColor)
     .EOB;
 }
 
 - (UIView *)testCreateButton {
     return
-    JUNFlex.Item
+    [JUNFlex item]
     .width(100)
     .height(44)
     .radius(10)
@@ -54,7 +54,7 @@
 
 - (UIView *)testCreateImage {
     return
-    JUNFlex.Item
+    [JUNFlex item]
     .size(250, 250)
     .image(@"test-image3.jpeg")
     .EOB;
@@ -73,18 +73,18 @@
 //        .text(@"hello world", 20, UIColor.blueColor),
 //        UISwitch.new,
 //    ]);
-    JUNFlex.Hstack
+    [JUNFlex hstack]
     .children(@[
-        JUNFlex.Item
+        [JUNFlex item]
         .height(30)
         .color(UIColor.cyanColor)
         .text(@"hello world", 20, UIColor.blackColor),
 
-        JUNFlex.Item
+        [JUNFlex item]
         .size(100, 100)
         .image(@"test-image3.jpeg"),
 
-        JUNFlex.Item
+        [JUNFlex item]
         .width(80)
         .height(44)
         .radius(10)
@@ -109,15 +109,15 @@
 //        UISwitch.new,
 //        [self testCreateHStack],
 //    ]);
-    JUNFlex.Vstack
+    JUNFlex.vstack
     .align(-1 /*主轴对齐*/, -1 /*交叉轴对齐*/)
     .children(@[
-        JUNFlex.Item
+        JUNFlex.item
         .width(100)
         .color(UIColor.cyanColor)
         .text(@"hello world", 20, UIColor.blackColor),
 
-        JUNFlex.Item
+        JUNFlex.item
         .size(100, 100)
         .image(@"test-image3.jpeg"),
 
@@ -141,14 +141,14 @@
 //        UISwitch.new,
 ////        [self testCreateVStack],
 //    ]);
-    JUNFlex.Zstack
+    JUNFlex.zstack
 //    .align(-1, -1) // 靠最左上方对齐
     .children(@[
-        JUNFlex.Item
+        JUNFlex.item
         .size(200, 200)
         .image(@"test-image3.jpeg"),
         
-        JUNFlex.Item
+        JUNFlex.item
         .width(150)
         .height(80)
         .color(UIColor.cyanColor)
@@ -160,21 +160,21 @@
 
 - (UIView *)testCreateNestedStack {
     return
-    JUNFlex.Vstack
+    JUNFlex.vstack
     .align(-1, 0)
     .children(@[
-        JUNFlex.Hstack
+        JUNFlex.hstack
         .children(@[
-            JUNFlex.Item
+            JUNFlex.item
             .height(30)
             .color(UIColor.cyanColor)
             .text(@"hello world", 20, UIColor.blackColor),
 
-             JUNFlex.Item
+             JUNFlex.item
             .size(100, 100)
             .image(@"test-image3.jpeg"),
 
-            JUNFlex.Item
+            JUNFlex.item
             .width(80)
             .height(44)
             .radius(10)
@@ -184,14 +184,14 @@
             .onTap(self, @selector(buttonOnClick)),
         ]),
 
-        JUNFlex.Zstack
+        JUNFlex.zstack
         .size(200, 200)
         .align(-1, -1)
         .children(@[
-            JUNFlex.Item
+            JUNFlex.item
             .image(@"test-image3.jpeg"),
 
-            JUNFlex.Item
+            JUNFlex.item
             .width(150)
             .height(80)
             .color(UIColor.cyanColor)
@@ -206,7 +206,7 @@
 
 - (UIView *)testCreatePadding {
     return
-    JUNFlex.Padding
+    JUNFlex.padding
     .top(10)
     .left(20)
     .bottom(30)
@@ -218,7 +218,7 @@
 
 - (UIView *)testCreateList {
     return
-    JUNFlex.List
+    JUNFlex.list
     .size(300, 500)
     .count(100, ^id _Nonnull(NSUInteger i) {
         return [self testCreateZStack];
