@@ -7,8 +7,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class JUNAbstractBuilder;
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JUNJSONSerializer : NSObject
