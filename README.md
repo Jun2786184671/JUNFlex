@@ -82,8 +82,8 @@ pod 'JUNFlex'
 
            		[JUNFlex item] // This makes item responds to ui events.
            		.text(@"Hello World!!!", 
-                   	[UIFont systemFontOfSize:20], 
-                   	UIColor.blueColor
+                   		[UIFont systemFontOfSize:20], 
+                   		UIColor.blueColor
                 	)
            		.onTap(self, @selector(buttonOnTap)), 
 
@@ -116,9 +116,9 @@ pod 'JUNFlex'
         		.children(@[
         			[JUNFlex item]
         			.text(@"hello", 
-                        	[UIFont systemFontOfSize:20], 
-                        	UIColor.blueColor
-                    	)
+                        		[UIFont systemFontOfSize:20], 
+                        		UIColor.blueColor
+                    		)
         			.onTap(self, @selector(buttonOnTap)),
 
         			UISwitch.new,
@@ -127,8 +127,8 @@ pod 'JUNFlex'
         		[JUNFlex item]
         		.width(120)
         		.text(@"world", 
-                    	[UIFont systemFontOfSize:20],
-                     	UIColor.blueColor
+                    		[UIFont systemFontOfSize:20],
+                     		UIColor.blueColor
                 	)
         		.color(UIColor.greenColor),
             ]);
