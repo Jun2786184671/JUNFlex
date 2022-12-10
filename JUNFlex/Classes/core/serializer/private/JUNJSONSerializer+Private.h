@@ -5,7 +5,7 @@
 //  Created by Jun Ma on 2022/12/10.
 //
 
-#import <JUNFlex/JUNFlex.h>
+#import "JUNJSONSerializer.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
