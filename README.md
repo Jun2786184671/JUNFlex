@@ -81,7 +81,10 @@ pod 'JUNFlex'
           	.children(@[
 
            		[JUNFlex item] // This makes item responds to ui events.
-           		.text(@"Hello World!!!", 20, UIColor.blueColor)
+           		.text(@"Hello World!!!", 
+                   [UIFont systemFontOfSize:20], 
+                   UIColor.blueColor
+                )
            		.onTap(self, @selector(buttonOnTap)), 
 
            		UISwitch.new,
@@ -112,7 +115,10 @@ pod 'JUNFlex'
         		[JUNFlex hstack]
         		.children(@[
         			[JUNFlex item]
-        			.text(@"hello", 20, UIColor.blueColor)
+        			.text(@"hello", 
+                        [UIFont systemFontOfSize:20], 
+                        UIColor.blueColor
+                    )
         			.onTap(self, @selector(buttonOnTap)),
 
         			UISwitch.new,
@@ -120,7 +126,10 @@ pod 'JUNFlex'
 
         		[JUNFlex item]
         		.width(120)
-        		.text(@"world", 20, UIColor.blueColor)
+        		.text(@"world", 
+                    [UIFont systemFontOfSize:20],
+                     UIColor.blueColor
+                )
         		.color(UIColor.greenColor),
             ]);
         });
@@ -167,7 +176,10 @@ pod 'JUNFlex'
 	            "color" : "red",
 	            "text" : {
                     "string" : "hello",
-                    "font" : 18,
+                    "font" : {
+                        "name" : "PingFang SC",
+                        "size" : 18,
+                    },
                     "color" : "pink",
                 },
 	            "image" : "test-image.jpg",

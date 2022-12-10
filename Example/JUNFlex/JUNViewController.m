@@ -37,7 +37,8 @@
     [JUNFlex item]
     .text(@"hello world",
           [UIFont systemFontOfSize:40],
-          UIColor.blackColor)
+          UIColor.blackColor
+    )
     .EOB;
 }
 
@@ -49,7 +50,10 @@
     .radius(10)
     .color(UIColor.whiteColor)
     .border(3, UIColor.blueColor)
-    .text(@"Click me!", [UIFont systemFontOfSize:20], UIColor.blueColor)
+    .text(@"Click me!",
+          [UIFont systemFontOfSize:20],
+          UIColor.blueColor
+    )
     .onTap(self, @selector(buttonOnClick))
     .EOB;
 }
@@ -80,7 +84,9 @@
         [JUNFlex item]
         .height(30)
         .color(UIColor.cyanColor)
-        .text(@"hello world", [UIFont systemFontOfSize:20], UIColor.blackColor),
+        .text(@"hello world",
+            [UIFont systemFontOfSize:20],
+            UIColor.blackColor),
 
         [JUNFlex item]
         .size(100, 100)
@@ -92,7 +98,10 @@
         .radius(10)
         .color(UIColor.whiteColor)
         .border(3, UIColor.blueColor)
-        .text(@"Click me!", [UIFont systemFontOfSize:16], UIColor.blueColor)
+        .text(@"Click me!",
+            [UIFont systemFontOfSize:16],
+            UIColor.blueColor
+        )
         .onTap(self, @selector(buttonOnClick:)),
     ]);
 }
@@ -117,7 +126,10 @@
         JUNFlex.item
         .width(100)
         .color(UIColor.cyanColor)
-        .text(@"hello world", [UIFont systemFontOfSize:20], UIColor.blackColor),
+        .text(@"hello world",
+            [UIFont systemFontOfSize:20],
+            UIColor.blackColor
+        ),
 
         JUNFlex.item
         .size(100, 100)
