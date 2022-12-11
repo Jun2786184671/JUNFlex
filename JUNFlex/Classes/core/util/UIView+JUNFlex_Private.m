@@ -15,7 +15,7 @@
     CGRect frame = self.frame;
     CGFloat w = frame.size.width;
     CGFloat h = frame.size.height;
-    if (!w || !h) {
+    if (!w || w == CGFLOAT_MIN || !h || h == CGFLOAT_MIN) {
         [self sizeToFit];
         w = w ? w : self.frame.size.width;
         h = h ? h : self.frame.size.height;

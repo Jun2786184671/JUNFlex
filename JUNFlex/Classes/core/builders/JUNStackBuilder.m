@@ -8,6 +8,7 @@
 #import "JUNStackBuilder.h"
 #import "JUNStackBuilder+Private.h"
 #import "JUNAbstractBuilder+Private.h"
+#import "JUNStackContainer.h"
 #import "JUNStack.h"
 #import "JUNJSONSerializer.h"
 
@@ -33,7 +34,7 @@
 
 - (JUNItem *)stack {
     if (_stack == nil) {
-        _stack = [[JUNItem alloc] init];
+        _stack = [[JUNStackContainer alloc] init];
     }
     return _stack;
 }
@@ -97,7 +98,7 @@
 }
 
 - (void)_configAspectRatioWithDictionary:(NSDictionary *)dict {
-    id aspectRatio = dict[@"aspectRatio"];
+    id aspectRatio = dict[@"aspect_ratio"];
     self.aspectRatio([self _boolFromValue:aspectRatio]);
 }
 

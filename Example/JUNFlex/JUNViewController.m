@@ -19,7 +19,7 @@
     // Do any additional setup after loading the view.
     self.jun_layout(@"test.json");
     [self.view addSubview:
-        [self testCreateLabel]
+//        [self testCreateLabel]
 //        [self testCreateButton]
 //        [self testCreateImage]
 //        [self testCreateHStack]
@@ -27,7 +27,7 @@
 //        [self testCreateZStack]
 //        [self testCreateNestedStack]
 //        [self testCreatePadding]
-//        [self testCreateList]
+        [self testCreateList]
     ];
 //    UIView *res = self.view.jun_query0(@"hello");
 }

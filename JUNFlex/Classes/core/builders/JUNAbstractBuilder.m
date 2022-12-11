@@ -85,7 +85,8 @@
 
 - (id _Nonnull (^)(CGFloat))width {
     return ^(CGFloat width) {
-        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self.product attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:width == CGFLOAT_MAX ? JUNSystemLayoutConstraintNumberLimit : width];
+        width = [self _validateLength:width];
+        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self.product attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:width];
         widthConstraint.priority = UILayoutPriorityDefaultHigh;
         [self.product addConstraint:widthConstraint];
         CGRect frame = self.product.frame;
@@ -97,7 +98,8 @@
 
 - (id _Nonnull (^)(CGFloat))height {
     return ^(CGFloat height) {
-        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.product attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:height == CGFLOAT_MAX ? JUNSystemLayoutConstraintNumberLimit : height];
+        height = [self _validateLength:height];
+        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.product attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:height];
         heightConstraint.priority = UILayoutPriorityDefaultHigh;
         [self.product addConstraint:heightConstraint];
         CGRect frame = self.product.frame;
@@ -150,6 +152,12 @@
         }
     }];
     return self.EOB;
+}
+
+- (CGFloat)_validateLength:(CGFloat)length {
+    if (length == CGFLOAT_MIN) return 0;
+    if (length == CGFLOAT_MAX) return JUNSystemLayoutConstraintNumberLimit;
+    return length;
 }
 
 - (NSString *)_stringFromValue:(id)value {

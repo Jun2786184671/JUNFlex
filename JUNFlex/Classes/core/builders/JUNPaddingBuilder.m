@@ -7,7 +7,7 @@
 
 #import "JUNPaddingBuilder.h"
 #import "JUNAbstractBuilder+Private.h"
-#import "JUNItem.h"
+#import "JUNPadding.h"
 #import "JUNJSONSerializer.h"
 #import "UIView+JUNFlex_Private.h"
 
@@ -35,7 +35,7 @@
 
 - (JUNItem *)padding {
     if (_padding == nil) {
-        _padding = [[JUNItem alloc] init];
+        _padding = [[JUNPadding alloc] init];
     }
     return _padding;
 }

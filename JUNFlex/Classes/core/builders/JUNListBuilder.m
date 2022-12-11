@@ -7,7 +7,7 @@
 
 #import "JUNAbstractBuilder+Private.h"
 #import "JUNListBuilder.h"
-#import "JUNItem.h"
+#import "JUNList.h"
 #import "UICollectionView+JUNex.h"
 
 @interface JUNListBuilder ()
@@ -40,7 +40,7 @@
 
 - (JUNItem *)list {
     if (_list == nil) {
-        _list = [[JUNItem alloc] init];
+        _list = [[JUNList alloc] init];
     }
     return _list;
 }
