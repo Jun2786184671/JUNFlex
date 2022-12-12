@@ -4,6 +4,9 @@
 [![License](https://img.shields.io/cocoapods/l/JUNFlex.svg?style=flat)](https://cocoapods.org/pods/JUNFlex)
 [![Platform](https://img.shields.io/cocoapods/p/JUNFlex.svg?style=flat)](https://cocoapods.org/pods/JUNFlex)
 
+## Intro
+中文版简介: https://www.jianshu.com/p/f59a74a1dc95
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
@@ -22,7 +25,7 @@ pod 'JUNFlex'
 2. JUNFlex provides six widgets to help you build interfaces quickly.
 	+ ```Hstack``` is an horizontal layout, all of the UIViews wrapped by it are laid out in x-axis direction.
 		```objc
-		[JUNFlex hstack]
+		JUNFlex.hstack
       	.children(@[
 			aLabel,
       		aButton,
@@ -33,7 +36,7 @@ pod 'JUNFlex'
 
 	+ ```Vstack``` is a vertical layout, similar to Hstack, all of its components are laid out in y-axis direction.
 		```objc
-		[JUNFlex vstack]
+		JUNFlex.vstack
 		.width(100) // Yes, you can set some properties here.
 		.height(200)
       	.children(@[
@@ -45,7 +48,7 @@ pod 'JUNFlex'
 		```
 	+ ```Zstack``` is a stack layout where all of its components are stacked in the z-axis direction.
 		```objc
-		[JUNFlex zstack]
+		JUNFlex.zstack
 		.size(80, 80)
 		.align(-1, -1) // This makes all contents in stack lean to the left top corner.
       	.children(@[
@@ -57,7 +60,7 @@ pod 'JUNFlex'
 		```
 	+ ```Padding``` is used to wrap a UIView, you can use it to specify the insets, as well as implicitly constraining its content by setting the wrapper's size.
 		```objc
-		[JUNFlex padding]
+		JUNFlex.padding
 		.left(20).right(20) // This makes edge insets.
 		.size(80, 80) // Constrain its content implicitly.
 		.radius(30)
@@ -69,18 +72,18 @@ pod 'JUNFlex'
 		```
 	+ ```Item``` is a nice tool in JUNFlex that allows you to quickly create many types of views, from UIImageView to UILabel and even UIButton.
 		```objc
-		[JUNFlex vstack]
+		JUNFlex.vstack
       	.children(@[
 
-			[JUNFlex item] // This makes a UIImageView
+			JUNFlex.item // This makes a UIImageView
            	.size(80, 80)
            	.image(@"http:///path/to/image")
          	.radius(30),
 
-         	[JUNFlex hstack] // Yes, you can nest stacks in stacks.
+         	JUNFlex.hstack // Yes, you can nest stacks in stacks.
           	.children(@[
 
-           		[JUNFlex item] // This makes item responds to ui events.
+           		JUNFlex.item // This makes item responds to ui events.
            		.text(@"Hello World!!!", 
                    		[UIFont systemFontOfSize:20], 
                    		UIColor.blueColor)
@@ -96,7 +99,7 @@ pod 'JUNFlex'
 		```
 	+ ```List``` is an encapsulation of [JUNCollectionView](https://github.com/Jun2786184671/JUNCollectionView) that you can use to create either a horizontal or vertical scrollable list or a flowlayout.
 		```objc
-		[JUNFlex list]
+		JUNFlex.list
 		.horizontal(true)
 		.size(535, 1000)
 		.itemSize(80, 80)
@@ -104,16 +107,16 @@ pod 'JUNFlex'
         .showIndicator(true)
         .count(100, ^id (NSUInteger i) { // There are four other builders, such as forEach loop builder...
         	return
-        	[JUNFlex vstack]
+        	JUNFlex.vstack
         	.children(@[
-        		[JUNFlex item]
+        		JUNFlex.item
         		.size(80, 80)
         		.image(@"aBundleImageName")
         		.radius(30),
 
-        		[JUNFlex hstack]
+        		JUNFlex.hstack
         		.children(@[
-        			[JUNFlex item]
+        			JUNFlex.item
         			.text(@"hello", 
                         		[UIFont systemFontOfSize:20], 
                         		UIColor.blueColor)
@@ -122,7 +125,7 @@ pod 'JUNFlex'
         			UISwitch.new,
         		]),
 
-        		[JUNFlex item]
+        		JUNFlex.item
         		.width(120)
         		.text(@"world", 
                     		[UIFont systemFontOfSize:20],
@@ -134,7 +137,7 @@ pod 'JUNFlex'
 3. You can register and query the identifier of views.
 	```objc
 	[self.view addSubview:
-		[JUNFlex item]
+		JUNFlex.item
 		.ID(@"anyIdentifier")
 		.color(UIColor.orangeColor)
 		.size(100, 100)
