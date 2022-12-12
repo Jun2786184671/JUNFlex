@@ -4,6 +4,9 @@
 [![License](https://img.shields.io/cocoapods/l/JUNFlex.svg?style=flat)](https://cocoapods.org/pods/JUNFlex)
 [![Platform](https://img.shields.io/cocoapods/p/JUNFlex.svg?style=flat)](https://cocoapods.org/pods/JUNFlex)
 
+## Intro
+中文版简介: https://www.jianshu.com/p/f59a74a1dc95
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
