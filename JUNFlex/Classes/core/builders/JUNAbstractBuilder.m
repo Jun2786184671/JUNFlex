@@ -156,7 +156,7 @@
 
 - (CGFloat)_validateLength:(CGFloat)length {
     if (length == CGFLOAT_MIN) return 0;
-    if (length == CGFLOAT_MAX) return JUNSystemLayoutConstraintNumberLimit;
+    if (length == CGFLOAT_MAX || length < 0) return JUNSystemLayoutConstraintNumberLimit;
     return length;
 }
 
