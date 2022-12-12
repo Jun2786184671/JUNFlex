@@ -25,11 +25,20 @@
 //        [self testCreateHStack]
 //        [self testCreateVStack]
 //        [self testCreateZStack]
-//        [self testCreateNestedStack]
+        [self testCreateNestedStack]
 //        [self testCreatePadding]
-        [self testCreateList]
+//        [self testCreateList]
+//        [self testConfig]
     ];
+    
 //    UIView *res = self.view.jun_query0(@"hello");
+}
+
+- (UIView *)testConfig {
+    return
+    JUNFlex.config(UIView.new)
+    .color(UIColor.redColor)
+    .size(100, 100).EOB;
 }
 
 - (UIView *)testCreateLabel {

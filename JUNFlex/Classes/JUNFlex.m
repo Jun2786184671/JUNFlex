@@ -36,4 +36,10 @@
     return [[JUNItemBuilder alloc] init];
 }
 
++ (JUNPropertyBuilder * _Nonnull (^)(__kindof UIView * _Nonnull))config {
+    return ^(__kindof UIView *target) {
+        return [[JUNPropertyBuilder alloc] initWithTarget:target];
+    };
+}
+
 @end

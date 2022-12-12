@@ -12,6 +12,7 @@
 #import <JUNFlex/JUNListBuilder.h>
 #import <JUNFlex/JUNPaddingBuilder.h>
 #import <JUNFlex/JUNItemBuilder.h>
+#import <JUNFlex/JUNPropertyBuilder.h>
 #import <JUNFlex/UIColor+JUNFlex.h>
 #import <JUNFlex/UIView+JUNFlex.h>
 #import <JUNFlex/UIViewController+JUNFlex.h>
@@ -26,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(class, nonatomic, readonly) JUNPaddingBuilder *padding;
 @property(class, nonatomic, readonly) JUNListBuilder *list;
 @property(class, nonatomic, readonly) JUNItemBuilder *item;
+@property(class, nonatomic, readonly) JUNPropertyBuilder *(^config)(__kindof UIView *aView);
 
 @end
 

@@ -35,10 +35,7 @@
 
 - (UIView *)serialize:(NSDictionary *)json {
     NSString *type = json[@"type"];
-    Class builderCls = self.builderMapper[type];
-    if (builderCls == nil) {
-        builderCls = [JUNItemBuilder class];
-    }
+    Class builderCls = self.builderMapper[type] ?: [JUNItemBuilder class];
     NSParameterAssert([builderCls isSubclassOfClass:[JUNAbstractBuilder class]]);
     
     JUNAbstractBuilder *builder = [[builderCls alloc] init];
