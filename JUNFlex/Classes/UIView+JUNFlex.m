@@ -6,15 +6,17 @@
 //
 
 #import "UIView+JUNFlex.h"
-#import "JUNJSONSerializer.h"
+#import "UIView+JUNFlex_Private.h"
+#import "JUNSerializer.h"
+#import <MJExtension/NSObject+MJKeyValue.h>
 
 @implementation UIView (JUNFlex)
 
-- (void (^)(NSString * _Nonnull))jun_ID {
-    return ^(NSString *identifier) {
-        self.accessibilityIdentifier = identifier;
-    };
-}
+//- (void (^)(NSString * _Nonnull))jun_ID {
+//    return ^(NSString *identifier) {
+//        self.accessibilityIdentifier = identifier;
+//    };
+//}
 
 - (NSArray<UIView *> * _Nullable (^)(NSString * _Nonnull))jun_query {
     return ^NSArray<UIView *> *(NSString *identifier) {
@@ -43,30 +45,42 @@
     };
 }
 
-- (void (^)(NSString * _Nonnull))jun_layout {
-    return ^(NSString *fileName) {
-        [self jun_setContentWithFile:fileName];
-    };
+- (id)jun_json {
+    return [self.jun_property mj_keyValues];
 }
 
-- (void)jun_setContentWithFile:(NSString *)fileName {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:[fileName.pathExtension length] ? nil : @"json"];
-    NSAssert(filePath, @"cannot find layout file");
-    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
-    NSError *error = nil;
-    id json = [NSJSONSerialization JSONObjectWithData:fileData options:NSJSONReadingFragmentsAllowed error:&error];
-    NSAssert(json && !error, @"layout file json serialize error");
-    NSAssert([json isKindOfClass:[NSDictionary class]], @"top-level object in layout file must be a dictionary");
-    [self jun_setContentWithDictionary:json];
-}
-
-- (void)jun_setContentWithDictionary:(NSDictionary *)dict {
-    UIView *contentView = [[JUNJSONSerializer sharedInstance] serialize:dict];
-    [self addSubview:contentView];
+- (NSString *)jun_jsonString {
+    NSError *err = nil;
+    NSJSONWritingOptions opts = NSJSONWritingPrettyPrinted;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.jun_json options:opts error:&err];
+    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return jsonStr;
 }
 
 - (id _Nullable)jun_data {
     return nil;
 }
+
+//- (void (^)(NSString * _Nonnull))jun_layout {
+//    return ^(NSString *fileName) {
+//        [self jun_setContentWithFile:fileName];
+//    };
+//}
+
+//- (void)jun_setContentWithFile:(NSString *)fileName {
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:[fileName.pathExtension length] ? nil : @"json"];
+//    NSAssert(filePath, @"cannot find layout file");
+//    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+//    NSError *error = nil;
+//    id json = [NSJSONSerialization JSONObjectWithData:fileData options:NSJSONReadingFragmentsAllowed error:&error];
+//    NSAssert(json && !error, @"layout file json serialize error");
+//    NSAssert([json isKindOfClass:[NSDictionary class]], @"top-level object in layout file must be a dictionary");
+//    [self jun_setContentWithDictionary:json];
+//}
+
+//- (void)jun_setContentWithDictionary:(NSDictionary *)dict {
+//    UIView *contentView = [[JUNJSONSerializer sharedInstance] serialize:dict];
+//    [self addSubview:contentView];
+//}
 
 @end

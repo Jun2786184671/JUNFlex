@@ -5,13 +5,14 @@
 //  Created by Jun Ma on 2022/11/27.
 //
 
-#import "JUNItem.h"
+#import "JUNBaseView.h"
+#import "JUNStackProperty.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNStack : JUNItem
+@interface JUNStack : JUNBaseView
 
-- (instancetype)initWithItems:(NSArray<UIView *> *)items mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment aspectRatio:(bool)aspectRatio;
+#pragma mark - Convenience properties below.
 
 @property(nonatomic, strong, readonly) NSArray<UIView *> *items;
 @property(nonatomic, assign, readonly) int mainAxisAlignment;

@@ -1,61 +1,14 @@
 {
-    "type" : "hstack",
-    "id" : "hello",
-    "border" : {
-        "width" : 10,
-        "color" : "orange",
-    },
-    "color" : "#00ffffff",
-    "radius" : "12.5",
-    "mask_bounds" : "true",
-    "text" : {
-        "string" : "hello world",
-        "color" : "#ff00ffff",
-        "font" : "28",
-    },
-    "align" : {
-        "main" : "center",
-        "cross" : "max",
-    },
-    "children" : [
-        {
-            "align" : {
-                "main" : "min",
-                "cross" : "center",
-            },
-            "size" : {
-                "width" : 100,
-                "height" : 200,
-            },
-            "color" : "red",
-            "text" : {
-                "string" : "hello",
-                "font" : {
-                    "name" : "PingFang SC",
-                    "size" : 30,
-                },
-                "color" : "purple",
-            },
-            "image" : "test-image.jpg",
-        },
-
-        {
-            "width" : 100,
-            "height" : 200,
-            "text" : "world",
-            "color" : "green",
-        },
-        
-        {
-            "size" : {
-                "width" : 100,
-                "height" : 200,
-            },
-            "color" : "blue",
-        },
-    ],
-    "data" : {
-        "name" : "Jun",
-        "age" : 22,
-    },
+  "class" : "item",
+  "radius" : 8,
+  "color" : {
+    "space" : "rgba",
+    "value" : {
+      "a" : 1,
+      "hex" : "#0000ff"
+    }
+  },
+  "text" : {
+    "string" : "Imported"
+  }
 }

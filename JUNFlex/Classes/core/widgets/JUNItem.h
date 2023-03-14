@@ -5,11 +5,11 @@
 //  Created by Jun Ma on 2022/11/29.
 //
 
-#import <UIKit/UIKit.h>
+#import "JUNBaseView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNItem : UIButton
+@interface JUNItem : JUNBaseView
 
 @end
 

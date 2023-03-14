@@ -6,66 +6,94 @@
 //
 
 #import "JUNItem.h"
-#import "UIView+JUNFlex.h"
-#import "UIView+JUNFlex_Private.h"
-
-@interface JUNItem ()
-
-@property(nonatomic, strong, nullable) id jun_data;
-
-@end
+#import "JUNItemProperty.h"
+#import "UIFont+JUNFlex_Private.h"
+#import "UIColor+JUNFlex_Private.h"
+#import <SDWebImage/SDWebImage.h>
 
 @implementation JUNItem
+JUN_REGISTER_CLASS(@"item", [JUNItemProperty class]);
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        self.translatesAutoresizingMaskIntoConstraints = false;
-        self.backgroundColor = [UIColor clearColor];
-        self.adjustsImageWhenDisabled = false;
-        self.adjustsImageWhenHighlighted = false;
-    }
-    return self;
-}
-
-- (void)didMoveToWindow {
-    [self _addDefaultConstraintsIfNeeded];
-}
-
-- (void)sizeToFit {
-    if (!self.currentImage || !self.currentTitle.length) return;
-    [super sizeToFit];
-}
-
-- (void)_addDefaultConstraintsIfNeeded {
-    if (self.superview == nil) return;
-    if ([self _isConstraintedInSuperview]) return;
-    [self _addDefaultConstraintsToSuperview];
-}
-
-- (bool)_isConstraintedInSuperview {
-    for (NSLayoutConstraint *constraint in self.superview.constraints) {
-        if (constraint.firstItem == self || constraint.secondItem == self) return true;
-    }
-    return false;
-}
-
-- (void)_addDefaultConstraintsToSuperview {
-    NSLayoutConstraint *widthContraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeWidth multiplier:1.0f constant:0.0f];
-    widthContraint.priority = UILayoutPriorityDefaultHigh;
+- (void)jun_setProperty:(__kindof JUNBaseProperty *)property {
+    if ([property isEqual:self.jun_property]) return;
+    [super jun_setProperty:property];
+    if (![property isKindOfClass:[JUNItemProperty class]]) return;
+    JUNItemProperty *itemProperty = property;
     
-    NSLayoutConstraint *heightContraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeHeight multiplier:1.0f constant:0.0f];
-    heightContraint.priority = UILayoutPriorityDefaultHigh;
+    if (itemProperty.align) {
+        JUNAlignProperty *align = itemProperty.align;
+        if (align.main) {
+            self.contentHorizontalAlignment = [self getHorizontalAlignWithInt:[align.main intValue]];
+        }
+        if (align.cross) {
+            self.contentVerticalAlignment = [self getVerticalAlignWithInt:[align.cross intValue]];
+        }
+    }
     
-    [self.superview addConstraints:@[
-        [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self.superview attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0f],
-        [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self.superview attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f],
-        [NSLayoutConstraint constraintWithItem:self.superview attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f],
-        [NSLayoutConstraint constraintWithItem:self.superview attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0.0f],
-        [NSLayoutConstraint constraintWithItem:self.superview attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f],
-        [NSLayoutConstraint constraintWithItem:self.superview attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0.0f],
-        widthContraint,
-        heightContraint,
-    ]];
+    if (itemProperty.text) {
+        JUNTextProperty *text = itemProperty.text;
+        if (text.string) {
+            [self setTitle:text.string forState:UIControlStateNormal];
+        }
+        if (text.color) {
+            [self setTitleColor:[UIColor jun_colorWithProperty:text.color] forState:UIControlStateNormal];
+        }
+        if (text.font) {
+            self.titleLabel.font = [UIFont jun_fontWithProperty:text.font];
+        }
+    }
+    
+    if (itemProperty.image) {
+        NSURL *url = [NSURL URLWithString:itemProperty.image];
+        bool isUrl = url.scheme.length && url.host.length && url.path.length;
+        if (isUrl) {
+            [self sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:nil];
+        } else {
+            UIImage *image = [UIImage imageNamed:itemProperty.image];
+            [self setBackgroundImage:image forState:UIControlStateNormal];
+        }
+    }
+    
+    if (itemProperty.action) {
+        JUNActionProperty *action = itemProperty.action;
+        if (action.target && action.selector) {
+            [self addTarget:action.target action:NSSelectorFromString(action.selector) forControlEvents:UIControlEventTouchUpInside];
+        }
+    }
+}
+
+#pragma mark - Private
+
+- (UIControlContentHorizontalAlignment)getHorizontalAlignWithInt:(int)intValue {
+    UIControlContentHorizontalAlignment res = 0;
+    if (intValue < 0) {
+        if (@available(iOS 11.0, *)) {
+            res = UIControlContentHorizontalAlignmentLeading;
+        } else {
+            res = UIControlContentHorizontalAlignmentLeft;
+        }
+    } else if (intValue == 0) {
+        res = UIControlContentHorizontalAlignmentCenter;
+    } else if (intValue > 0) {
+        if (@available(iOS 11.0, *)) {
+            res = UIControlContentHorizontalAlignmentTrailing;
+        } else {
+            res = UIControlContentHorizontalAlignmentRight;
+        }
+    }
+    return res;
+}
+
+- (UIControlContentVerticalAlignment)getVerticalAlignWithInt:(int)intValue {
+    UIControlContentVerticalAlignment res = 0;
+    if (intValue < 0) {
+        res = UIControlContentVerticalAlignmentTop;
+    } else if (intValue == 0) {
+        res = UIControlContentVerticalAlignmentCenter;
+    } else if (intValue > 0) {
+        res = UIControlContentVerticalAlignmentBottom;
+    }
+    return res;
 }
 
 @end

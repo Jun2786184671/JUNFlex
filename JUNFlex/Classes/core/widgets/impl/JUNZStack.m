@@ -7,15 +7,14 @@
 
 #import "JUNZStack.h"
 
-#import "UIView+JUNFlex_Private.h"
-
 @implementation JUNZStack
+JUN_REGISTER_CLASS(@"zstack", [JUNStackProperty class]);
 
-- (instancetype)initWithItems:(NSArray<UIView *> *)items mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment aspectRatio:(bool)aspectRatio {
-    if (self = [super initWithItems:items mainAxisAlignment:mainAxisAlignment crossAxisAlignment:crossAxisAlignment aspectRatio:aspectRatio]) {
-        [self _setUpItems];
-    }
-    return self;
+- (void)jun_setProperty:(__kindof JUNBaseProperty *)property {
+    if ([property isEqual:self.jun_property]) return;
+    [super jun_setProperty:property];
+    if (![property isKindOfClass:[JUNStackProperty class]]) return;
+    [self _setUpItems];
 }
 
 - (void)_setUpItems {

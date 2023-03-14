@@ -6,7 +6,7 @@
 //
 
 #import "JUNPropertyBuilder.h"
-#import "JUNAbstractBuilder+Private.h"
+#import "JUNBaseBuilder+Private.h"
 
 @interface JUNPropertyBuilder ()
 
@@ -15,10 +15,6 @@
 @end
 
 @implementation JUNPropertyBuilder
-
-+ (void)load {
-    [super load];
-}
 
 - (instancetype)initWithTarget:(id)target {
     if (self = [super init]) {

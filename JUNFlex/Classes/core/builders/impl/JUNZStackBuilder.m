@@ -6,21 +6,26 @@
 //
 
 #import "JUNZStackBuilder.h"
-#import "JUNStackBuilder+Private.h"
+#import "JUNBaseBuilder+Private.h"
 #import "JUNZStack.h"
+
+@interface JUNZStackBuilder ()
+
+@property(nonatomic, strong) JUNZStack *zstack;
+
+@end
 
 @implementation JUNZStackBuilder
 
-+ (void)load {
-    [super load];
+- (__kindof UIView *)product {
+    return self.zstack;
 }
 
-+ (NSString *)type {
-    return @"zstack";
-}
-
-- (JUNStack *)_getProductWithChildren:(NSArray<UIView *> *)items mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment aspectRatio:(bool)aspectRatio {
-    return [[JUNZStack alloc] initWithItems:items mainAxisAlignment:mainAxisAlignment crossAxisAlignment:crossAxisAlignment aspectRatio:aspectRatio];
+- (JUNZStack *)zstack {
+    if (!_zstack) {
+        _zstack = [[JUNZStack alloc] init];
+    }
+    return _zstack;
 }
 
 @end

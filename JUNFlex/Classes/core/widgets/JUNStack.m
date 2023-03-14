@@ -6,7 +6,6 @@
 //
 
 #import "JUNStack.h"
-#import "UIView+JUNFlex_Private.h"
 
 @interface JUNStack ()
 
@@ -20,14 +19,20 @@
 
 @implementation JUNStack
 
-- (instancetype)initWithItems:(NSArray<UIView *> *)items mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment aspectRatio:(bool)aspectRatio {
-    if (self = [super init]) {
-        self.items = items;
-        self.mainAxisAlignment = mainAxisAlignment;
-        self.crossAxisAlignment = crossAxisAlignment;
-        self.aspectRatio = aspectRatio;
+- (void)jun_setProperty:(__kindof JUNBaseProperty *)property {
+    [super jun_setProperty:property];
+    [self _removeAllSubviews];
+    JUNStackProperty *stackProperty = property;
+    self.mainAxisAlignment = [stackProperty.align.main intValue];
+    self.crossAxisAlignment = [stackProperty.align.cross intValue];
+    self.aspectRatio = [stackProperty.aspectRatio boolValue];
+    self.items = stackProperty.childrenViews;
+}
+
+- (void)_removeAllSubviews {
+    for (UIView *subview in self.subviews) {
+        [subview removeFromSuperview];
     }
-    return self;
 }
 
 @end

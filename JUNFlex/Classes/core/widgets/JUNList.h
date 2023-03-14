@@ -5,11 +5,13 @@
 //  Created by Jun Ma on 2022/12/11.
 //
 
-#import "JUNItem.h"
+#import "JUNBaseView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNList : JUNItem
+@interface JUNList : JUNBaseView
+
+@property(nonatomic, strong) UICollectionView *target;
 
 @end
 

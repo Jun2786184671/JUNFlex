@@ -6,21 +6,26 @@
 //
 
 #import "JUNVStackBuilder.h"
-#import "JUNStackBuilder+Private.h"
+#import "JUNBaseBuilder+Private.h"
 #import "JUNVStack.h"
+
+@interface JUNVStackBuilder ()
+
+@property(nonatomic, strong) JUNVStack *vstack;
+
+@end
 
 @implementation JUNVStackBuilder
 
-+ (void)load {
-    [super load];
+- (__kindof UIView *)product {
+    return self.vstack;
 }
 
-+ (NSString *)type {
-    return @"vstack";
-}
-
-- (JUNStack *)_getProductWithChildren:(NSArray<UIView *> *)items mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment aspectRatio:(bool)aspectRatio {
-    return [[JUNVStack alloc] initWithItems:items mainAxisAlignment:mainAxisAlignment crossAxisAlignment:crossAxisAlignment aspectRatio:aspectRatio];
+- (JUNVStack *)vstack {
+    if (!_vstack) {
+        _vstack = [[JUNVStack alloc] init];
+    }
+    return _vstack;
 }
 
 @end

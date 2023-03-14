@@ -7,16 +7,17 @@
 
 #import "JUNLinearStack.h"
 #import "JUNPadding.h"
-#import "UIView+JUNFlex_Private.h"
 
 @implementation JUNLinearStack
 
-- (instancetype)initWithItems:(NSArray<UIView *> *)items mainAxisAlignment:(int)mainAxisAlignment crossAxisAlignment:(int)crossAxisAlignment aspectRatio:(bool)aspectRatio {
-    if (self = [super initWithItems:items mainAxisAlignment:mainAxisAlignment crossAxisAlignment:crossAxisAlignment aspectRatio:aspectRatio]) {
-        [self _addCrossHugConstraints];
-        [self _setUpItems];
-    }
-    return self;
++ (void)load { [super load]; }
+
+- (void)jun_setProperty:(__kindof JUNBaseProperty *)property {
+    if ([property isEqual:self.jun_property]) return;
+    [super jun_setProperty:property];
+    if (![property isKindOfClass:[JUNStackProperty class]]) return;
+    [self _addCrossHugConstraints];
+    [self _setUpItems];
 }
 
 - (void)_addCrossHugConstraints {
@@ -62,7 +63,6 @@
     NSLayoutAttribute mainSpanAttribute = isHorizontal ? NSLayoutAttributeWidth : NSLayoutAttributeHeight;
     NSLayoutAttribute mainInfAttribute = isHorizontal ? NSLayoutAttributeLeading : NSLayoutAttributeTop;
     NSLayoutAttribute mainSupAttribute = isHorizontal ? NSLayoutAttributeTrailing : NSLayoutAttributeBottom;
-//    NSLayoutAttribute mainMidAttribute = isHorizontal ? NSLayoutAttributeCenterX : NSLayoutAttributeCenterY;
     
     CGFloat crossSpan = isHorizontal ? itemSize.height : itemSize.width;
     
@@ -222,7 +222,6 @@
             [NSLayoutConstraint constraintWithItem:item attribute:crossMidAttribute relatedBy:NSLayoutRelationEqual toItem:self attribute:crossMidAttribute multiplier:1.0f constant:0.0f]
         ];
     }
-    
 }
 
 @end

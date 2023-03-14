@@ -6,145 +6,113 @@
 //
 
 #import "JUNPaddingBuilder.h"
-#import "JUNAbstractBuilder+Private.h"
+#import "JUNBaseBuilder+Private.h"
 #import "JUNPadding.h"
-#import "JUNJSONSerializer.h"
-#import "UIView+JUNFlex_Private.h"
+#import "JUNPaddingProperty.h"
+#import "JUNPropertyParser.h"
 
 @interface JUNPaddingBuilder ()
 
-@property(nonatomic, strong) JUNItem *padding;
-
-@property(nonatomic, assign) UIEdgeInsets insets;
+@property(nonatomic, strong) JUNPadding *padding;
+@property(nonatomic, strong) JUNPaddingProperty *paddingProperty;
 
 @end
 
 @implementation JUNPaddingBuilder
 
-+ (void)load {
-    [super load];
-}
-
-+ (NSString *)type {
-    return @"padding";
-}
-
 - (id)product {
     return self.padding;
 }
 
-- (JUNItem *)padding {
-    if (_padding == nil) {
+- (__kindof JUNBaseProperty *)property {
+    return self.paddingProperty;
+}
+
+- (JUNPadding *)padding {
+    if (!_padding) {
         _padding = [[JUNPadding alloc] init];
     }
     return _padding;
 }
 
-- (JUNPaddingBuilder * _Nonnull (^)(CGFloat))top {
-    return ^(CGFloat top) {
-        UIEdgeInsets paddings = self.insets;
-        paddings.top = top;
-        self.insets = paddings;
+- (JUNPaddingProperty *)paddingProperty {
+    if (!_paddingProperty) {
+        _paddingProperty = [[JUNPaddingProperty alloc] init];
+    }
+    return _paddingProperty;
+}
+
+- (JUNPaddingBuilder * _Nonnull (^)(id))top {
+    return ^(id value) {
+        self.paddingProperty.top = [[JUNPropertyParser sharedParser] parseFloatWithValue:value];
         return self;
     };
 }
 
-- (JUNPaddingBuilder * _Nonnull (^)(CGFloat))left {
-    return ^(CGFloat left) {
-        UIEdgeInsets paddings = self.insets;
-        paddings.left = left;
-        self.insets = paddings;
+- (JUNPaddingBuilder * _Nonnull (^)(id))left {
+    return ^(id value) {
+        self.paddingProperty.left = [[JUNPropertyParser sharedParser] parseFloatWithValue:value];
         return self;
     };
 }
 
-- (JUNPaddingBuilder * _Nonnull (^)(CGFloat))bottom {
-    return ^(CGFloat bottom) {
-        UIEdgeInsets paddings = self.insets;
-        paddings.bottom = bottom;
-        self.insets = paddings;
+- (JUNPaddingBuilder * _Nonnull (^)(id))bottom {
+    return ^(id value) {
+        self.paddingProperty.bottom = [[JUNPropertyParser sharedParser] parseFloatWithValue:value];
         return self;
     };
 }
 
-- (JUNPaddingBuilder * _Nonnull (^)(CGFloat))right {
-    return ^(CGFloat right) {
-        UIEdgeInsets paddings = self.insets;
-        paddings.right = right;
-        self.insets = paddings;
+- (JUNPaddingBuilder * _Nonnull (^)(id))right {
+    return ^(id value) {
+        self.paddingProperty.right = [[JUNPropertyParser sharedParser] parseFloatWithValue:value];
         return self;
     };
 }
 
-- (JUNPaddingBuilder * _Nonnull (^)(CGFloat))all {
-    return ^(CGFloat all) {
-        self.insets = UIEdgeInsetsMake(all, all, all, all);
+- (JUNPaddingBuilder * _Nonnull (^)(id))all {
+    return ^(id value) {
+        id all = [[JUNPropertyParser sharedParser] parseFloatWithValue:value];
+        self.paddingProperty.top = all;
+        self.paddingProperty.left = all;
+        self.paddingProperty.bottom = all;
+        self.paddingProperty.right = all;
         return self;
     };
 }
 
-- (JUNPaddingBuilder * _Nonnull (^)(CGFloat, CGFloat, CGFloat, CGFloat))make {
-    return ^(CGFloat t, CGFloat l, CGFloat b, CGFloat r) {
-        self.insets = UIEdgeInsetsMake(t, l, b, r);
+- (JUNPaddingBuilder * _Nonnull (^)(id, ...))make {
+    return ^(id arg, ...) {
+        va_list args;
+        va_start(args, arg);
+        self.paddingProperty.top = arg;
+        if (!(arg = va_arg(args, id))) goto END;
+        self.paddingProperty.left = arg;
+        if (!(arg = va_arg(args, id))) goto END;
+        self.paddingProperty.bottom = arg;
+        if (!(arg = va_arg(args, id))) goto END;
+        self.paddingProperty.right = arg;
+    END:
+        va_end(args);
         return self;
     };
 }
 
-- (JUNItem * _Nonnull (^)(id _Nonnull))child {
+- (__kindof UIView * _Nonnull (^)(id _Nonnull))child {
     return ^(id child) {
-        UIView *validChild = [self _validateChild:child];
-        
-        validChild.translatesAutoresizingMaskIntoConstraints = false;
-        [self.padding addSubview:validChild];
-        [self.padding addConstraints:@[
-            [NSLayoutConstraint constraintWithItem:validChild attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.padding attribute:NSLayoutAttributeTop multiplier:1.0f constant:self.insets.top],
-            [NSLayoutConstraint constraintWithItem:validChild attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.padding attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-self.insets.bottom],
-            [NSLayoutConstraint constraintWithItem:validChild attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.padding attribute:NSLayoutAttributeLeading multiplier:1.0f constant:self.insets.left],
-            [NSLayoutConstraint constraintWithItem:validChild attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.padding attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:-self.insets.right],
-        ]];
+        UIView *childView = [self _validateChild:child];
+        childView.translatesAutoresizingMaskIntoConstraints = false;
+        self.paddingProperty.childView = childView;
         return self.EOB;
     };
-}
-
-- (UIView *)buildWithDictionary:(NSDictionary *)dict {
-    [super buildWithDictionary:dict];
-    
-    id top = dict[@"top"];
-    if (top) {
-        self.top([self _floatFromValue:top]);
-    }
-    id left = dict[@"left"];
-    if (left) {
-        self.left([self _floatFromValue:left]);
-    }
-    id bottom = dict[@"bottom"];
-    if (bottom) {
-        self.bottom([self _floatFromValue:bottom]);
-    }
-    id right = dict[@"right"];
-    if (right) {
-        self.right([self _floatFromValue:right]);
-    }
-    id all = dict[@"all"];
-    if (all) {
-        self.all([self _floatFromValue:all]);
-    }
-    
-    id childDict = dict[@"child"];
-    if (childDict) {
-        NSAssert([childDict isKindOfClass:[NSDictionary class]], @"unexpected child format");
-        UIView *childView = [[JUNJSONSerializer sharedInstance] serialize:childDict];
-        self.child(childView);
-    }
-    return self.EOB;
 }
 
 - (UIView *)_validateChild:(id)child {
     if ([child isKindOfClass:[UIView class]]) {
         return child;
-    } else if ([child isKindOfClass:[JUNAbstractBuilder class]]) {
-        JUNAbstractBuilder *builder = (JUNAbstractBuilder *)child;
-        return builder.EOB;
+    } else if ([child isKindOfClass:[JUNBaseBuilder class]]) {
+        JUNBaseBuilder *childBuilder = (JUNBaseBuilder *)child;
+        return childBuilder.EOB;
     }
     NSAssert(false, @"child of padding must be a uiview or itembuilder");
     return [[UIView alloc] init];

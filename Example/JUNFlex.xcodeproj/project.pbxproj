@@ -18,18 +18,18 @@
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
-		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		A552ABD01D440D3CCB544992 /* Pods_JUNFlex_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F99569CFD3EA237C63E909A4 /* Pods_JUNFlex_Tests.framework */; };
 		B81338F3CF135AD058070D16 /* Pods_JUNFlex_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3DE9966DA10CAF15CFE57AE /* Pods_JUNFlex_Example.framework */; };
-		B930542829430AF50049BCA3 /* JUNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B930542729430AF50049BCA3 /* JUNViewController.m */; };
+		B92A79D629B88D49002263FF /* JUNPaddingBuilderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B92A79D529B88D49002263FF /* JUNPaddingBuilderTest.m */; };
 		B930543229432A1C0049BCA3 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = B930543129432A1C0049BCA3 /* test.json */; };
-		B96794462935EC680011BA8C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B96794452935EC680011BA8C /* ViewController.m */; };
-		B9679461293728600011BA8C /* test-image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9679460293728600011BA8C /* test-image.jpg */; };
-		B9A09D1829438A0F00193E26 /* test-image1.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A09D1729438A0F00193E26 /* test-image1.png */; };
-		B9A09D19294392E200193E26 /* test-image2.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A09D15294389B200193E26 /* test-image2.png */; };
-		B9A09D1A294392E200193E26 /* test-image3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B9A09D16294389B200193E26 /* test-image3.jpeg */; };
+		B96794462935EC680011BA8C /* JUNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B96794452935EC680011BA8C /* JUNViewController.m */; };
+		B9BBDD6B29B77E8A0007B440 /* JUNBuilderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BBDD6A29B77E8A0007B440 /* JUNBuilderTest.m */; };
+		B9BBDD6D29B77F470007B440 /* JUNStackBuilderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BBDD6C29B77F470007B440 /* JUNStackBuilderTest.m */; };
+		B9EAC02129B71A20003C19FD /* JUNItemBuilderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EAC02029B71A20003C19FD /* JUNItemBuilderTest.m */; };
+		B9EAC02729B73D0B003C19FD /* JUNSerializerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EAC02629B73D0B003C19FD /* JUNSerializerTest.m */; };
+		B9FB04DD29BD893D004FE930 /* JUNListBuilderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9FB04DC29BD893D004FE930 /* JUNListBuilderTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,20 +61,20 @@
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		68764DB7CEC01C39FC611EFA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B930542629430AF50049BCA3 /* JUNViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JUNViewController.h; sourceTree = "<group>"; };
-		B930542729430AF50049BCA3 /* JUNViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNViewController.m; sourceTree = "<group>"; };
+		B92A79D529B88D49002263FF /* JUNPaddingBuilderTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNPaddingBuilderTest.m; sourceTree = "<group>"; };
 		B930543129432A1C0049BCA3 /* test.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
-		B96794442935EC680011BA8C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B96794452935EC680011BA8C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		B9679460293728600011BA8C /* test-image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "test-image.jpg"; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/Share/Pictures/test-image.jpg"; sourceTree = "<group>"; };
-		B9A09D15294389B200193E26 /* test-image2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test-image2.png"; sourceTree = "<group>"; };
-		B9A09D16294389B200193E26 /* test-image3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "test-image3.jpeg"; sourceTree = "<group>"; };
-		B9A09D1729438A0F00193E26 /* test-image1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test-image1.png"; sourceTree = "<group>"; };
+		B96794442935EC680011BA8C /* JUNViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JUNViewController.h; sourceTree = "<group>"; };
+		B96794452935EC680011BA8C /* JUNViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNViewController.m; sourceTree = "<group>"; };
+		B9BBDD6929B77DFE0007B440 /* JUNBuilderTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JUNBuilderTest.h; sourceTree = "<group>"; };
+		B9BBDD6A29B77E8A0007B440 /* JUNBuilderTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNBuilderTest.m; sourceTree = "<group>"; };
+		B9BBDD6C29B77F470007B440 /* JUNStackBuilderTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNStackBuilderTest.m; sourceTree = "<group>"; };
+		B9EAC02029B71A20003C19FD /* JUNItemBuilderTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNItemBuilderTest.m; sourceTree = "<group>"; };
+		B9EAC02629B73D0B003C19FD /* JUNSerializerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNSerializerTest.m; sourceTree = "<group>"; };
+		B9FB04DC29BD893D004FE930 /* JUNListBuilderTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNListBuilderTest.m; sourceTree = "<group>"; };
 		BF5E237E7B710F6A8549FC90 /* Pods-JUNFlex_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JUNFlex_Example.release.xcconfig"; path = "Target Support Files/Pods-JUNFlex_Example/Pods-JUNFlex_Example.release.xcconfig"; sourceTree = "<group>"; };
 		E3FC218AFEC373E62161DEA4 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		E69FEDA17D69760127DFA7FA /* JUNFlex.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = JUNFlex.podspec; path = ../JUNFlex.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -147,16 +147,10 @@
 			children = (
 				6003F59C195388D20070C39A /* JUNAppDelegate.h */,
 				6003F59D195388D20070C39A /* JUNAppDelegate.m */,
-				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
-				B96794442935EC680011BA8C /* ViewController.h */,
-				B96794452935EC680011BA8C /* ViewController.m */,
-				B930542629430AF50049BCA3 /* JUNViewController.h */,
-				B930542729430AF50049BCA3 /* JUNViewController.m */,
+				B96794442935EC680011BA8C /* JUNViewController.h */,
+				B96794452935EC680011BA8C /* JUNViewController.m */,
 				B930543129432A1C0049BCA3 /* test.json */,
-				B9679460293728600011BA8C /* test-image.jpg */,
-				B9A09D1729438A0F00193E26 /* test-image1.png */,
-				B9A09D15294389B200193E26 /* test-image2.png */,
-				B9A09D16294389B200193E26 /* test-image3.jpeg */,
+				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -179,7 +173,13 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				6003F5BB195388D20070C39A /* Tests.m */,
+				B9BBDD6929B77DFE0007B440 /* JUNBuilderTest.h */,
+				B9BBDD6A29B77E8A0007B440 /* JUNBuilderTest.m */,
+				B9EAC02029B71A20003C19FD /* JUNItemBuilderTest.m */,
+				B9BBDD6C29B77F470007B440 /* JUNStackBuilderTest.m */,
+				B92A79D529B88D49002263FF /* JUNPaddingBuilderTest.m */,
+				B9FB04DC29BD893D004FE930 /* JUNListBuilderTest.m */,
+				B9EAC02629B73D0B003C19FD /* JUNSerializerTest.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
 			path = Tests;
@@ -298,13 +298,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9A09D19294392E200193E26 /* test-image2.png in Resources */,
-				B9A09D1A294392E200193E26 /* test-image3.jpeg in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
-				B9A09D1829438A0F00193E26 /* test-image1.png in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
-				B9679461293728600011BA8C /* test-image.jpg in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				B930543229432A1C0049BCA3 /* test.json in Resources */,
 			);
@@ -371,6 +367,8 @@
 				"${BUILT_PRODUCTS_DIR}/JUNCollectionView/JUNCollectionView.framework",
 				"${BUILT_PRODUCTS_DIR}/JUNFlex/JUNFlex.framework",
 				"${BUILT_PRODUCTS_DIR}/JUNTableView/JUNTableView.framework",
+				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/OrderedDictionary/OrderedDictionary.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -378,6 +376,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JUNCollectionView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JUNFlex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JUNTableView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OrderedDictionary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,9 +415,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* JUNAppDelegate.m in Sources */,
-				B96794462935EC680011BA8C /* ViewController.m in Sources */,
+				B96794462935EC680011BA8C /* JUNViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
-				B930542829430AF50049BCA3 /* JUNViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,7 +424,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F5BC195388D20070C39A /* Tests.m in Sources */,
+				B9BBDD6B29B77E8A0007B440 /* JUNBuilderTest.m in Sources */,
+				B9EAC02729B73D0B003C19FD /* JUNSerializerTest.m in Sources */,
+				B92A79D629B88D49002263FF /* JUNPaddingBuilderTest.m in Sources */,
+				B9BBDD6D29B77F470007B440 /* JUNStackBuilderTest.m in Sources */,
+				B9EAC02129B71A20003C19FD /* JUNItemBuilderTest.m in Sources */,
+				B9FB04DD29BD893D004FE930 /* JUNListBuilderTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

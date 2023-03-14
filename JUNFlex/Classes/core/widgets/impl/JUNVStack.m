@@ -8,6 +8,7 @@
 #import "JUNVStack.h"
 
 @implementation JUNVStack
+JUN_REGISTER_CLASS(@"vstack", [JUNStackProperty class]);
 
 - (bool)isHorizontal {
     return false;

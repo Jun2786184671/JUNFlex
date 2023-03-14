@@ -5,23 +5,27 @@
 //  Created by Jun Ma on 2022/11/29.
 //
 
-#import "JUNAbstractBuilder.h"
+#import "JUNBaseBuilder.h"
 
-@class JUNPaddingBuilder, JUNItem;
+#ifndef make
+#define make(t_l_b_r, ...) make(t_l_b_r, ##__VA_ARGS__, nil)
+#endif
+
+@class JUNPaddingBuilder;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JUNPaddingBuilder : JUNAbstractBuilder<JUNPaddingBuilder *, JUNItem *>
+@interface JUNPaddingBuilder : JUNBaseBuilder<JUNPaddingBuilder *, __kindof UIView *>
 
 
-@property(nonatomic, readonly) JUNPaddingBuilder *(^top)(CGFloat top);
-@property(nonatomic, readonly) JUNPaddingBuilder *(^left)(CGFloat left);
-@property(nonatomic, readonly) JUNPaddingBuilder *(^bottom)(CGFloat bottom);
-@property(nonatomic, readonly) JUNPaddingBuilder *(^right)(CGFloat right);
-@property(nonatomic, readonly) JUNPaddingBuilder *(^all)(CGFloat all);
-@property(nonatomic, readonly) JUNPaddingBuilder *(^make)(CGFloat t, CGFloat l, CGFloat b, CGFloat r);
+@property(nonatomic, readonly) JUNPaddingBuilder *(^top)(id top);
+@property(nonatomic, readonly) JUNPaddingBuilder *(^left)(id left);
+@property(nonatomic, readonly) JUNPaddingBuilder *(^bottom)(id bottom);
+@property(nonatomic, readonly) JUNPaddingBuilder *(^right)(id right);
+@property(nonatomic, readonly) JUNPaddingBuilder *(^all)(id all);
+@property(nonatomic, readonly) JUNPaddingBuilder *(^make)(id t_l_b_r, ...);
 /// target can be a uiview or itembuilder
-@property(nonatomic, readonly) JUNItem *(^child)(id child);
+@property(nonatomic, readonly) __kindof UIView *(^child)(id child);
 
 @end
 

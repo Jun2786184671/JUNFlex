@@ -9,6 +9,7 @@
 #import "JUNHStackBuilder.h"
 #import "JUNVStackBuilder.h"
 #import "JUNZStackBuilder.h"
+#import "JUNSerializer.h"
 
 @implementation JUNFlex
 
@@ -39,6 +40,12 @@
 + (JUNPropertyBuilder * _Nonnull (^)(__kindof UIView * _Nonnull))config {
     return ^(__kindof UIView *target) {
         return [[JUNPropertyBuilder alloc] initWithTarget:target];
+    };
+}
+
++ (__kindof UIView * _Nonnull (^)(NSString * _Nonnull))src {
+    return ^(NSString *filePath) {
+        return [[JUNSerializer sharedSerializer] serializeJsonFile2View:filePath];
     };
 }
 
