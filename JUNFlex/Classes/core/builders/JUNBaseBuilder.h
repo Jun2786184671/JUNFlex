@@ -8,11 +8,11 @@
 #import <UIKit/UIKit.h>
 
 #ifndef border
-#define border(width_color, ...) border(width_color, ##__VA_ARGS__, nil)
+    #define border(width_color, ...) border(width_color, ##__VA_ARGS__, nil)
 #endif
 
 #ifndef size
-#define size(width_height, ...) size(width_height, ##__VA_ARGS__, nil)
+    #define size(width_height, ...) size(width_height, ##__VA_ARGS__, nil)
 #endif
 
 NS_ASSUME_NONNULL_BEGIN

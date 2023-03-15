@@ -8,7 +8,7 @@
 #import "JUNBaseBuilder.h"
 
 #ifndef make
-#define make(t_l_b_r, ...) make(t_l_b_r, ##__VA_ARGS__, nil)
+    #define make(t_l_b_r, ...) make(t_l_b_r, ##__VA_ARGS__, nil)
 #endif
 
 @class JUNPaddingBuilder;

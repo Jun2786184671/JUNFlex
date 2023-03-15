@@ -8,7 +8,7 @@
 #import "JUNBaseBuilder.h"
 
 #ifndef itemSize
-#define itemSize(width_height, ...) itemSize(width_height, ##__VA_ARGS__, nil)
+    #define itemSize(width_height, ...) itemSize(width_height, ##__VA_ARGS__, nil)
 #endif
 
 @class JUNListBuilder;

@@ -8,6 +8,7 @@
 #import "JUNPropertyParser.h"
 #import "UIColor+JUNFlex_Private.h"
 #import "JUNSizeProperty.h"
+#import "JUNAlignProperty.h"
 
 @implementation JUNPropertyParser
 
@@ -75,6 +76,23 @@
             return @false;
         } else {
             return @false;
+        }
+    } else {
+        NSParameterAssert(false);
+        return nil;
+    }
+}
+
+- (NSNumber * _Nullable)parseAlignWithValue:(id)value {
+    if ([value isKindOfClass:[NSNumber class]]) {
+        return value;
+    } else if ([value isKindOfClass:[NSString class]]) {
+        if ([value isEqualToString:JUNAlignPropertyMax]) {
+            return @1;
+        } else if ([value isEqualToString:JUNAlignPropertyMin]) {
+            return @(-1);
+        } else {
+            return @0;
         }
     } else {
         NSParameterAssert(false);

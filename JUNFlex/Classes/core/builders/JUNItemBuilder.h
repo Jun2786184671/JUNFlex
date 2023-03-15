@@ -8,7 +8,11 @@
 #import "JUNBaseBuilder.h"
 
 #ifndef text
-#define text(string, ...) text(string, ##__VA_ARGS__, nil)
+    #define text(string, ...) text(string, ##__VA_ARGS__, nil)
+#endif
+
+#ifndef align
+    #define align(main_cross, ...) align(main_cross, ##__VA_ARGS__, nil)
 #endif
 
 @class JUNItemBuilder;
@@ -17,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JUNItemBuilder : JUNBaseBuilder<JUNItemBuilder *, __kindof UIView *>
 
-@property(nonatomic, readonly) JUNItemBuilder *(^align)(id main, id cross);
+@property(nonatomic, readonly) JUNItemBuilder *(^align)(id main_cross, ...);
 /// You can follow the string with UIFont, UIColor, string of color hex, or font size. Note that all parameters must be of object type.
 @property(nonatomic, readonly) JUNItemBuilder *(^text)(NSString *string, ...);
 @property(nonatomic, readonly) JUNItemBuilder *(^image)(NSString *nameOrURL);

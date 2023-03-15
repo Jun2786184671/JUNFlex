@@ -9,6 +9,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+extern NSString * const JUNAlignPropertyMax;
+extern NSString * const JUNAlignPropertyCenter;
+extern NSString * const JUNAlignPropertyMin;
+
 @interface JUNAlignProperty : JUNProperty
 
 @property(nonatomic, strong, nullable) NSNumber *main;

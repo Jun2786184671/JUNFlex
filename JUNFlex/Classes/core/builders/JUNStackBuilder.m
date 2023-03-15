@@ -30,11 +30,18 @@
     return _stackProperty;
 }
 
-- (JUNStackBuilder * _Nonnull (^)(id, id))align {
-    return ^(id main, id cross) {
+- (JUNStackBuilder * _Nonnull (^)(id, ...))align {
+    return ^(id arg, ...) {
         JUNAlignProperty *align = [[JUNAlignProperty alloc] init];
-        align.main = main;
-        align.cross = cross;
+        JUNPropertyParser *parser = [JUNPropertyParser sharedParser];
+        va_list args;
+        va_start(args, arg);
+        align.cross = [parser parseAlignWithValue:arg];
+        if ((arg = va_arg(args, id))) {
+            align.main = align.cross;
+            align.cross = [parser parseAlignWithValue:arg];
+        }
+        va_end(args);
         self.stackProperty.align = align;
         return self;
     };

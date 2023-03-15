@@ -43,9 +43,10 @@
     };
 }
 
-+ (__kindof UIView * _Nonnull (^)(NSString * _Nonnull))src {
++ (JUNPropertyBuilder * _Nonnull (^)(NSString * _Nonnull))src {
     return ^(NSString *filePath) {
-        return [[JUNSerializer sharedSerializer] serializeJsonFile2View:filePath];
+        UIView *target = [[JUNSerializer sharedSerializer] serializeJsonFile2View:filePath];
+        return [[JUNPropertyBuilder alloc] initWithTarget:target];
     };
 }
 

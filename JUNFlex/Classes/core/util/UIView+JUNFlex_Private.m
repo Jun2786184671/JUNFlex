@@ -54,7 +54,9 @@
 - (void)jun_setHeight:(CGFloat)height {
     height = [self jun_getLengthWithFloat:height];
     NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:height];
-    if (height >= JUNSystemLayoutConstraintNumberLimit || height == 0) {
+    if (height >= JUNSystemLayoutConstraintNumberLimit) {
+        heightConstraint.priority = UILayoutPriorityDefaultHigh + 1;
+    } else if (height == 0) {
         heightConstraint.priority = UILayoutPriorityDefaultHigh;
     } else {
         heightConstraint.priority = UILayoutPriorityRequired - 1;
@@ -68,7 +70,9 @@
 - (void)jun_setWidth:(CGFloat)width {
     width = [self jun_getLengthWithFloat:width];
     NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:width];
-    if (width >= JUNSystemLayoutConstraintNumberLimit || width == 0) {
+    if (width >= JUNSystemLayoutConstraintNumberLimit) {
+        widthConstraint.priority = UILayoutPriorityDefaultHigh + 1;
+    } else if (width == 0) {
         widthConstraint.priority = UILayoutPriorityDefaultHigh;
     } else {
         widthConstraint.priority = UILayoutPriorityRequired - 1;

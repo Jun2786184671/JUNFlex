@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (JUNFontProperty * _Nullable)parseFontPropertyWithValue:(id)value;
 - (NSNumber * _Nullable)parseFloatWithValue:(id)value;
 - (NSNumber * _Nullable)parseBoolWithValue:(id)value;
+- (NSNumber * _Nullable)parseAlignWithValue:(id)value;
 
 @end
 

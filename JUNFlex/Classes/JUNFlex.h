@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(class, nonatomic, readonly) JUNItemBuilder *item;
 @property(class, nonatomic, readonly) JUNPropertyBuilder *(^config)(__kindof UIView *aView);
 /// You can pass the path to a json layout file.
-@property(class, nonatomic, readonly) __kindof UIView *(^src)(NSString *filePath);
+@property(class, nonatomic, readonly) JUNPropertyBuilder *(^src)(NSString *filePath);
 
 @end
 

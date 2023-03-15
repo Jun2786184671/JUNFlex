@@ -42,11 +42,17 @@
     return _itemProperty;
 }
 
-- (JUNItemBuilder * _Nonnull (^)(id, id))align {
-    return ^(id main, id cross) {
+- (JUNItemBuilder * _Nonnull (^)(id, ...))align {
+    return ^(id arg, ...) {
         JUNAlignProperty *align = [[JUNAlignProperty alloc] init];
-        align.main = main;
-        align.cross = cross;
+        JUNPropertyParser *parser = [JUNPropertyParser sharedParser];
+        va_list args;
+        va_start(args, arg);
+        align.cross = [parser parseAlignWithValue:arg];
+        if ((arg = va_arg(args, id))) {
+            align.main = [parser parseAlignWithValue:arg];
+        }
+        va_end(args);
         self.itemProperty.align = align;
         return self;
     };

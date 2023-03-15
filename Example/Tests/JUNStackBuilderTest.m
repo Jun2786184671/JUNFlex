@@ -23,7 +23,7 @@ JUN_BUILDER_TEST
     .maskBounds(@"true")
     .color(UIColor.whiteColor)
     .border(@"#cccccc", @1)
-    .align(@1, @0)
+    .align(@"center")
     .children(@[
         @Auto
         .image(@"test-image1")
@@ -31,17 +31,20 @@ JUN_BUILDER_TEST
         .height(@80),
         
         @Padding
+        .size(@"max", @"max")
         .left(@16)
         .right(@16)
         .bottom(@8)
         .child(
             @VStack
-            .size(@"max", @"max")
+            .align(@-1)
             .children(@[
                 @Auto
+                .width(@"min")
                 .text(@"Hello world", @"#333333", @"20"),
 
                 @Auto
+                .width(@"min")
                 .text(
                     @"This is a welcome message.",
                     @"#666666",
@@ -63,7 +66,8 @@ JUN_BUILDER_TEST
                 .color(UIColor.blueColor)
                 .text(@"Other"),
                 
-                @Src(@"test.json"),
+                @Src(@"test.json")
+                .color(UIColor.systemPinkColor),
             ])
         ),
     ]);

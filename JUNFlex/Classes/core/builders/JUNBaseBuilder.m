@@ -7,13 +7,31 @@
 
 #import "JUNBaseBuilder.h"
 #import "JUNBaseBuilder+Private.h"
+#import "JUNBaseView.h"
+#import "JUNBaseProperty.h"
 #import "UIView+JUNFlex_Private.h"
 #import "UIColor+JUNFlex_Private.h"
 #import "JUNPropertyParser.h"
 
-@implementation JUNBaseBuilder
+@implementation JUNBaseBuilder {
+    @private
+    UIView * _product;
+    JUNBaseProperty *_property;
+}
 
-@dynamic product, property;
+- (__kindof UIView *)product {
+    if (!_product) {
+        _product = [[JUNBaseView alloc] init];
+    }
+    return _product;
+}
+
+- (__kindof JUNBaseProperty *)property {
+    if (!_property) {
+        _property = [[JUNBaseProperty alloc] init];
+    }
+    return _property;
+}
 
 - (id _Nonnull (^)(id _Nonnull))ID {
     return ^(NSString *identifier) {
