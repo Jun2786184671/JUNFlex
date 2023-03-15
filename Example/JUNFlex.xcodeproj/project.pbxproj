@@ -27,6 +27,7 @@
 		B96794462935EC680011BA8C /* JUNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B96794452935EC680011BA8C /* JUNViewController.m */; };
 		B9BBDD6B29B77E8A0007B440 /* JUNBuilderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BBDD6A29B77E8A0007B440 /* JUNBuilderTest.m */; };
 		B9BBDD6D29B77F470007B440 /* JUNStackBuilderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BBDD6C29B77F470007B440 /* JUNStackBuilderTest.m */; };
+		B9D0179829C1CC5B007CCE34 /* test2.json in Resources */ = {isa = PBXBuildFile; fileRef = B9D0179729C1CC5B007CCE34 /* test2.json */; };
 		B9EAC02129B71A20003C19FD /* JUNItemBuilderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EAC02029B71A20003C19FD /* JUNItemBuilderTest.m */; };
 		B9EAC02729B73D0B003C19FD /* JUNSerializerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EAC02629B73D0B003C19FD /* JUNSerializerTest.m */; };
 		B9FB04DD29BD893D004FE930 /* JUNListBuilderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9FB04DC29BD893D004FE930 /* JUNListBuilderTest.m */; };
@@ -72,6 +73,7 @@
 		B9BBDD6929B77DFE0007B440 /* JUNBuilderTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JUNBuilderTest.h; sourceTree = "<group>"; };
 		B9BBDD6A29B77E8A0007B440 /* JUNBuilderTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNBuilderTest.m; sourceTree = "<group>"; };
 		B9BBDD6C29B77F470007B440 /* JUNStackBuilderTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNStackBuilderTest.m; sourceTree = "<group>"; };
+		B9D0179729C1CC5B007CCE34 /* test2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test2.json; sourceTree = "<group>"; };
 		B9EAC02029B71A20003C19FD /* JUNItemBuilderTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNItemBuilderTest.m; sourceTree = "<group>"; };
 		B9EAC02629B73D0B003C19FD /* JUNSerializerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNSerializerTest.m; sourceTree = "<group>"; };
 		B9FB04DC29BD893D004FE930 /* JUNListBuilderTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JUNListBuilderTest.m; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				6003F59D195388D20070C39A /* JUNAppDelegate.m */,
 				B96794442935EC680011BA8C /* JUNViewController.h */,
 				B96794452935EC680011BA8C /* JUNViewController.m */,
+				B9D0179729C1CC5B007CCE34 /* test2.json */,
 				B930543129432A1C0049BCA3 /* test.json */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
@@ -298,6 +301,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9D0179829C1CC5B007CCE34 /* test2.json in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,

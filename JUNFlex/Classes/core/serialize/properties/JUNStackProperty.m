@@ -25,13 +25,14 @@ NSString * const kJUNStackPropertyChildren = @"children";
 }
 
 + (NSArray *)mj_ignoredPropertyNames {
-    return @[
+    return [[super mj_ignoredPropertyNames] arrayByAddingObjectsFromArray:@[
         NSStringFromSelector(@selector(childrenViews)),
         NSStringFromSelector(@selector(childrenProperties)),
-    ];
+    ]];
 }
 
 - (void)mj_didConvertToObjectWithKeyValues:(NSDictionary *)keyValues {
+    [super mj_didConvertToObjectWithKeyValues:keyValues];
     NSArray<NSDictionary *> *childrenJsons = keyValues[kJUNStackPropertyChildren];
     if (![childrenJsons count]) return;
     NSParameterAssert([childrenJsons isKindOfClass:[NSArray<NSDictionary *> class]]);
@@ -52,6 +53,7 @@ NSString * const kJUNStackPropertyChildren = @"children";
         self.childrenProperties = [self.childrenViews valueForKey:NSStringFromSelector(@selector(jun_property))];
     }
     keyValues[kJUNStackPropertyChildren] = [self.childrenProperties valueForKey:NSStringFromSelector(@selector(mj_keyValues))];
+    [super mj_objectDidConvertToKeyValues:keyValues];
 }
 
 @end

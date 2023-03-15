@@ -7,6 +7,7 @@
 
 #import "JUNPropertyBuilder.h"
 #import "JUNBaseBuilder+Private.h"
+#import "UIView+JUNFlex_Private.h"
 
 @interface JUNPropertyBuilder ()
 
@@ -26,6 +27,10 @@
 
 - (id)product {
     return self.target;
+}
+
+- (__kindof JUNBaseProperty *)property {
+    return [self.target jun_property];
 }
 
 @end

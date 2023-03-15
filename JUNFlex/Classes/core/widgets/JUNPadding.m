@@ -12,7 +12,7 @@
 JUN_REGISTER_CLASS(@"padding", [JUNPaddingProperty class]);
 
 - (void)jun_setProperty:(__kindof JUNBaseProperty *)property {
-    if ([property isEqual:self.jun_property]) return;
+//    if ([property isEqual:self.jun_property]) return;
     [super jun_setProperty:property];
     if (![property isKindOfClass:[JUNPaddingProperty class]]) return;
     JUNPaddingProperty *paddingProperty = property;

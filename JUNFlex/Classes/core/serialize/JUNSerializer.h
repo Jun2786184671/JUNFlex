@@ -16,9 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)sharedSerializer;
 - (void)registerJsonClassName:(NSString *)className propertyClass:(Class)propertyClass viewClass:(Class)viewClass;
 
+- (NSDictionary *)serializeJsonFile2Json:(NSString *)filePath;
 - (__kindof JUNBaseProperty *)serializeJson2Property:(NSDictionary *)json;
 - (__kindof UIView *)serializeProperty2View:(__kindof JUNBaseProperty *)property;
 - (__kindof UIView *)serializeJson2View:(NSDictionary *)json;
+- (__kindof JUNBaseProperty *)serializeJsonFile2Property:(NSString *)filePath;
 - (__kindof UIView *)serializeJsonFile2View:(NSString *)filePath;
 
 @end

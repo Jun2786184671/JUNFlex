@@ -29,13 +29,14 @@ NSString * const kJUNListPropertyChildren = @"children";
 }
 
 + (NSArray *)mj_ignoredPropertyNames {
-    return @[
+    return [[super mj_ignoredPropertyNames] arrayByAddingObjectsFromArray:@[
         NSStringFromSelector(@selector(childrenViews)),
         NSStringFromSelector(@selector(childrenProperties)),
-    ];
+    ]];
 }
 
 - (void)mj_didConvertToObjectWithKeyValues:(NSDictionary *)keyValues {
+    [super mj_didConvertToObjectWithKeyValues:keyValues];
     NSArray<NSDictionary *> *childrenJsons = keyValues[kJUNListPropertyChildren];
     if (![childrenJsons count]) return;
     NSParameterAssert([childrenJsons isKindOfClass:[NSArray<NSDictionary *> class]]);
@@ -52,11 +53,13 @@ NSString * const kJUNListPropertyChildren = @"children";
 }
 
 - (void)mj_objectDidConvertToKeyValues:(NSMutableDictionary *)keyValues {
-    if (!self.childrenProperties && !self.childrenViews) return;
-    if (!self.childrenProperties) {
-        self.childrenProperties = [self.childrenViews valueForKey:NSStringFromSelector(@selector(jun_property))];
+    if ([self.childrenProperties count] || [self.childrenViews count]) {
+        if (![self.childrenProperties count]) {
+            self.childrenProperties = [self.childrenViews valueForKey:NSStringFromSelector(@selector(jun_property))];
+        }
+        keyValues[kJUNListPropertyChildren] = [self.childrenProperties valueForKey:NSStringFromSelector(@selector(mj_keyValues))];
     }
-    keyValues[kJUNListPropertyChildren] = [self.childrenProperties valueForKey:NSStringFromSelector(@selector(mj_keyValues))];
+    [super mj_objectDidConvertToKeyValues:keyValues];
 }
 
 @end

@@ -1,14 +1,149 @@
 {
-  "class" : "item",
+  "class" : "vstack",
+  "size" : {
+    "width" : 260,
+    "height" : 340
+  },
   "radius" : 8,
   "color" : {
     "space" : "rgba",
     "value" : {
-      "a" : 1,
-      "hex" : "#0000ff"
+      "hex" : "#ffffff"
     }
   },
-  "text" : {
-    "string" : "Imported"
-  }
+  "border" : {
+    "width" : 1,
+    "color" : {
+      "space" : "rgba",
+      "value" : {
+        "hex" : "#cccccc"
+      }
+    }
+  },
+  "maskBounds" : 1,
+  "align" : {
+    "cross" : "center"
+  },
+  "children" : [
+    {
+      "class" : "item",
+      "size" : {
+        "width" : 0,
+        "height" : 80
+      },
+      "image" : "test-image1"
+    },
+    {
+      "class" : "padding",
+      "size" : {
+        "width" : "max",
+        "height" : "max"
+      },
+      "left" : 16,
+      "bottom" : 8,
+      "right" : 16,
+      "child" : {
+        "class" : "vstack",
+        "align" : {
+          "cross" : "min"
+        },
+        "children" : [
+          {
+            "class" : "item",
+            "size" : {
+              "width" : 0
+            },
+            "text" : {
+              "string" : "Hello world",
+              "color" : {
+                "space" : "rgba",
+                "value" : {
+                  "hex" : "#333333"
+                }
+              },
+              "font" : {
+                "size" : 20
+              }
+            }
+          },
+          {
+            "class" : "item",
+            "size" : {
+              "width" : 0
+            },
+            "text" : {
+              "string" : "This is a welcome message.",
+              "color" : {
+                "space" : "rgba",
+                "value" : {
+                  "hex" : "#666666"
+                }
+              },
+              "font" : {
+                "size" : 16
+              }
+            }
+          },
+          {
+            "class" : "item",
+            "radius" : 8,
+            "color" : {
+              "space" : "rgba",
+              "value" : {
+                "hex" : "#999999"
+              }
+            },
+            "text" : {
+              "string" : "Confirm"
+            }
+          },
+          {
+            "class" : "item",
+            "radius" : 8,
+            "border" : {
+              "width" : 1,
+              "color" : {
+                "space" : "rgba",
+                "value" : {
+                  "hex" : "#ff0000"
+                }
+              }
+            },
+            "text" : {
+              "string" : "Close",
+              "color" : {
+                "space" : "rgba",
+                "value" : {
+                  "hex" : "#ff0000"
+                }
+              }
+            }
+          },
+          {
+            "class" : "item",
+            "radius" : 8,
+            "color" : {
+              "space" : "rgba",
+              "value" : {
+                "hex" : "#0000ff"
+              }
+            },
+            "text" : {
+              "string" : "Other"
+            }
+          },
+          {
+            "class" : "src",
+            "color" : {
+              "space" : "rgba",
+              "value" : {
+                "hex" : "#ff2d55"
+              }
+            },
+            "path" : "test2.json"
+          }
+        ]
+      }
+    }
+  ]
 }

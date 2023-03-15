@@ -10,6 +10,7 @@
 #import "JUNVStackBuilder.h"
 #import "JUNZStackBuilder.h"
 #import "JUNSerializer.h"
+#import "UIView+JUNFlex_Private.h"
 
 @implementation JUNFlex
 
@@ -46,6 +47,9 @@
 + (JUNPropertyBuilder * _Nonnull (^)(NSString * _Nonnull))src {
     return ^(NSString *filePath) {
         UIView *target = [[JUNSerializer sharedSerializer] serializeJsonFile2View:filePath];
+        JUNBaseProperty *property = [target jun_property];
+        property.jsonClassName = JUNBasePropertyJsonClassSrc;
+        property.path = filePath;
         return [[JUNPropertyBuilder alloc] initWithTarget:target];
     };
 }

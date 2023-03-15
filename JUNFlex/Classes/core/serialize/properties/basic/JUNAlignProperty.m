@@ -42,7 +42,7 @@ NSString * const JUNAlignPropertyMin = @"min";
     if ((cross = keyValues[NSStringFromSelector(@selector(cross))])) {
         if ([cross isEqual:JUNAlignPropertyMax]) {
             self.cross = @1;
-        } else if ([main isEqual:JUNAlignPropertyCenter]) {
+        } else if ([cross isEqual:JUNAlignPropertyCenter]) {
             self.cross = @0;
         } else if ([cross isEqual:JUNAlignPropertyMin]) {
             self.cross = @(-1);

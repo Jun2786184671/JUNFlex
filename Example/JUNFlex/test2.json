@@ -1,0 +1,13 @@
+{
+  "class" : "item",
+  "radius" : 8,
+  "color" : {
+    "space" : "rgba",
+    "value" : {
+      "hex" : "#0000ff"
+    }
+  },
+  "text" : {
+    "string" : "Hello"
+  }
+}

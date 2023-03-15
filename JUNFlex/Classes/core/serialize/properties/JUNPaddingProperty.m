@@ -29,13 +29,14 @@ static NSString * const kJUNPaddingPropertyChild = @"child";
 }
 
 + (NSArray *)mj_ignoredPropertyNames {
-    return @[
+    return [[super mj_ignoredPropertyNames] arrayByAddingObjectsFromArray:@[
         NSStringFromSelector(@selector(childProperty)),
         NSStringFromSelector(@selector(childView)),
-    ];
+    ]];
 }
 
 - (void)mj_didConvertToObjectWithKeyValues:(NSDictionary *)keyValues {
+    [super mj_didConvertToObjectWithKeyValues:keyValues];
     NSDictionary *childDict = keyValues[kJUNPaddingPropertyChild];
     JUNSerializer *serializer = [JUNSerializer sharedSerializer];
     UIView *childView = [serializer serializeJson2View:childDict];
@@ -69,6 +70,7 @@ static NSString * const kJUNPaddingPropertyChild = @"child";
         self.childProperty = self.childView.jun_property;
     }
     keyValues[kJUNPaddingPropertyChild] = [self.childProperty mj_keyValues];
+    [super mj_objectDidConvertToKeyValues:keyValues];
 }
 
 @end

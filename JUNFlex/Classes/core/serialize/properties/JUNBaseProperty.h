@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSString * const kJUNBasePropertyJsonClassName;
 extern NSString * const kJUNBasePropertyID;
 
+extern NSString * const JUNBasePropertyJsonClassSrc;
+
 @interface JUNBaseProperty : JUNProperty
 
 @property(nonatomic, copy) NSString *jsonClassName;
@@ -26,6 +28,8 @@ extern NSString * const kJUNBasePropertyID;
 @property(nonatomic, strong, nullable) JUNSizeProperty *size;
 @property(nonatomic, strong, nullable) JUNColorProperty *color;
 @property(nonatomic, strong, nullable) JUNBorderProperty *border;
+/// This property only appear when property is serialized with a src file.
+@property(nonatomic, strong, nullable) NSString *path;
 
 @end
 

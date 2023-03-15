@@ -47,8 +47,27 @@
     [self.viewMap setObject:viewClass forKey:className];
 }
 
+- (NSDictionary *)serializeJsonFile2Json:(NSString *)filePath {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        filePath = [[NSBundle mainBundle] pathForResource:filePath ofType:[filePath.pathExtension length] ? nil : @"json"];
+    }
+    NSAssert(filePath, @"Cannot find layout file.");
+    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+    NSError *error = nil;
+    id json = [NSJSONSerialization JSONObjectWithData:fileData options:NSJSONReadingFragmentsAllowed error:&error];
+    NSAssert(json && !error, @"Layout file json serialize error.");
+    NSAssert([json isKindOfClass:[NSDictionary class]], @"Top-level object in layout file must be a dictionary.");
+    return json;
+}
+
 - (__kindof JUNBaseProperty *)serializeJson2Property:(NSDictionary *)json {
     NSString *clsName = json[kJUNBasePropertyJsonClassName];
+    if ([clsName isEqualToString:JUNBasePropertyJsonClassSrc]) {
+        NSString *path = json[NSStringFromSelector(@selector(path))];
+        NSParameterAssert(path);
+        NSDictionary *json = [self serializeJsonFile2Json:path];
+        clsName = json[kJUNBasePropertyJsonClassName];
+    }
     Class propertyCls = self.propertyMap[clsName];
     NSParameterAssert([propertyCls isSubclassOfClass:[JUNBaseProperty class]]);
     __kindof JUNBaseProperty *property = [propertyCls mj_objectWithKeyValues:json];
@@ -58,7 +77,7 @@
 - (__kindof UIView *)serializeProperty2View:(__kindof JUNBaseProperty *)property {
     NSString *clsName = property.jsonClassName;
     Class viewCls = self.viewMap[clsName];
-    NSParameterAssert([viewCls isSubclassOfClass:[UIView class]]);
+    NSParameterAssert([clsName isEqualToString:JUNBasePropertyJsonClassSrc] || [viewCls isSubclassOfClass:[UIView class]]);
     __kindof UIView *view = [[viewCls alloc] initWithJUNProperty:property];
     return view;
 }
@@ -69,17 +88,14 @@
     return view;
 }
 
+- (__kindof JUNBaseProperty *)serializeJsonFile2Property:(NSString *)filePath {
+    id json = [self serializeJsonFile2Json:filePath];
+    return [self serializeJson2Property:json];
+}
+
 - (__kindof UIView *)serializeJsonFile2View:(NSString *)filePath {
-    if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        filePath = [[NSBundle mainBundle] pathForResource:filePath ofType:[filePath.pathExtension length] ? nil : @"json"];
-    }
-    NSAssert(filePath, @"Cannot find layout file.");
-    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
-    NSError *error = nil;
-    id json = [NSJSONSerialization JSONObjectWithData:fileData options:NSJSONReadingFragmentsAllowed error:&error];
-    NSAssert(json && !error, @"Layout file json serialize error.");
-    NSAssert([json isKindOfClass:[NSDictionary class]], @"Top-level object in layout file must be a dictionary.");
-    return [self serializeJson2View:json];
+    JUNBaseProperty *property = [self serializeJsonFile2Property:filePath];
+    return [self serializeProperty2View:property];
 }
 
 @end

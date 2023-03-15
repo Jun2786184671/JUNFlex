@@ -17,7 +17,7 @@
 JUN_BUILDER_TEST
 - (UIView *)build {
     return
-    @Src(@"test.json");
+    @Src(@"test.json").EOB;
 }
 
 @end

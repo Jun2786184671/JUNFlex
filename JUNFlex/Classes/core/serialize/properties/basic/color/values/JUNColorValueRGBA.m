@@ -19,11 +19,13 @@ static NSString * const kJUNColorValueRGBAHex = @"hex";
 }
 
 - (void)mj_objectDidConvertToKeyValues:(NSMutableDictionary *)keyValues {
+    [super mj_objectDidConvertToKeyValues:keyValues];
     uint32_t hex = ((((self.r << 8) | self.g) << 8) | self.b);
     keyValues[kJUNColorValueRGBAHex] = [NSString stringWithFormat:@"#%06x", hex];
 }
 
 - (void)mj_didConvertToObjectWithKeyValues:(NSDictionary *)keyValues {
+    [super mj_didConvertToObjectWithKeyValues:keyValues];
     NSString *hexStr = keyValues[kJUNColorValueRGBAHex];
     NSScanner *scanner = [NSScanner scannerWithString:[hexStr substringFromIndex:1]];
     uint32_t hex;

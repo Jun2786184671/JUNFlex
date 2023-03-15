@@ -132,7 +132,9 @@
 }
 
 - (id)EOB {
-    self.property.jsonClassName = [[self.product class] jun_getJsonClassName];
+    if (!self.property.jsonClassName) {
+        self.property.jsonClassName = [[self.product class] jun_getJsonClassName];
+    }
     [self.product jun_setProperty:self.property];
     return self.product;
 }

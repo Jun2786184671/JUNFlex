@@ -66,8 +66,10 @@ JUN_BUILDER_TEST
                 .color(UIColor.blueColor)
                 .text(@"Other"),
                 
-                @Src(@"test.json")
-                .color(UIColor.systemPinkColor),
+                @Src(@"test2.json")
+                .color(UIColor.systemPinkColor)
+                .height(@80)
+                .radius(@16)
             ])
         ),
     ]);

@@ -11,7 +11,7 @@
 JUN_REGISTER_CLASS(@"zstack", [JUNStackProperty class]);
 
 - (void)jun_setProperty:(__kindof JUNBaseProperty *)property {
-    if ([property isEqual:self.jun_property]) return;
+//    if ([property isEqual:self.jun_property]) return;
     [super jun_setProperty:property];
     if (![property isKindOfClass:[JUNStackProperty class]]) return;
     [self _setUpItems];
