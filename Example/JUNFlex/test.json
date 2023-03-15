@@ -134,6 +134,10 @@
           },
           {
             "class" : "src",
+            "size" : {
+              "height" : 80
+            },
+            "radius" : 16,
             "color" : {
               "space" : "rgba",
               "value" : {

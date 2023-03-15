@@ -76,8 +76,13 @@
 
 - (__kindof UIView *)serializeProperty2View:(__kindof JUNBaseProperty *)property {
     NSString *clsName = property.jsonClassName;
+    NSParameterAssert([clsName isEqualToString:JUNBasePropertyJsonClassSrc] || self.viewMap[clsName]);
+    if ([clsName isEqualToString:JUNBasePropertyJsonClassSrc]) {
+        NSDictionary *json = [self serializeJsonFile2Json:property.path];
+        clsName = json[kJUNBasePropertyJsonClassName];
+    }
     Class viewCls = self.viewMap[clsName];
-    NSParameterAssert([clsName isEqualToString:JUNBasePropertyJsonClassSrc] || [viewCls isSubclassOfClass:[UIView class]]);
+    NSParameterAssert([viewCls isSubclassOfClass:[UIView class]]);
     __kindof UIView *view = [[viewCls alloc] initWithJUNProperty:property];
     return view;
 }
