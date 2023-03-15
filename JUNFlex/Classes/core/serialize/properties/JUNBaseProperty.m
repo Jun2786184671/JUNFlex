@@ -26,6 +26,7 @@ NSString * const JUNBasePropertyJsonClassSrc = @"src";
     return [NSMutableArray arrayWithArray:@[
         kJUNBasePropertyID,
         kJUNBasePropertyJsonClassName,
+        NSStringFromSelector(@selector(path)),
         NSStringFromSelector(@selector(size)),
         NSStringFromSelector(@selector(radius)),
         NSStringFromSelector(@selector(color)),

@@ -14,6 +14,7 @@
 
 @property(nonatomic, strong) NSMutableDictionary<NSString *, Class> *propertyMap;
 @property(nonatomic, strong) NSMutableDictionary<NSString *, Class> *viewMap;
+@property(nonatomic, strong) NSMutableDictionary<NSString *, NSString *> *jsonClsCache;
 
 @end
 
@@ -42,6 +43,13 @@
     return _viewMap;
 }
 
+- (NSMutableDictionary<NSString *,NSString *> *)jsonClsCache {
+    if (!_jsonClsCache) {
+        _jsonClsCache = [NSMutableDictionary dictionary];
+    }
+    return _jsonClsCache;
+}
+
 - (void)registerJsonClassName:(NSString *)className propertyClass:(Class)propertyClass viewClass:(Class)viewClass {
     [self.propertyMap setObject:propertyClass forKey:className];
     [self.viewMap setObject:viewClass forKey:className];
@@ -65,8 +73,11 @@
     if ([clsName isEqualToString:JUNBasePropertyJsonClassSrc]) {
         NSString *path = json[NSStringFromSelector(@selector(path))];
         NSParameterAssert(path);
-        NSDictionary *json = [self serializeJsonFile2Json:path];
-        clsName = json[kJUNBasePropertyJsonClassName];
+        if (!(clsName = self.jsonClsCache[path])) {
+            NSDictionary *json = [self serializeJsonFile2Json:path];
+            clsName = json[kJUNBasePropertyJsonClassName];
+            self.jsonClsCache[path] = clsName;
+        }
     }
     Class propertyCls = self.propertyMap[clsName];
     NSParameterAssert([propertyCls isSubclassOfClass:[JUNBaseProperty class]]);
@@ -78,8 +89,11 @@
     NSString *clsName = property.jsonClassName;
     NSParameterAssert([clsName isEqualToString:JUNBasePropertyJsonClassSrc] || self.viewMap[clsName]);
     if ([clsName isEqualToString:JUNBasePropertyJsonClassSrc]) {
-        NSDictionary *json = [self serializeJsonFile2Json:property.path];
-        clsName = json[kJUNBasePropertyJsonClassName];
+        if (!(clsName = self.jsonClsCache[property.path])) {
+            NSDictionary *json = [self serializeJsonFile2Json:property.path];
+            clsName = json[kJUNBasePropertyJsonClassName];
+            self.jsonClsCache[property.path] = clsName;
+        }
     }
     Class viewCls = self.viewMap[clsName];
     NSParameterAssert([viewCls isSubclassOfClass:[UIView class]]);

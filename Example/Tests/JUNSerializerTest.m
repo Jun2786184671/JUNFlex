@@ -17,7 +17,9 @@
 JUN_BUILDER_TEST
 - (UIView *)build {
     return
-    @Src(@"test.json").EOB;
+    @Src(@"test.json")
+    .color(@"#f0f0f0")
+    .height(@400).EOB;
 }
 
 @end
